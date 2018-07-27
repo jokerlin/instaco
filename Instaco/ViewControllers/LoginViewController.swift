@@ -81,9 +81,17 @@ class LoginController: UIViewController {
         insta.set_auth(username: username, password: password)
         insta.login(
             success: {
-                _ in
+                (JSONResponse) in
+                print("Login Success")
+                
+                // Store in Keychain
                 let keychain = Keychain(service: "com.instacoapp")
                 keychain[username] = password
+                
+                // set insta object
+                insta.LastJson = JSONResponse
+                insta.isLoggedIn = true
+                insta.username_id = insta.LastJson["logged_in_user"]["pk"].stringValue
                 
                 guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
                 

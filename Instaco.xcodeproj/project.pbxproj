@@ -1,0 +1,824 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8F0A19E720F4CF3300872C1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0A19E620F4CF3300872C1B /* AppDelegate.swift */; };
+		8F0A19EE20F4CF3500872C1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F0A19ED20F4CF3500872C1B /* Assets.xcassets */; };
+		8F0A19F120F4CF3500872C1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F0A19EF20F4CF3500872C1B /* LaunchScreen.storyboard */; };
+		8F0A19FC20F4CF3500872C1B /* InstacoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0A19FB20F4CF3500872C1B /* InstacoTests.swift */; };
+		8F0A1A0720F4CF3500872C1B /* InstacoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0A1A0620F4CF3500872C1B /* InstacoUITests.swift */; };
+		8F19C29F20FFD67400A7FB56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F19C29E20FFD67400A7FB56 /* Main.storyboard */; };
+		8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519120F73E7100B39F6D /* RequestConfiguration.swift */; };
+		8F22519420F7429300B39F6D /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519320F7429300B39F6D /* MD5.swift */; };
+		8F22519720F742DF00B39F6D /* hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519620F742DF00B39F6D /* hmac.swift */; };
+		8F22519A20F750A500B39F6D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519920F750A500B39F6D /* NetworkManager.swift */; };
+		8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BF420FF757200C6CC46 /* TimelineSectionController.swift */; };
+		8F2C3BF720FF7EAC00C6CC46 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BF620FF7EAB00C6CC46 /* MediaModel.swift */; };
+		8F2C3BF920FF808200C6CC46 /* MediaCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BF820FF808200C6CC46 /* MediaCommentViewModel.swift */; };
+		8F2C3BFB20FFA36A00C6CC46 /* MediaUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BFA20FFA36A00C6CC46 /* MediaUserCell.swift */; };
+		8F2C3BFD20FFA50900C6CC46 /* MediaUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BFC20FFA50900C6CC46 /* MediaUserViewModel.swift */; };
+		8F2C3BFF20FFA65100C6CC46 /* MediaImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BFE20FFA65100C6CC46 /* MediaImageCell.swift */; };
+		8F2C3C0120FFA67300C6CC46 /* MediaActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3C0020FFA67300C6CC46 /* MediaActionCell.swift */; };
+		8F2C3C0320FFAC0600C6CC46 /* MediaImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3C0220FFAC0600C6CC46 /* MediaImageViewModel.swift */; };
+		8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3C0420FFAC4000C6CC46 /* MediaActionViewModel.swift */; };
+		8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */; };
+		8F37FC7B20F9C2A30035E303 /* TimelineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */; };
+		8F60943F21013B6200C360F8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F60943E21013B6200C360F8 /* LoginViewController.swift */; };
+		8F6094532102F4D200C360F8 /* MediaCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */; };
+		8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */; };
+		8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */; };
+		8F6904C421084F6F000B1AB7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */; };
+		8FB9A76B210A99FC005BE1F6 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9A76A210A99FC005BE1F6 /* Styles.swift */; };
+		8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD744120F7CCBD001ACD34 /* helper.swift */; };
+		8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */; };
+		8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDA614520F7056700B07D8A /* BaseNetworkService.swift */; };
+		EEC0FF090245A8A36F83F2B8 /* Pods_Instaco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F0A19F820F4CF3500872C1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F0A19DB20F4CF3300872C1B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F0A19E220F4CF3300872C1B;
+			remoteInfo = Instaco;
+		};
+		8F0A1A0320F4CF3500872C1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F0A19DB20F4CF3300872C1B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F0A19E220F4CF3300872C1B;
+			remoteInfo = Instaco;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1298D6FE1DC918E4A53C30D0 /* Pods_InstacoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstacoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E765C1EB5C97718E893A386 /* Pods-Instaco.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instaco.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instaco/Pods-Instaco.debug.xcconfig"; sourceTree = "<group>"; };
+		2EA7A5293962383459874598 /* Pods_InstacoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstacoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F0A19E320F4CF3300872C1B /* Instaco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instaco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F0A19E620F4CF3300872C1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8F0A19ED20F4CF3500872C1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8F0A19F020F4CF3500872C1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8F0A19F220F4CF3500872C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F0A19F720F4CF3500872C1B /* InstacoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstacoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F0A19FB20F4CF3500872C1B /* InstacoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstacoTests.swift; sourceTree = "<group>"; };
+		8F0A19FD20F4CF3500872C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F0A1A0220F4CF3500872C1B /* InstacoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstacoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F0A1A0620F4CF3500872C1B /* InstacoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstacoUITests.swift; sourceTree = "<group>"; };
+		8F0A1A0820F4CF3500872C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F19C29E20FFD67400A7FB56 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8F22519120F73E7100B39F6D /* RequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfiguration.swift; sourceTree = "<group>"; };
+		8F22519320F7429300B39F6D /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
+		8F22519620F742DF00B39F6D /* hmac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hmac.swift; sourceTree = "<group>"; };
+		8F22519920F750A500B39F6D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		8F2C3BF420FF757200C6CC46 /* TimelineSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSectionController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		8F2C3BF620FF7EAB00C6CC46 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
+		8F2C3BF820FF808200C6CC46 /* MediaCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCommentViewModel.swift; sourceTree = "<group>"; };
+		8F2C3BFA20FFA36A00C6CC46 /* MediaUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUserCell.swift; sourceTree = "<group>"; };
+		8F2C3BFC20FFA50900C6CC46 /* MediaUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUserViewModel.swift; sourceTree = "<group>"; };
+		8F2C3BFE20FFA65100C6CC46 /* MediaImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaImageCell.swift; sourceTree = "<group>"; };
+		8F2C3C0020FFA67300C6CC46 /* MediaActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaActionCell.swift; sourceTree = "<group>"; };
+		8F2C3C0220FFAC0600C6CC46 /* MediaImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaImageViewModel.swift; sourceTree = "<group>"; };
+		8F2C3C0420FFAC4000C6CC46 /* MediaActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaActionViewModel.swift; sourceTree = "<group>"; };
+		8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCommentCell.swift; sourceTree = "<group>"; };
+		8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineResponse.swift; sourceTree = "<group>"; };
+		8F60943E21013B6200C360F8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCaptionCell.swift; sourceTree = "<group>"; };
+		8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCaptionViewModel.swift; sourceTree = "<group>"; };
+		8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		8FB9A76A210A99FC005BE1F6 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		8FBD744120F7CCBD001ACD34 /* helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helper.swift; sourceTree = "<group>"; };
+		8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramNetworkAPI.swift; sourceTree = "<group>"; };
+		8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instaco-Bridging-Header.h"; sourceTree = "<group>"; };
+		8FDA614520F7056700B07D8A /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
+		A44B594BE77548476B176952 /* Pods-Instaco.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instaco.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instaco/Pods-Instaco.release.xcconfig"; sourceTree = "<group>"; };
+		C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instaco.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8F0A19E020F4CF3300872C1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEC0FF090245A8A36F83F2B8 /* Pods_Instaco.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F0A19F420F4CF3500872C1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F0A19FF20F4CF3500872C1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4659C875C6307592F4C18467 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2E765C1EB5C97718E893A386 /* Pods-Instaco.debug.xcconfig */,
+				A44B594BE77548476B176952 /* Pods-Instaco.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8F0A19DA20F4CF3300872C1B = {
+			isa = PBXGroup;
+			children = (
+				8F0A19E520F4CF3300872C1B /* Instaco */,
+				8F0A19FA20F4CF3500872C1B /* InstacoTests */,
+				8F0A1A0520F4CF3500872C1B /* InstacoUITests */,
+				8F0A19E420F4CF3300872C1B /* Products */,
+				8FD3885720F5213600B6C3E7 /* Frameworks */,
+				4659C875C6307592F4C18467 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		8F0A19E420F4CF3300872C1B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F0A19E320F4CF3300872C1B /* Instaco.app */,
+				8F0A19F720F4CF3500872C1B /* InstacoTests.xctest */,
+				8F0A1A0220F4CF3500872C1B /* InstacoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F0A19E520F4CF3300872C1B /* Instaco */ = {
+			isa = PBXGroup;
+			children = (
+				8F0A19E620F4CF3300872C1B /* AppDelegate.swift */,
+				8F19C29E20FFD67400A7FB56 /* Main.storyboard */,
+				8F0A19EF20F4CF3500872C1B /* LaunchScreen.storyboard */,
+				8F0A19ED20F4CF3500872C1B /* Assets.xcassets */,
+				8F0A19F220F4CF3500872C1B /* Info.plist */,
+				8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */,
+				8F64165820FC88F0009B8BD6 /* ViewControllers */,
+				8F64165720FC88DF009B8BD6 /* SectionControllers */,
+				8F37FC7720F8F4530035E303 /* Model */,
+				8F64165D20FC8DC8009B8BD6 /* Cell */,
+				8F22519820F74A2B00B39F6D /* Network */,
+				8F22519520F7429D00B39F6D /* Extensions */,
+			);
+			path = Instaco;
+			sourceTree = "<group>";
+		};
+		8F0A19FA20F4CF3500872C1B /* InstacoTests */ = {
+			isa = PBXGroup;
+			children = (
+				8F0A19FB20F4CF3500872C1B /* InstacoTests.swift */,
+				8F0A19FD20F4CF3500872C1B /* Info.plist */,
+			);
+			path = InstacoTests;
+			sourceTree = "<group>";
+		};
+		8F0A1A0520F4CF3500872C1B /* InstacoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8F0A1A0620F4CF3500872C1B /* InstacoUITests.swift */,
+				8F0A1A0820F4CF3500872C1B /* Info.plist */,
+			);
+			path = InstacoUITests;
+			sourceTree = "<group>";
+		};
+		8F22519520F7429D00B39F6D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8F22519320F7429300B39F6D /* MD5.swift */,
+				8F22519620F742DF00B39F6D /* hmac.swift */,
+				8FBD744120F7CCBD001ACD34 /* helper.swift */,
+				8FB9A76A210A99FC005BE1F6 /* Styles.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8F22519820F74A2B00B39F6D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */,
+				8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */,
+				8F22868920FE51AA0005BB61 /* Basic */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8F22868920FE51AA0005BB61 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				8FDA614520F7056700B07D8A /* BaseNetworkService.swift */,
+				8F22519920F750A500B39F6D /* NetworkManager.swift */,
+				8F22519120F73E7100B39F6D /* RequestConfiguration.swift */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		8F37FC7720F8F4530035E303 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8F2C3BF620FF7EAB00C6CC46 /* MediaModel.swift */,
+				8F2C3BFC20FFA50900C6CC46 /* MediaUserViewModel.swift */,
+				8F2C3C0220FFAC0600C6CC46 /* MediaImageViewModel.swift */,
+				8F2C3C0420FFAC4000C6CC46 /* MediaActionViewModel.swift */,
+				8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */,
+				8F2C3BF820FF808200C6CC46 /* MediaCommentViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8F64165720FC88DF009B8BD6 /* SectionControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F2C3BF420FF757200C6CC46 /* TimelineSectionController.swift */,
+			);
+			path = SectionControllers;
+			sourceTree = "<group>";
+		};
+		8F64165820FC88F0009B8BD6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */,
+				8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */,
+				8F60943E21013B6200C360F8 /* LoginViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8F64165D20FC8DC8009B8BD6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8F2C3BFA20FFA36A00C6CC46 /* MediaUserCell.swift */,
+				8F2C3BFE20FFA65100C6CC46 /* MediaImageCell.swift */,
+				8F2C3C0020FFA67300C6CC46 /* MediaActionCell.swift */,
+				8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */,
+				8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8FD3885720F5213600B6C3E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */,
+				2EA7A5293962383459874598 /* Pods_InstacoTests.framework */,
+				1298D6FE1DC918E4A53C30D0 /* Pods_InstacoUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8F0A19E220F4CF3300872C1B /* Instaco */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F0A1A0B20F4CF3500872C1B /* Build configuration list for PBXNativeTarget "Instaco" */;
+			buildPhases = (
+				CA70B283B63547989F653713 /* [CP] Check Pods Manifest.lock */,
+				8F0A19DF20F4CF3300872C1B /* Sources */,
+				8F0A19E020F4CF3300872C1B /* Frameworks */,
+				8F0A19E120F4CF3300872C1B /* Resources */,
+				C810940B35B3F29075DE7673 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Instaco;
+			productName = Instaco;
+			productReference = 8F0A19E320F4CF3300872C1B /* Instaco.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8F0A19F620F4CF3500872C1B /* InstacoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F0A1A0E20F4CF3500872C1B /* Build configuration list for PBXNativeTarget "InstacoTests" */;
+			buildPhases = (
+				8F0A19F320F4CF3500872C1B /* Sources */,
+				8F0A19F420F4CF3500872C1B /* Frameworks */,
+				8F0A19F520F4CF3500872C1B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8F0A19F920F4CF3500872C1B /* PBXTargetDependency */,
+			);
+			name = InstacoTests;
+			productName = InstacoTests;
+			productReference = 8F0A19F720F4CF3500872C1B /* InstacoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8F0A1A0120F4CF3500872C1B /* InstacoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F0A1A1120F4CF3500872C1B /* Build configuration list for PBXNativeTarget "InstacoUITests" */;
+			buildPhases = (
+				8F0A19FE20F4CF3500872C1B /* Sources */,
+				8F0A19FF20F4CF3500872C1B /* Frameworks */,
+				8F0A1A0020F4CF3500872C1B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8F0A1A0420F4CF3500872C1B /* PBXTargetDependency */,
+			);
+			name = InstacoUITests;
+			productName = InstacoUITests;
+			productReference = 8F0A1A0220F4CF3500872C1B /* InstacoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F0A19DB20F4CF3300872C1B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Heng Lin";
+				TargetAttributes = {
+					8F0A19E220F4CF3300872C1B = {
+						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
+					};
+					8F0A19F620F4CF3500872C1B = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 8F0A19E220F4CF3300872C1B;
+					};
+					8F0A1A0120F4CF3500872C1B = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 8F0A19E220F4CF3300872C1B;
+					};
+				};
+			};
+			buildConfigurationList = 8F0A19DE20F4CF3300872C1B /* Build configuration list for PBXProject "Instaco" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8F0A19DA20F4CF3300872C1B;
+			productRefGroup = 8F0A19E420F4CF3300872C1B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8F0A19E220F4CF3300872C1B /* Instaco */,
+				8F0A19F620F4CF3500872C1B /* InstacoTests */,
+				8F0A1A0120F4CF3500872C1B /* InstacoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8F0A19E120F4CF3300872C1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F19C29F20FFD67400A7FB56 /* Main.storyboard in Resources */,
+				8F0A19F120F4CF3500872C1B /* LaunchScreen.storyboard in Resources */,
+				8F0A19EE20F4CF3500872C1B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F0A19F520F4CF3500872C1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F0A1A0020F4CF3500872C1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C810940B35B3F29075DE7673 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Instaco/Pods-Instaco-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/StyledTextKit/StyledTextKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StyledTextKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Instaco/Pods-Instaco-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA70B283B63547989F653713 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Instaco-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8F0A19DF20F4CF3300872C1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F60943F21013B6200C360F8 /* LoginViewController.swift in Sources */,
+				8F22519420F7429300B39F6D /* MD5.swift in Sources */,
+				8F6094532102F4D200C360F8 /* MediaCaptionCell.swift in Sources */,
+				8F2C3C0120FFA67300C6CC46 /* MediaActionCell.swift in Sources */,
+				8F2C3BFD20FFA50900C6CC46 /* MediaUserViewModel.swift in Sources */,
+				8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */,
+				8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */,
+				8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */,
+				8F22519A20F750A500B39F6D /* NetworkManager.swift in Sources */,
+				8F2C3C0320FFAC0600C6CC46 /* MediaImageViewModel.swift in Sources */,
+				8F2C3BF720FF7EAC00C6CC46 /* MediaModel.swift in Sources */,
+				8F0A19E720F4CF3300872C1B /* AppDelegate.swift in Sources */,
+				8F2C3BF920FF808200C6CC46 /* MediaCommentViewModel.swift in Sources */,
+				8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */,
+				8F2C3BFB20FFA36A00C6CC46 /* MediaUserCell.swift in Sources */,
+				8F2C3BFF20FFA65100C6CC46 /* MediaImageCell.swift in Sources */,
+				8FB9A76B210A99FC005BE1F6 /* Styles.swift in Sources */,
+				8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */,
+				8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */,
+				8F22519720F742DF00B39F6D /* hmac.swift in Sources */,
+				8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */,
+				8F6904C421084F6F000B1AB7 /* TimelineViewController.swift in Sources */,
+				8F37FC7B20F9C2A30035E303 /* TimelineResponse.swift in Sources */,
+				8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */,
+				8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F0A19F320F4CF3500872C1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F0A19FC20F4CF3500872C1B /* InstacoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F0A19FE20F4CF3500872C1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F0A1A0720F4CF3500872C1B /* InstacoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8F0A19F920F4CF3500872C1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F0A19E220F4CF3300872C1B /* Instaco */;
+			targetProxy = 8F0A19F820F4CF3500872C1B /* PBXContainerItemProxy */;
+		};
+		8F0A1A0420F4CF3500872C1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F0A19E220F4CF3300872C1B /* Instaco */;
+			targetProxy = 8F0A1A0320F4CF3500872C1B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8F0A19EF20F4CF3500872C1B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F0A19F020F4CF3500872C1B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8F0A1A0920F4CF3500872C1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8F0A1A0A20F4CF3500872C1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F0A1A0C20F4CF3500872C1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E765C1EB5C97718E893A386 /* Pods-Instaco.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5T4ZJ88AT;
+				INFOPLIST_FILE = Instaco/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.Instaco;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Instaco/Instaco-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		8F0A1A0D20F4CF3500872C1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A44B594BE77548476B176952 /* Pods-Instaco.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5T4ZJ88AT;
+				INFOPLIST_FILE = Instaco/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.Instaco;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Instaco/Instaco-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		8F0A1A0F20F4CF3500872C1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5T4ZJ88AT;
+				INFOPLIST_FILE = InstacoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.InstacoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Instaco.app/Instaco";
+			};
+			name = Debug;
+		};
+		8F0A1A1020F4CF3500872C1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5T4ZJ88AT;
+				INFOPLIST_FILE = InstacoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.InstacoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Instaco.app/Instaco";
+			};
+			name = Release;
+		};
+		8F0A1A1220F4CF3500872C1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5T4ZJ88AT;
+				INFOPLIST_FILE = InstacoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.InstacoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Instaco;
+			};
+			name = Debug;
+		};
+		8F0A1A1320F4CF3500872C1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5T4ZJ88AT;
+				INFOPLIST_FILE = InstacoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.InstacoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Instaco;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8F0A19DE20F4CF3300872C1B /* Build configuration list for PBXProject "Instaco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F0A1A0920F4CF3500872C1B /* Debug */,
+				8F0A1A0A20F4CF3500872C1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F0A1A0B20F4CF3500872C1B /* Build configuration list for PBXNativeTarget "Instaco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F0A1A0C20F4CF3500872C1B /* Debug */,
+				8F0A1A0D20F4CF3500872C1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F0A1A0E20F4CF3500872C1B /* Build configuration list for PBXNativeTarget "InstacoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F0A1A0F20F4CF3500872C1B /* Debug */,
+				8F0A1A1020F4CF3500872C1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F0A1A1120F4CF3500872C1B /* Build configuration list for PBXNativeTarget "InstacoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F0A1A1220F4CF3500872C1B /* Debug */,
+				8F0A1A1320F4CF3500872C1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F0A19DB20F4CF3300872C1B /* Project object */;
+}

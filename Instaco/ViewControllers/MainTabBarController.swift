@@ -20,7 +20,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let keychain = Keychain(service: "com.instacoapp")
         
 //        try! keychain.removeAll()
-        print("login in by \(keychain.allKeys()[0])")
         
         if keychain.allKeys() == []{
             DispatchQueue.main.async {
@@ -31,6 +30,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             return
         }
         else{
+            print("Login by \(keychain.allKeys()[0])")
+            
             insta.set_auth(username: keychain.allKeys()[0], password: keychain[keychain.allKeys()[0]]!)
             insta.login(
                 success: {

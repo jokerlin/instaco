@@ -6,8 +6,9 @@
 //  Copyright © 2018 Heng Lin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import IGListKit
+import SnapKit
 
 final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ActionCellDelegate{
     
@@ -44,12 +45,6 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         guard let cell = collectionContext!.dequeueReusableCell(of: cellClass, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }
         
-        if let cell = cell as? UserCell {
-            cell.profileImageView.sd_setImage(with: mediaInfo?.userProfileImage)
-            cell.usernameLabel.text = mediaInfo?.username
-            cell.locationLabel.text = mediaInfo?.location
-            cell.timestampLabel.text = Date(timeIntervalSince1970: Double((mediaInfo?.timestamp)!)).timeAgoDisplay()
-        }
         if let cell = cell as? ImageCell {
             cell.imageView.sd_setImage(with: mediaInfo?.imageURL)
         }
@@ -79,7 +74,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         guard let width = collectionContext?.containerSize.width else { fatalError() }
         let height: CGFloat
         switch viewModel {
-        case is UserViewModel: height = 40
+        case is UserViewModel: height = 52
         case is ImageViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is ActionViewModel: height = 40
         case is CaptionViewModel: height = 30

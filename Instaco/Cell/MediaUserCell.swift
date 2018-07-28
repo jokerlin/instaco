@@ -8,14 +8,16 @@
 
 import UIKit
 import IGListKit
+import SnapKit
 
 final class UserCell: UICollectionViewCell, ListBindable {
+    
+    var usernameLabelConstraint : Constraint?
     
     let usernameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.numberOfLines = 0
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = UIColor.darkText
         label.textAlignment = .left
         label.sizeToFit()
@@ -26,7 +28,7 @@ final class UserCell: UICollectionViewCell, ListBindable {
         let label = UILabel()
         label.backgroundColor = .clear
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.darkText
         label.textAlignment = .left
         label.sizeToFit()
@@ -37,7 +39,7 @@ final class UserCell: UICollectionViewCell, ListBindable {
         let label = UILabel()
         label.backgroundColor = .clear
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.darkText
         label.textAlignment = .left
         label.sizeToFit()
@@ -66,31 +68,47 @@ final class UserCell: UICollectionViewCell, ListBindable {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let bounds = contentView.bounds
         
-        let profileImageViewWidth: CGFloat = 25.0
-        let profileImageViewTopSpace: CGFloat = (bounds.height - profileImageViewWidth) / 2.0
-        let profileImageViewLeftSpace: CGFloat = 8.0
-        self.profileImageView.frame = CGRect(x: profileImageViewLeftSpace, y: profileImageViewTopSpace, width: profileImageViewWidth, height: profileImageViewWidth)
+        profileImageView.snp.makeConstraints{ (make) -> Void in
+            make.width.equalTo(32)
+            make.height.equalTo(32)
+            make.centerY.equalTo(contentView)
+            make.left.equalTo(11)
+        }
         self.profileImageView.layer.cornerRadius = min(self.profileImageView.frame.height, profileImageView.frame.width) / 2.0
         self.profileImageView.layer.masksToBounds = true
         
-        self.usernameLabel.frame = CGRect(x:self.profileImageView.frame.maxX + 8.0,
-                                          y:self.profileImageView.frame.minY,
-                                          width: bounds.width - self.profileImageView.frame.maxX - 8.0*2,
-                                          height:self.profileImageView.frame.height)
+        if locationLabel.text == "" {
+            usernameLabelConstraint?.deactivate()
+            usernameLabel.snp.makeConstraints{ (make) -> Void in
+                usernameLabelConstraint = make.centerY.equalTo(profileImageView).constraint
+                make.left.equalTo(profileImageView.snp.right).offset(9)
+            }
+        }
+        else{
+            usernameLabelConstraint?.deactivate()
+            usernameLabel.snp.makeConstraints{ (make) -> Void in
+                usernameLabelConstraint = make.centerY.equalTo(profileImageView).offset(-7).constraint
+                make.left.equalTo(profileImageView.snp.right).offset(9)
+            }
+        }
         
-        self.locationLabel.frame = CGRect(x:self.profileImageView.frame.maxX + 200.0,
-                                          y:self.profileImageView.frame.minY,
-                                          width: bounds.width - self.profileImageView.frame.maxX - 8.0*2,
-                                          height:self.profileImageView.frame.height)
+        locationLabel.snp.makeConstraints{ (make) -> Void in
+            make.centerY.equalTo(profileImageView).offset(9)
+            make.left.equalTo(profileImageView.snp.right).offset(9)
+        }
         
-        self.timestampLabel.frame = CGRect(x:self.profileImageView.frame.maxX + 100.0,
-                                          y:self.profileImageView.frame.minY,
-                                          width: bounds.width - self.profileImageView.frame.maxX - 8.0*2,
-                                          height:self.profileImageView.frame.height)
+        timestampLabel.snp.makeConstraints{ (make) -> Void in
+            make.centerY.equalTo(contentView)
+            make.right.equalTo(contentView).offset(-11)
+        }
     }
     
     func bindViewModel(_ viewModel: Any) {
+        guard let viewModel = viewModel as? UserViewModel else { return }
+        profileImageView.sd_setImage(with: viewModel.userProfileImage)
+        usernameLabel.text = viewModel.username
+        locationLabel.text = viewModel.location
+        timestampLabel.text = viewModel.timestamp
     }
 }

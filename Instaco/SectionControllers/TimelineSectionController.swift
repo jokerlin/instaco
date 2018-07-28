@@ -45,9 +45,6 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         guard let cell = collectionContext!.dequeueReusableCell(of: cellClass, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }
         
-        if let cell = cell as? ImageCell {
-            cell.imageView.sd_setImage(with: mediaInfo?.imageURL)
-        }
         if let cell = cell as? ActionCell {
             let likes = (mediaInfo?.likes)!.withCommas()
             if (mediaInfo?.likes)! > 1 {

@@ -11,9 +11,11 @@ import IGListKit
 final class ActionViewModel: ListDiffable {
     
     let likes: Int
+    let beliked: Bool
     
-    init(likes: Int) {
+    init(likes: Int, beliked: Bool) {
         self.likes = likes
+        self.beliked = beliked
     }
     
     // MARK: ListDiffable

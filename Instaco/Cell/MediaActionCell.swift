@@ -36,7 +36,7 @@ final class ActionCell: UICollectionViewCell, ListBindable {
     let likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.darkText
         label.textAlignment = .left
         label.sizeToFit()
@@ -57,10 +57,22 @@ final class ActionCell: UICollectionViewCell, ListBindable {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let leftPadding: CGFloat = 8.0
-        likeButton.frame = CGRect(x: leftPadding, y: 0, width: likeButton.frame.width, height: bounds.size.height)
-        commentButton.frame = CGRect(x: leftPadding + likeButton.frame.maxX, y: 0, width: commentButton.frame.width, height: bounds.size.height)
-        likesLabel.frame = CGRect(x: leftPadding + likeButton.frame.maxX + 200, y: 0, width: likesLabel.frame.width, height: bounds.size.height)
+        
+        likeButton.snp.makeConstraints{ (make) -> Void in
+            make.centerY.equalTo(contentView)
+            make.left.equalTo(11)
+        }
+        
+        commentButton.snp.makeConstraints{ (make) -> Void in
+            make.centerY.equalTo(contentView)
+            make.left.equalTo(likeButton).offset(40)
+        }
+        
+        likesLabel.snp.makeConstraints{ (make) -> Void in
+            make.centerY.equalTo(contentView)
+            make.right.equalTo(contentView).offset(-11)
+        }
+
     }
     
 
@@ -69,7 +81,24 @@ final class ActionCell: UICollectionViewCell, ListBindable {
     }
     
     func bindViewModel(_ viewModel: Any) {
+        guard let viewModel = viewModel as? ActionViewModel else { return }
+        let likes = viewModel.likes.withCommas()
+        if viewModel.likes > 1 {
+            likesLabel.text = "\(likes)" + " likes"
+        }
+        else{
+            likesLabel.text = "\(likes)" + " like"
+        }
+        likesLabel.sizeToFit()
         
+        if viewModel.beliked == true{
+            let btnImage = UIImage(named: "like_selected")
+            likeButton.setImage(btnImage , for: UIControlState.normal)
+        }
+        else{
+            let btnImage = UIImage(named: "like_unselected")
+            likeButton.setImage(btnImage , for: UIControlState.normal)
+        }
     }
 
 }

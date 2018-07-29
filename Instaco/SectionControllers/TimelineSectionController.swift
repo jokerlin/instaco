@@ -27,7 +27,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         let results: [ListDiffable] = [
             UserViewModel(username: object.username, userProfileImage: object.userProfileImage, location: object.location, timestamp: object.timestamp),
             ImageViewModel(url: object.imageURL),
-            ActionViewModel(likes: localLikes ?? object.likes),
+            ActionViewModel(likes: localLikes ?? object.likes, beliked: object.beliked),
             CaptionViewModel(username: object.caption.username, text: object.caption.text),
             ]
         return results + object.comments
@@ -46,22 +46,6 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             else { fatalError("Cell not bindable") }
         
         if let cell = cell as? ActionCell {
-            let likes = (mediaInfo?.likes)!.withCommas()
-            if (mediaInfo?.likes)! > 1 {
-                cell.likesLabel.text = "\(likes)" + " likes"
-            }
-            else{
-                cell.likesLabel.text = "\(likes)" + " like"
-            }
-            cell.likesLabel.sizeToFit()
-            if mediaInfo?.beliked == true{
-                let btnImage = UIImage(named: "like_selected")
-                cell.likeButton.setImage(btnImage , for: UIControlState.normal)
-            }
-            else{
-                let btnImage = UIImage(named: "like_unselected")
-                cell.likeButton.setImage(btnImage , for: UIControlState.normal)
-            }
             cell.delegate = self
         }
         return cell

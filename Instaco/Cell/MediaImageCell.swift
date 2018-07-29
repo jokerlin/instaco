@@ -36,6 +36,8 @@ final class ImageCell: UICollectionViewCell, ListBindable {
     }
     
     func bindViewModel(_ viewModel: Any) {
+        guard let viewModel = viewModel as? ImageViewModel else { return }
+        imageView.sd_setImage(with: viewModel.url)
     }
     
 }

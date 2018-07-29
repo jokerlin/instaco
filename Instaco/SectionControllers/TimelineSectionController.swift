@@ -6,8 +6,9 @@
 //  Copyright © 2018 Heng Lin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import IGListKit
+import SnapKit
 
 final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ActionCellDelegate{
     
@@ -44,24 +45,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         guard let cell = collectionContext!.dequeueReusableCell(of: cellClass, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }
         
-        if let cell = cell as? UserCell {
-            cell.profileImageView.sd_setImage(with: mediaInfo?.userProfileImage)
-            cell.usernameLabel.text = mediaInfo?.username
-            cell.locationLabel.text = mediaInfo?.location
-            cell.timestampLabel.text = Date(timeIntervalSince1970: Double((mediaInfo?.timestamp)!)).timeAgoDisplay()
-        }
-        if let cell = cell as? ImageCell {
-            cell.imageView.sd_setImage(with: mediaInfo?.imageURL)
-        }
         if let cell = cell as? ActionCell {
-            let likes = (mediaInfo?.likes)!.withCommas()
-            if (mediaInfo?.likes)! > 1 {
-                cell.likesLabel.text = "\(likes)" + " likes"
-            }
-            else{
-                cell.likesLabel.text = "\(likes)" + " like"
-            }
-            cell.likesLabel.sizeToFit()
             if mediaInfo?.beliked == true{
                 let btnImage = UIImage(named: "like_selected")
                 cell.likeButton.setImage(btnImage , for: UIControlState.normal)
@@ -79,11 +63,13 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         guard let width = collectionContext?.containerSize.width else { fatalError() }
         let height: CGFloat
         switch viewModel {
-        case is UserViewModel: height = 40
+        case is UserViewModel: height = 52
         case is ImageViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is ActionViewModel: height = 40
-        case is CaptionViewModel: height = 30
-        case is CommentViewModel: height = 30
+        case is CaptionViewModel: //height = 30
+            height = CaptionCell.textHeight(mediaInfo?.caption.text ?? "", width: width)
+        case is CommentViewModel: height = 20
+            print("hwo many")
         default: height = 0
         }
         return CGSize(width: width, height: height)

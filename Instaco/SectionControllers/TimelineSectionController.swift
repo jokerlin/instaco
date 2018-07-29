@@ -29,8 +29,9 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             ImageViewModel(url: object.imageURL),
             ActionViewModel(likes: localLikes ?? object.likes),
             CaptionViewModel(username: object.caption.username, text: object.caption.text),
+            CommentViewModel(comment_count: object.comment_count)
             ]
-        return results + object.comments
+        return results 
     }
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, cellForViewModel viewModel: Any, at index: Int) -> UICollectionViewCell & ListBindable {
@@ -66,9 +67,16 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         case is UserViewModel: height = 52
         case is ImageViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is ActionViewModel: height = 40
-        case is CaptionViewModel: //height = 30
+        case is CaptionViewModel:
             height = CaptionCell.textHeight(mediaInfo?.caption.text ?? "", width: width)
-        case is CommentViewModel: height = 20
+        case is CommentViewModel:
+            if mediaInfo?.comment_count == 0 {
+                height = 0
+            }
+            else{
+                height = 20
+            }
+            
         default: height = 0
         }
         return CGSize(width: width, height: height)

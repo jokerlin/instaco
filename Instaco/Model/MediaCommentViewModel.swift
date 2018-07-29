@@ -10,18 +10,17 @@ import IGListKit
 
 final class CommentViewModel: ListDiffable {
     
-    let username: String
-    let text: String
+    let comment_count: Int
     
-    init(username: String, text: String) {
-        self.username = username
-        self.text = text
+    
+    init(comment_count: Int) {
+        self.comment_count = comment_count
     }
     
     // MARK: ListDiffable
     
     func diffIdentifier() -> NSObjectProtocol {
-        return (username + text) as NSObjectProtocol
+        return comment_count as NSObjectProtocol
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {

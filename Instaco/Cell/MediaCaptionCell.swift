@@ -12,7 +12,7 @@ import ActiveLabel
 
 final class CaptionCell: UICollectionViewCell, ListBindable {
     
-    fileprivate static let insets = UIEdgeInsets(top: 4, left: 11, bottom: 4, right: 11)
+    fileprivate static let insets = UIEdgeInsets(top: 8, left: 11, bottom: 8, right: 11)
     fileprivate static let font = UIFont.systemFont(ofSize: 14)
     
     static func textHeight(_ text: String, width: CGFloat) -> CGFloat {

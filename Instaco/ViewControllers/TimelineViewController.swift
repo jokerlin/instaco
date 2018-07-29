@@ -110,7 +110,6 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
             if timelineResponse?.feed_items != nil{
                 for item in (timelineResponse?.feed_items!)!{
                     
-                    var commentArray = Array<CommentViewModel>()
                     var location = ""
                     var caption_username = ""
                     var caption_text = ""
@@ -118,11 +117,7 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
                     if item.media_or_ad?.location != nil{
                         location = (item.media_or_ad?.location?.name)!
                     }
-                    if item.media_or_ad?.preview_comments != nil{
-                        for comment in (item.media_or_ad?.preview_comments!)!{
-                            commentArray.append(CommentViewModel(username: (comment.user?.username!)!, text: comment.text!))
-                        }
-                    }
+                    
                     if item.media_or_ad?.caption != nil{
                         caption_username = (item.media_or_ad?.caption?.user?.username)!
                         caption_text = (item.media_or_ad?.caption?.text)!
@@ -138,11 +133,11 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
                             imageHeight: item.image_versions2![0].height!,
                             imageWidth: item.image_versions2![0].width!,
                             likes: item.like_count!,
-                            comments: commentArray,
                             beliked: item.has_liked!,
                             caption: CaptionViewModel(username: caption_username, text: caption_text),
                             id: item.id!,
-                            userid: (item.user?.pk)!
+                            userid: (item.user?.pk)!,
+                            comment_count: item.comment_count!
                         )
                         self.data.append(mediainfo)
                     }

@@ -16,28 +16,28 @@ final class MediaInfo: ListDiffable {
     let timestamp: Int
     let imageURL: URL
     let likes: Int
-    let comments: [CommentViewModel]
     let imageHeight: Int
     let imageWidth: Int
     let beliked: Bool
     let caption: CaptionViewModel
     let id: String
     let userid: Int
+    let comment_count: Int
     
-    init(username: String, userProfileImage: URL, location: String, timestamp: Int, imageURL: URL, imageHeight: Int, imageWidth: Int, likes: Int, comments: [CommentViewModel], beliked: Bool, caption: CaptionViewModel, id: String, userid: Int) {
+    init(username: String, userProfileImage: URL, location: String, timestamp: Int, imageURL: URL, imageHeight: Int, imageWidth: Int, likes: Int, beliked: Bool, caption: CaptionViewModel, id: String, userid: Int, comment_count: Int) {
         self.username = username
         self.userProfileImage = userProfileImage
         self.location = location
         self.timestamp = timestamp
         self.imageURL = imageURL
         self.likes = likes
-        self.comments = comments
         self.imageHeight = imageHeight
         self.imageWidth = imageWidth
         self.beliked = beliked
         self.caption = caption
         self.id = id
         self.userid = userid
+        self.comment_count = comment_count
     }
     
     // MARK: ListDiffable

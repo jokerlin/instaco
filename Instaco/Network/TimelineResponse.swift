@@ -45,6 +45,7 @@ class Media_or_ad: Mappable{
     var taken_at: Int?
     var caption: Caption?
     var id: String?
+    var comment_count: Int?
     
     required init?(map: Map){
         if map.JSON["image_versions2"] != nil{
@@ -71,7 +72,7 @@ class Media_or_ad: Mappable{
             preview_comments <- map["preview_comments"]
             caption <- map["caption"]
             id <- map["id"]
-            
+            comment_count <- map["comment_count"]
         }
         else {
             image_versions2 <- map["carousel_media.0.image_versions2.candidates"]
@@ -83,6 +84,7 @@ class Media_or_ad: Mappable{
             preview_comments <- map["preview_comments"]
             caption <- map["caption"]
             id <- map["id"]
+            comment_count <- map["comment_count"]
         }
     }
 }

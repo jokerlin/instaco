@@ -50,9 +50,9 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
             var atts = attributes
             switch type {
             case .hashtag:
-                atts[NSAttributedStringKey.font] = isSelected ? UIFont.boldSystemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14)
+                atts[NSAttributedStringKey.font] = isSelected ? UIFont.systemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14)
             case .mention:
-                atts[NSAttributedStringKey.font] = isSelected ? UIFont.boldSystemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14)
+                atts[NSAttributedStringKey.font] = isSelected ? UIFont.systemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14)
             case usernameType:
                 atts[NSAttributedStringKey.font] = UIFont.boldSystemFont(ofSize: 14)
             default: ()
@@ -68,6 +68,9 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
         }
         captionLabel.handleHashtagTap { hashtag in
             print("Success. You just tapped the \(hashtag) hashtag")
+        }
+        captionLabel.handleCustomTap(for: usernameType){ usernameType in
+            print("Success. You just tapped the \(usernameType) usernametag")
         }
         
         contentView.addSubview(captionLabel)

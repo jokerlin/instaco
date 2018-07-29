@@ -69,7 +69,6 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         case is CaptionViewModel: //height = 30
             height = CaptionCell.textHeight(mediaInfo?.caption.text ?? "", width: width)
         case is CommentViewModel: height = 20
-            print("hwo many")
         default: height = 0
         }
         return CGSize(width: width, height: height)

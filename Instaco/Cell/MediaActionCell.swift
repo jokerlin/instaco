@@ -90,15 +90,6 @@ final class ActionCell: UICollectionViewCell, ListBindable {
             likesLabel.text = "\(likes)" + " like"
         }
         likesLabel.sizeToFit()
-        
-        if viewModel.beliked == true{
-            let btnImage = UIImage(named: "like_selected")
-            likeButton.setImage(btnImage , for: UIControlState.normal)
-        }
-        else{
-            let btnImage = UIImage(named: "like_unselected")
-            likeButton.setImage(btnImage , for: UIControlState.normal)
-        }
     }
 
 }

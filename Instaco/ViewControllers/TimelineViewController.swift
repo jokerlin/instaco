@@ -52,7 +52,7 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
         let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
-        sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
         return sectionController
     }
     

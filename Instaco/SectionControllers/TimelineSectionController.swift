@@ -66,10 +66,10 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         case is UserViewModel: height = 52
         case is ImageViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is ActionViewModel: height = 40
-            
         case is CaptionViewModel: //height = 30
             height = CaptionCell.textHeight(mediaInfo?.caption.text ?? "", width: width)
-        case is CommentViewModel: height = 30
+        case is CommentViewModel: height = 20
+            print("hwo many")
         default: height = 0
         }
         return CGSize(width: width, height: height)

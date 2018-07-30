@@ -1,0 +1,51 @@
+//
+//  UserInfoResponse.swift
+//  Instaco
+//
+//  Created by Henry Lin on 7/29/18.
+//  Copyright © 2018 Heng Lin. All rights reserved.
+//
+
+import ObjectMapper
+
+class UserInfoResponse: Mappable{
+    var status: String?
+    var user: UserInfo?
+    
+    required init?(map: Map){
+        
+    }
+    func mapping(map: Map) {
+        status <- map["status"]
+        user <- map["user"]
+    }
+}
+
+class UserInfo: Mappable{
+    var biography: String?
+    var follower_count: Int?
+    var following_count: Int?
+    var full_name: String?
+    var hd_profile_pic_url_info: ImageTimeline?
+    var is_private: Int?
+    var external_url: String?
+    var pk: Int?
+    var media_count: Int?
+    
+    required init?(map: Map){
+        
+    }
+    
+    func mapping(map: Map) {
+        media_count <- map["media_count"]
+        biography <- map["biography"]
+        follower_count <- map["follower_count"]
+        following_count <- map["following_count"]
+        full_name <- map["full_name"]
+        hd_profile_pic_url_info <- map["hd_profile_pic_url_info"]
+        is_private <- map["is_private"]
+        external_url <- map["external_url"]
+        pk <- map["pk"]
+    }
+
+}

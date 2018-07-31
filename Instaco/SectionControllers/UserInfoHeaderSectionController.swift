@@ -8,7 +8,7 @@
 
 import IGListKit
 
-class UserInfoHeaderSectionController:ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource{
+class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource {
     
     override init() {
         super.init()
@@ -28,6 +28,7 @@ class UserInfoHeaderSectionController:ListBindingSectionController<ListDiffable>
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, sizeForViewModel viewModel: Any, at index: Int) -> CGSize {
         guard let width = collectionContext?.containerSize.width else { fatalError() }
+        
         // TODO: Calculate Height
         let height: CGFloat = 200
         return CGSize(width: width, height: height)

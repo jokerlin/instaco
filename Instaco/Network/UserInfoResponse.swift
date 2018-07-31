@@ -8,11 +8,11 @@
 
 import ObjectMapper
 
-class UserInfoResponse: Mappable{
+class UserInfoResponse: Mappable {
     var status: String?
     var user: JSONUserInfo?
     
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     func mapping(map: Map) {
@@ -21,7 +21,7 @@ class UserInfoResponse: Mappable{
     }
 }
 
-class JSONUserInfo: Mappable{
+class JSONUserInfo: Mappable {
     var biography: String?
     var follower_count: Int?
     var following_count: Int?
@@ -33,7 +33,7 @@ class JSONUserInfo: Mappable{
     var media_count: Int?
     var username: String?
     
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     

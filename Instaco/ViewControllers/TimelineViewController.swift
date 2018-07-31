@@ -11,7 +11,7 @@ import IGListKit
 import SwiftyJSON
 import ObjectMapper
 
-class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate{
+class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
     var data = [ListDiffable]()
     var next_max_id = ""
@@ -37,8 +37,7 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
         adapter.collectionView = collectionView
         adapter.scrollViewDelegate = self
     }
-    
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
@@ -84,8 +83,7 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y < -50 ) {
-            
+        if scrollView.contentOffset.y < -50 {
             data.removeAll()
             adapter.performUpdates(animated: true, completion: nil)
             DispatchQueue.global(qos: .default).async {
@@ -98,32 +96,31 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
         }
     }
     
-    func timelineJSON2Object(params: [String: Any]){
-        insta.timelineFeed(params: params, success: {
-            (JSONResponse) -> Void in
+    func timelineJSON2Object(params: [String: Any]) {
+        insta.timelineFeed(params: params, success: { (JSONResponse) -> Void in
             let json = JSONResponse
             print("GET JSON RESPONSE")
             
             self.next_max_id = json["next_max_id"].stringValue
             
             let timelineResponse = Mapper<TimelineResponse>().map(JSONString: json.rawString()!)
-            if timelineResponse?.feed_items != nil{
-                for item in (timelineResponse?.feed_items!)!{
-                    
+            if timelineResponse?.feed_items != nil {
+                
+                for item in (timelineResponse?.feed_items!)! {
                     var location = ""
                     var caption_username = ""
                     var caption_text = ""
                     
-                    if item.media_or_ad?.location != nil{
+                    if item.media_or_ad?.location != nil {
                         location = (item.media_or_ad?.location?.name)!
                     }
                     
-                    if item.media_or_ad?.caption != nil{
+                    if item.media_or_ad?.caption != nil {
                         caption_username = (item.media_or_ad?.caption?.user?.username)!
                         caption_text = (item.media_or_ad?.caption?.text)!
                     }
                     
-                    if let item = item.media_or_ad{
+                    if let item = item.media_or_ad {
                         let mediainfo = MediaInfo(
                             username: (item.user?.username)!,
                             userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
@@ -144,8 +141,7 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
                 }
             }
             self.adapter.performUpdates(animated: true)
-        }, failure: {
-            (JSONResponse) -> Void in
+        }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
         })
     }

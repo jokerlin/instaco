@@ -8,7 +8,7 @@
 
 import Alamofire
 
-class NetworkManager: SessionManager{
+class NetworkManager: SessionManager {
     
     // MARK: - Singleton instance
     static let shared: Alamofire.SessionManager = {

@@ -69,7 +69,7 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
         captionLabel.handleHashtagTap { hashtag in
             print("Success. You just tapped the \(hashtag) hashtag")
         }
-        captionLabel.handleCustomTap(for: usernameType){ usernameType in
+        captionLabel.handleCustomTap(for: usernameType) { usernameType in
             print("Success. You just tapped the \(usernameType) usernametag")
         }
         
@@ -84,7 +84,7 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        captionLabel.snp.makeConstraints{ (make) -> Void in
+        captionLabel.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(contentView)
             make.left.equalTo(11)
             make.right.equalTo(contentView).offset(-11)

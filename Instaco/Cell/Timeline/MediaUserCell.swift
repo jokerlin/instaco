@@ -12,7 +12,7 @@ import SnapKit
 
 final class UserCell: UICollectionViewCell, ListBindable {
     
-    var usernameLabelConstraint : Constraint?
+    var usernameLabelConstraint: Constraint?
     
     let usernameLabel: UILabel = {
         let label = UILabel()
@@ -69,7 +69,7 @@ final class UserCell: UICollectionViewCell, ListBindable {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        profileImageView.snp.makeConstraints{ (make) -> Void in
+        profileImageView.snp.makeConstraints { (make) -> Void in
             make.width.equalTo(32)
             make.height.equalTo(32)
             make.centerY.equalTo(contentView)
@@ -80,25 +80,24 @@ final class UserCell: UICollectionViewCell, ListBindable {
         
         if locationLabel.text == "" {
             usernameLabelConstraint?.deactivate()
-            usernameLabel.snp.makeConstraints{ (make) -> Void in
+            usernameLabel.snp.makeConstraints { (make) -> Void in
                 usernameLabelConstraint = make.centerY.equalTo(profileImageView).constraint
                 make.left.equalTo(profileImageView.snp.right).offset(9)
             }
-        }
-        else{
+        } else {
             usernameLabelConstraint?.deactivate()
-            usernameLabel.snp.makeConstraints{ (make) -> Void in
+            usernameLabel.snp.makeConstraints { (make) -> Void in
                 usernameLabelConstraint = make.centerY.equalTo(profileImageView).offset(-7).constraint
                 make.left.equalTo(profileImageView.snp.right).offset(9)
             }
         }
         
-        locationLabel.snp.makeConstraints{ (make) -> Void in
+        locationLabel.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(profileImageView).offset(9)
             make.left.equalTo(profileImageView.snp.right).offset(9)
         }
         
-        timestampLabel.snp.makeConstraints{ (make) -> Void in
+        timestampLabel.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(contentView)
             make.right.equalTo(contentView).offset(-11)
         }

@@ -15,12 +15,12 @@ protocol ActionCellDelegate: class {
 
 final class ActionCell: UICollectionViewCell, ListBindable {
     
-    weak var delegate: ActionCellDelegate? = nil
+    weak var delegate: ActionCellDelegate? 
     
     let likeButton: UIButton = {
         let button = UIButton()
         let btnImage = UIImage(named: "like_unselected")
-        button.setImage(btnImage , for: UIControlState.normal)
+        button.setImage(btnImage, for: UIControlState.normal)
         button.sizeToFit()
         return button
     }()
@@ -28,7 +28,7 @@ final class ActionCell: UICollectionViewCell, ListBindable {
     let commentButton: UIButton = {
         let button = UIButton()
         let btnImage = UIImage(named: "comment")
-        button.setImage(btnImage , for: UIControlState.normal)
+        button.setImage(btnImage, for: UIControlState.normal)
         button.sizeToFit()
         return button
     }()
@@ -58,23 +58,22 @@ final class ActionCell: UICollectionViewCell, ListBindable {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        likeButton.snp.makeConstraints{ (make) -> Void in
+        likeButton.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(contentView)
             make.left.equalTo(11)
         }
         
-        commentButton.snp.makeConstraints{ (make) -> Void in
+        commentButton.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(contentView)
             make.left.equalTo(likeButton).offset(40)
         }
         
-        likesLabel.snp.makeConstraints{ (make) -> Void in
+        likesLabel.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(contentView)
             make.right.equalTo(contentView).offset(-11)
         }
 
     }
-    
 
     @objc func onHeart() {
         delegate?.didTapHeart(cell: self)
@@ -85,8 +84,7 @@ final class ActionCell: UICollectionViewCell, ListBindable {
         let likes = viewModel.likes.withCommas()
         if viewModel.likes > 1 {
             likesLabel.text = "\(likes)" + " likes"
-        }
-        else{
+        } else {
             likesLabel.text = "\(likes)" + " like"
         }
         likesLabel.sizeToFit()

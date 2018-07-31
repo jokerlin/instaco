@@ -12,7 +12,6 @@ final class CommentViewModel: ListDiffable {
     
     let comment_count: Int
     
-    
     init(comment_count: Int) {
         self.comment_count = comment_count
     }

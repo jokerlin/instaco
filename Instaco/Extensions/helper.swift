@@ -9,7 +9,7 @@
 import UIKit
 
 // Get afterHeight
-func transfromHeight(originalHeight: Int, OriginalWidth: Int, afterWidth: CGFloat) -> CGFloat{
+func transfromHeight(originalHeight: Int, OriginalWidth: Int, afterWidth: CGFloat) -> CGFloat {
     return afterWidth / CGFloat(OriginalWidth) * CGFloat(originalHeight)
 }
 
@@ -57,7 +57,7 @@ extension UIColor {
 }
 
 extension UIView {
-    func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?,  paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat) {
+    func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?, paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -94,7 +94,7 @@ extension Int {
     func withCommas() -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        return numberFormatter.string(from: NSNumber(value:self))!
+        return numberFormatter.string(from: NSNumber(value: self))!
     }
 }
 

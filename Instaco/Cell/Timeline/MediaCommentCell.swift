@@ -35,7 +35,7 @@ final class CommentCell: UICollectionViewCell, ListBindable {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        commentLabel.snp.makeConstraints{ (make) -> Void in
+        commentLabel.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(contentView)
             make.left.equalTo(11)
         }
@@ -48,15 +48,11 @@ final class CommentCell: UICollectionViewCell, ListBindable {
         
         if viewModel.comment_count == 0 {
             commentLabel.text = ""
-        }
-        else if viewModel.comment_count == 1 {
+        } else if viewModel.comment_count == 1 {
             commentLabel.text = "View all 1 comment"
-        }
-        else{
+        } else {
             commentLabel.text = "View all " + String(viewModel.comment_count) + " comments"
         }
-        
     }
     
 }
-

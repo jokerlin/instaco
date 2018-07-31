@@ -8,7 +8,6 @@
 
 import Alamofire
 
-
 class BaseNetworkService {
     
     var config: RequestConfiguration
@@ -22,7 +21,7 @@ class BaseNetworkService {
         return NetworkManager.shared.request(request).validate()
     }
     
-    func executeWithoutValidation(request: URLRequest) -> DataRequest{
+    func executeWithoutValidation(request: URLRequest) -> DataRequest {
         
         return NetworkManager.shared.request(request)
     }
@@ -55,8 +54,8 @@ class BaseNetworkService {
         return urlRequest
     }
     
-    private func createUrl(_ fromUrl: String) -> URL{
-        if let _url = URL(string: fromUrl){
+    private func createUrl(_ fromUrl: String) -> URL {
+        if let _url = URL(string: fromUrl) {
             return _url
         }
         return URL(fileURLWithPath: "")

@@ -21,21 +21,19 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
 //        try! keychain.removeAll()
         
-        if keychain.allKeys() == []{
+        if keychain.allKeys() == [] {
             DispatchQueue.main.async {
                 let loginController = LoginController()
                 let navController = UINavigationController(rootViewController: loginController)
                 self.present(navController, animated: true, completion: nil)
             }
             return
-        }
-        else{
+        } else {
             print("Login by \(keychain.allKeys()[0])")
             
             insta.set_auth(username: keychain.allKeys()[0], password: keychain[keychain.allKeys()[0]]!)
             insta.login(
-                success: {
-                    (JSONResponse) in
+                success: { (JSONResponse) in
                     print("Login Success")
                     insta.LastJson = JSONResponse
                     insta.isLoggedIn = true
@@ -43,8 +41,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
                     self.setupViewControllers()
                     },
-                failure: {
-                    _ in
+                failure: { _ in
                     print("Login Failed")
             })
         }

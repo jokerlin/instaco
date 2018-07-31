@@ -11,8 +11,7 @@ import IGListKit
 import SwiftyJSON
 import ObjectMapper
 
-
-class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate{
+class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
     var data = [ListDiffable]()
     var next_max_id = ""
@@ -37,15 +36,13 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         collectionView.frame = view.bounds
     }
     
-    func getUserInfoHeader(){
-        insta.getUserInfo(userid: insta.username_id, success: {
-            (JSONResponse) in
+    func getUserInfoHeader() {
+        insta.getUserInfo(userid: insta.username_id, success: { (JSONResponse) in
             var is_private = false
             let userInfoResponse = Mapper<UserInfoResponse>().map(JSONString: JSONResponse.rawString()!)
             if (userInfoResponse?.user?.is_private)! == 0 {
                 is_private = false
-            }
-            else{
+            } else {
                 is_private = true
             }
             let userInfo = UserInfo(username: (userInfoResponse?.user?.username)!,
@@ -63,8 +60,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
             self.data.append(userInfo)
             self.navigationItem.title = userInfo.username
             self.adapter.performUpdates(animated: true)
-        }, failure: {
-            (JSONResponse) in
+        }, failure: { (JSONResponse) in
             print(JSONResponse)
         })
     }

@@ -8,11 +8,11 @@
 
 import ObjectMapper
 
-class TimelineResponse: Mappable{
+class TimelineResponse: Mappable {
     var num_results: Int?
     var next_max_id: String?
     var feed_items: [FeedItemsTimeline]?
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     func mapping(map: Map) {
@@ -22,10 +22,10 @@ class TimelineResponse: Mappable{
     
 }
 
-class FeedItemsTimeline: Mappable{
+class FeedItemsTimeline: Mappable {
     var media_or_ad: Media_or_ad?
     
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     func mapping(map: Map) {
@@ -34,7 +34,7 @@ class FeedItemsTimeline: Mappable{
     }
 }
 
-class Media_or_ad: Mappable{
+class Media_or_ad: Mappable {
     var image_versions2: [ImageTimeline]?
     var like_count: Int?
     var user: User?
@@ -47,22 +47,22 @@ class Media_or_ad: Mappable{
     var id: String?
     var comment_count: Int?
     
-    required init?(map: Map){
-        if map.JSON["image_versions2"] != nil{
+    required init?(map: Map) {
+        if map.JSON["image_versions2"] != nil {
             type = 1
         }
         
-        if map.JSON["carousel_media"] != nil{
+        if map.JSON["carousel_media"] != nil {
             type = 2
         }
         
-        if map.JSON["ad_header_style"] != nil{
+        if map.JSON["ad_header_style"] != nil {
             return nil
         }
     }
     
     func mapping(map: Map) {
-        if type == 1{
+        if type == 1 {
             image_versions2 <- map["image_versions2.candidates"]
             like_count <- map["like_count"]
             user <- map["user"]
@@ -73,8 +73,7 @@ class Media_or_ad: Mappable{
             caption <- map["caption"]
             id <- map["id"]
             comment_count <- map["comment_count"]
-        }
-        else {
+        } else {
             image_versions2 <- map["carousel_media.0.image_versions2.candidates"]
             like_count <- map["like_count"]
             user <- map["user"]
@@ -89,10 +88,10 @@ class Media_or_ad: Mappable{
     }
 }
 
-class Caption: Mappable{
+class Caption: Mappable {
     var user: User?
     var text: String?
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     func mapping(map: Map) {
@@ -101,12 +100,12 @@ class Caption: Mappable{
     }
 }
 
-class User: Mappable{
+class User: Mappable {
     var username: String?
     var profile_pic_url: String?
     var pk: Int?
     
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     func mapping(map: Map) {
@@ -116,12 +115,12 @@ class User: Mappable{
     }
 }
 
-class ImageTimeline: Mappable{
+class ImageTimeline: Mappable {
     var height: Int?
     var url: String?
     var width: Int?
     
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     func mapping(map: Map) {
@@ -131,10 +130,10 @@ class ImageTimeline: Mappable{
     }
 }
 
-class Location: Mappable{
+class Location: Mappable {
     var name: String?
     
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     func mapping(map: Map) {
@@ -142,11 +141,11 @@ class Location: Mappable{
     }
 }
 
-class PreviewComments: Mappable{
+class PreviewComments: Mappable {
     var user: User?
     var text: String?
     
-    required init?(map: Map){
+    required init?(map: Map) {
         
     }
     func mapping(map: Map) {

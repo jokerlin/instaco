@@ -49,4 +49,3 @@ final class UserInfo: ListDiffable {
     }
     
 }
-

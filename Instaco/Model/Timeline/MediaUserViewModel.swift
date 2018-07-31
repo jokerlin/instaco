@@ -32,7 +32,7 @@ final class UserViewModel: ListDiffable {
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        guard let object = object as? UserViewModel else  { return false }
+        guard let object = object as? UserViewModel else { return false }
         return username == object.username
             && timestamp == object.timestamp
     }

@@ -39,7 +39,6 @@
 		8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */; };
 		8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */; };
 		8F6904C421084F6F000B1AB7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */; };
-		8FB9A76B210A99FC005BE1F6 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9A76A210A99FC005BE1F6 /* Styles.swift */; };
 		8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD744120F7CCBD001ACD34 /* helper.swift */; };
 		8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */; };
 		8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDA614520F7056700B07D8A /* BaseNetworkService.swift */; };
@@ -105,7 +104,6 @@
 		8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCaptionViewModel.swift; sourceTree = "<group>"; };
 		8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
-		8FB9A76A210A99FC005BE1F6 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		8FBD744120F7CCBD001ACD34 /* helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helper.swift; sourceTree = "<group>"; };
 		8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramNetworkAPI.swift; sourceTree = "<group>"; };
 		8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instaco-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 				8F22519320F7429300B39F6D /* MD5.swift */,
 				8F22519620F742DF00B39F6D /* hmac.swift */,
 				8FBD744120F7CCBD001ACD34 /* helper.swift */,
-				8FB9A76A210A99FC005BE1F6 /* Styles.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,6 +339,7 @@
 				8F0A19E020F4CF3300872C1B /* Frameworks */,
 				8F0A19E120F4CF3300872C1B /* Resources */,
 				C810940B35B3F29075DE7673 /* [CP] Embed Pods Frameworks */,
+				8F59F7A82110016A000A7833 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -460,6 +458,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8F59F7A82110016A000A7833 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		C810940B35B3F29075DE7673 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -538,7 +549,6 @@
 				8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */,
 				8F2C3BFB20FFA36A00C6CC46 /* MediaUserCell.swift in Sources */,
 				8F2C3BFF20FFA65100C6CC46 /* MediaImageCell.swift in Sources */,
-				8FB9A76B210A99FC005BE1F6 /* Styles.swift in Sources */,
 				8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */,
 				8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */,
 				8F22519720F742DF00B39F6D /* hmac.swift in Sources */,

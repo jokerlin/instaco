@@ -21,6 +21,21 @@ class UserInfoResponse: Mappable {
     }
 }
 
+class UserFeedResponse: Mappable {
+    var next_max_id: String?
+    var items: [Media_or_ad]?
+    var num_results: Int?
+    
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        num_results <- map["num_results"]
+        items <- map["items"]
+        next_max_id <- map["next_max_id"]
+    }
+}
+
 class JSONUserInfo: Mappable {
     var biography: String?
     var follower_count: Int?

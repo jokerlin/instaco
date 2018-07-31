@@ -14,6 +14,7 @@ import ObjectMapper
 class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
     var data = [ListDiffable]()
+    var postData = [ListDiffable]()
     var next_max_id = ""
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
@@ -24,7 +25,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         self.view.addSubview(collectionView)
         
-        getUserInfoHeader()
+        setup()
         
         adapter.dataSource = self
         adapter.collectionView = collectionView
@@ -36,8 +37,8 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         collectionView.frame = view.bounds
     }
     
-    func getUserInfoHeader() {
-        insta.getUserInfo(userid: insta.username_id, success: { (JSONResponse) in
+    func setup() {
+        getUserInfoHeader(success: { (JSONResponse) in
             var is_private = false
             let userInfoResponse = Mapper<UserInfoResponse>().map(JSONString: JSONResponse.rawString()!)
             if (userInfoResponse?.user?.is_private)! == 0 {
@@ -59,8 +60,30 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                                     media_count: (userInfoResponse?.user?.media_count)!)
             self.data.append(userInfo)
             self.navigationItem.title = userInfo.username
-            self.adapter.performUpdates(animated: true)
+            self.getUserInfoFeed()
         }, failure: { (JSONResponse) in
+            print(JSONResponse)
+        })
+
+    }
+    
+    func getUserInfoHeader(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        insta.getUserInfo(userid: insta.username_id, success: success, failure: failure)
+    }
+    
+    func getUserInfoFeed() {
+        insta.getUserFeed(userid: insta.username_id, success: {(JSONResponse) -> Void in
+//            print(JSONResponse)
+            let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
+            if userFeedResponse?.items != nil {
+                for item in (userFeedResponse?.items!)! {
+                    let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!)
+                    self.postData.append(userFeed)
+                }
+            }
+            self.data += self.postData
+            self.adapter.performUpdates(animated: true)
+        }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
         })
     }
@@ -70,11 +93,10 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-//        switch object{
-//        case is UserInfo: return UserInfoHeaderSectionController()
-//        default: return UserInfoPostSectionController()
-//        }
-        return UserInfoHeaderSectionController()
+        switch object {
+        case is UserInfo: return UserInfoHeaderSectionController()
+        default: return UserInfoPostSectionController()
+        }
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {

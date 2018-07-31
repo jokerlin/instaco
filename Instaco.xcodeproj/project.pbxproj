@@ -34,6 +34,8 @@
 		8F59F79F210F3DD6000A7833 /* UserInfoPostSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F79E210F3DD6000A7833 /* UserInfoPostSectionController.swift */; };
 		8F59F7A5210F5CBD000A7833 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F7A4210F5CBD000A7833 /* UserInfoModel.swift */; };
 		8F59F7A7210FEBA2000A7833 /* UserInfoHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F7A6210FEBA2000A7833 /* UserInfoHeaderCell.swift */; };
+		8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F7A92110274E000A7833 /* UserFeedModel.swift */; };
+		8F59F7AE21103210000A7833 /* UserInfoPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F7AD21103210000A7833 /* UserInfoPostCell.swift */; };
 		8F60943F21013B6200C360F8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F60943E21013B6200C360F8 /* LoginViewController.swift */; };
 		8F6094532102F4D200C360F8 /* MediaCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */; };
 		8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */; };
@@ -99,6 +101,8 @@
 		8F59F79E210F3DD6000A7833 /* UserInfoPostSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPostSectionController.swift; sourceTree = "<group>"; };
 		8F59F7A4210F5CBD000A7833 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		8F59F7A6210FEBA2000A7833 /* UserInfoHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderCell.swift; sourceTree = "<group>"; };
+		8F59F7A92110274E000A7833 /* UserFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedModel.swift; sourceTree = "<group>"; };
+		8F59F7AD21103210000A7833 /* UserInfoPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPostCell.swift; sourceTree = "<group>"; };
 		8F60943E21013B6200C360F8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCaptionCell.swift; sourceTree = "<group>"; };
 		8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCaptionViewModel.swift; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				8F59F7A4210F5CBD000A7833 /* UserInfoModel.swift */,
+				8F59F7A92110274E000A7833 /* UserFeedModel.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				8F59F7A6210FEBA2000A7833 /* UserInfoHeaderCell.swift */,
+				8F59F7AD21103210000A7833 /* UserInfoPostCell.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -532,6 +538,7 @@
 			files = (
 				8F60943F21013B6200C360F8 /* LoginViewController.swift in Sources */,
 				8F22519420F7429300B39F6D /* MD5.swift in Sources */,
+				8F59F7AE21103210000A7833 /* UserInfoPostCell.swift in Sources */,
 				8F6094532102F4D200C360F8 /* MediaCaptionCell.swift in Sources */,
 				8F2C3C0120FFA67300C6CC46 /* MediaActionCell.swift in Sources */,
 				8F2C3BFD20FFA50900C6CC46 /* MediaUserViewModel.swift in Sources */,
@@ -558,6 +565,7 @@
 				8F6904C421084F6F000B1AB7 /* TimelineViewController.swift in Sources */,
 				8F37FC7B20F9C2A30035E303 /* TimelineResponse.swift in Sources */,
 				8F59F7A7210FEBA2000A7833 /* UserInfoHeaderCell.swift in Sources */,
+				8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */,
 				8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */,
 				8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */,
 			);

@@ -13,8 +13,8 @@ import ObjectMapper
 
 class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
-    var data = [ListDiffable]()
-    var postData = [ListDiffable]()
+    var data: [ListDiffable] = []
+    var postData: [UserFeed] = []
     var next_max_id = ""
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
@@ -81,7 +81,8 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                     self.postData.append(userFeed)
                 }
             }
-            self.data += self.postData
+
+            self.data.append(GridItem(items: self.postData))
             self.adapter.performUpdates(animated: true)
         }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)

@@ -11,24 +11,35 @@ import SDWebImage
 
 class UserInfoPostSectionController: ListSectionController {
 
-    private var object: UserFeed?
+    private var object: GridItem?
+    
+    override init() {
+        super.init()
+        minimumLineSpacing = 1
+        minimumInteritemSpacing = 1
+    }
     
     override func sizeForItem(at index: Int) -> CGSize {
-        // TODO: Resize Cell
-        return CGSize(width: 137, height: 137)
+        guard let width = collectionContext?.containerSize.width else { fatalError() }
+        
+        return CGSize(width: floor((width - 2 * minimumInteritemSpacing) / 3), height: floor((width - 2 * minimumInteritemSpacing) / 3))
+    }
+    
+    override func numberOfItems() -> Int {
+        return object?.itemCount ?? 0
     }
     
     override func cellForItem(at index: Int) -> UICollectionViewCell {
         guard let cell = collectionContext!.dequeueReusableCell(of: UserInfoPostCell.self, for: self, at: index) as? UserInfoPostCell else { fatalError("Cell not bindable") }
-        cell.imageView.sd_setImage(with: object?.imageURL)
+        cell.imageView.sd_setImage(with: object?.items[index].imageURL)
         return cell
     }
     
     override func didUpdate(to object: Any) {
-        self.object = object as? UserFeed
+        self.object = object as? GridItem
     }
     
     override func didSelectItem(at index: Int) {
-        print("Tap photo " + (object?.imageURL.absoluteString)!)
+        print("Tap photo " + (object?.items[index].id)!)
     }
 }

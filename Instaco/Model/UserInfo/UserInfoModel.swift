@@ -49,3 +49,29 @@ final class UserInfo: ListDiffable {
     }
     
 }
+
+final class GridItem: NSObject {
+    
+    let itemCount: Int
+    var items: [UserFeed] = []
+    
+    init(items: [UserFeed]) {
+        self.items = items
+        self.itemCount = items.count
+        
+        super.init()
+        
+    }
+}
+
+extension GridItem: ListDiffable {
+    
+    func diffIdentifier() -> NSObjectProtocol {
+        return self
+    }
+    
+    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+        return self === object ? true : self.isEqual(object)
+    }
+    
+}

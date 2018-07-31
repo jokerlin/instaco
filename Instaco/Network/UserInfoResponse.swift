@@ -10,7 +10,7 @@ import ObjectMapper
 
 class UserInfoResponse: Mappable{
     var status: String?
-    var user: UserInfo?
+    var user: JSONUserInfo?
     
     required init?(map: Map){
         
@@ -21,7 +21,7 @@ class UserInfoResponse: Mappable{
     }
 }
 
-class UserInfo: Mappable{
+class JSONUserInfo: Mappable{
     var biography: String?
     var follower_count: Int?
     var following_count: Int?
@@ -31,6 +31,7 @@ class UserInfo: Mappable{
     var external_url: String?
     var pk: Int?
     var media_count: Int?
+    var username: String?
     
     required init?(map: Map){
         
@@ -46,6 +47,7 @@ class UserInfo: Mappable{
         is_private <- map["is_private"]
         external_url <- map["external_url"]
         pk <- map["pk"]
+        username <- map["username"]
     }
 
 }

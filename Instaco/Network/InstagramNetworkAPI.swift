@@ -210,16 +210,16 @@ class InstagramAPI{
         SendRequest(URI: "feed/timeline/", method: .post, encoding: URLEncoding.httpBody, params: params, success: success, failure: failure)
     }
     
-    func getUserInfo(userid: Int, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void){
-        SendRequest(URI: "users/" + String(userid) + "/info/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
+    func getUserInfo(userid: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void){
+        SendRequest(URI: "users/" + userid + "/info/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
     }
     
-    func getUserFeed(userid: Int, max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void){
+    func getUserFeed(userid: String, max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void){
         if max_id == "" {
-            SendRequest(URI: "feed/user/" + String(userid) + "/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
+            SendRequest(URI: "feed/user/" + userid + "/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
         }
         else{
-            SendRequest(URI: "feed/user/" + String(userid) + "/?max_id=" + max_id!, method: .get, encoding: URLEncoding.default, success: success, failure: failure)
+            SendRequest(URI: "feed/user/" + userid + "/?max_id=" + max_id!, method: .get, encoding: URLEncoding.default, success: success, failure: failure)
         }
     }
     

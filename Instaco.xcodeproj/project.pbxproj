@@ -44,6 +44,11 @@
 		8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */; };
 		8F6904C421084F6F000B1AB7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */; };
 		8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD744120F7CCBD001ACD34 /* helper.swift */; };
+		8FCAD4972111EA29006908FE /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4962111EA29006908FE /* NewsViewController.swift */; };
+		8FCAD4992111F4D5006908FE /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4982111F4D5006908FE /* NewsResponse.swift */; };
+		8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD49E2112283A006908FE /* NewsModel.swift */; };
+		8FCAD4A121122B84006908FE /* NewsSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A021122B84006908FE /* NewsSectionController.swift */; };
+		8FCAD4A421122BDC006908FE /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A321122BDC006908FE /* NewsCell.swift */; };
 		8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */; };
 		8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDA614520F7056700B07D8A /* BaseNetworkService.swift */; };
 		EEC0FF090245A8A36F83F2B8 /* Pods_Instaco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */; };
@@ -113,6 +118,11 @@
 		8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		8FBD744120F7CCBD001ACD34 /* helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helper.swift; sourceTree = "<group>"; };
+		8FCAD4962111EA29006908FE /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		8FCAD4982111F4D5006908FE /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
+		8FCAD49E2112283A006908FE /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		8FCAD4A021122B84006908FE /* NewsSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSectionController.swift; sourceTree = "<group>"; };
+		8FCAD4A321122BDC006908FE /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramNetworkAPI.swift; sourceTree = "<group>"; };
 		8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instaco-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FDA614520F7056700B07D8A /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
@@ -228,9 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */,
-				8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */,
-				8F59F796210EA352000A7833 /* UserInfoResponse.swift */,
-				8F4B67AF21118CF00077068E /* MediaResponse.swift */,
+				8FCAD49A2111F4DC006908FE /* Response */,
 				8F22868920FE51AA0005BB61 /* Basic */,
 			);
 			path = Network;
@@ -249,6 +257,7 @@
 		8F37FC7720F8F4530035E303 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8FCAD49D21122829006908FE /* News */,
 				8F59F7A1210F5C6C000A7833 /* UserInfo */,
 				8F59F7A0210F5C54000A7833 /* Timeline */,
 			);
@@ -304,6 +313,7 @@
 				8F2C3BF420FF757200C6CC46 /* TimelineSectionController.swift */,
 				8F59F79C210F3DB6000A7833 /* UserInfoHeaderSectionController.swift */,
 				8F59F79E210F3DD6000A7833 /* UserInfoPostSectionController.swift */,
+				8FCAD4A021122B84006908FE /* NewsSectionController.swift */,
 			);
 			path = SectionControllers;
 			sourceTree = "<group>";
@@ -316,6 +326,7 @@
 				8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */,
 				8F60943E21013B6200C360F8 /* LoginViewController.swift */,
 				8F4B67AD211188240077068E /* MediaViewController.swift */,
+				8FCAD4962111EA29006908FE /* NewsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -323,10 +334,38 @@
 		8F64165D20FC8DC8009B8BD6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8FCAD4A221122BCB006908FE /* News */,
 				8F59F7A3210F5C93000A7833 /* UserInfo */,
 				8F59F7A2210F5C82000A7833 /* Timeline */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8FCAD49A2111F4DC006908FE /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD4982111F4D5006908FE /* NewsResponse.swift */,
+				8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */,
+				8F59F796210EA352000A7833 /* UserInfoResponse.swift */,
+				8F4B67AF21118CF00077068E /* MediaResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		8FCAD49D21122829006908FE /* News */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD49E2112283A006908FE /* NewsModel.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		8FCAD4A221122BCB006908FE /* News */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD4A321122BDC006908FE /* NewsCell.swift */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 		8FD3885720F5213600B6C3E7 /* Frameworks */ = {
@@ -547,10 +586,12 @@
 				8F59F7AE21103210000A7833 /* UserInfoPostCell.swift in Sources */,
 				8F6094532102F4D200C360F8 /* MediaCaptionCell.swift in Sources */,
 				8F2C3C0120FFA67300C6CC46 /* MediaActionCell.swift in Sources */,
+				8FCAD4992111F4D5006908FE /* NewsResponse.swift in Sources */,
 				8F2C3BFD20FFA50900C6CC46 /* MediaUserViewModel.swift in Sources */,
 				8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */,
 				8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */,
 				8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */,
+				8FCAD4A121122B84006908FE /* NewsSectionController.swift in Sources */,
 				8F59F79F210F3DD6000A7833 /* UserInfoPostSectionController.swift in Sources */,
 				8F22519A20F750A500B39F6D /* NetworkManager.swift in Sources */,
 				8F2C3C0320FFAC0600C6CC46 /* MediaImageViewModel.swift in Sources */,
@@ -559,7 +600,9 @@
 				8F0A19E720F4CF3300872C1B /* AppDelegate.swift in Sources */,
 				8F2C3BF920FF808200C6CC46 /* MediaCommentViewModel.swift in Sources */,
 				8F59F797210EA352000A7833 /* UserInfoResponse.swift in Sources */,
+				8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */,
 				8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */,
+				8FCAD4972111EA29006908FE /* NewsViewController.swift in Sources */,
 				8F2C3BFB20FFA36A00C6CC46 /* MediaUserCell.swift in Sources */,
 				8F2C3BFF20FFA65100C6CC46 /* MediaImageCell.swift in Sources */,
 				8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */,
@@ -575,6 +618,7 @@
 				8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */,
 				8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */,
 				8F4B67AE211188240077068E /* MediaViewController.swift in Sources */,
+				8FCAD4A421122BDC006908FE /* NewsCell.swift in Sources */,
 				8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

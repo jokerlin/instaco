@@ -10,9 +10,14 @@ import UIKit
 import IGListKit
 import SnapKit
 
+protocol UserCellDelegate: class {
+    func didTapUsername(cell: UserCell)
+}
+
 final class UserCell: UICollectionViewCell, ListBindable {
     
     var usernameLabelConstraint: Constraint?
+    weak var delegate: UserCellDelegate?
     
     let usernameLabel: UILabel = {
         let label = UILabel()
@@ -21,6 +26,7 @@ final class UserCell: UICollectionViewCell, ListBindable {
         label.textColor = UIColor.darkText
         label.textAlignment = .left
         label.sizeToFit()
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -58,6 +64,8 @@ final class UserCell: UICollectionViewCell, ListBindable {
         super.init(frame: frame)
         contentView.addSubview(profileImageView)
         contentView.addSubview(usernameLabel)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UserCell.onUsername))
+        usernameLabel.addGestureRecognizer(tap)
         contentView.addSubview(locationLabel)
         contentView.addSubview(timestampLabel)
     }
@@ -101,6 +109,22 @@ final class UserCell: UICollectionViewCell, ListBindable {
             make.centerY.equalTo(contentView)
             make.right.equalTo(contentView).offset(-11)
         }
+    }
+    
+    func responderViewController() -> UIViewController? {
+        for view in sequence(first: self.superview, next: {$0?.superview}) {
+            if let responder = view?.next {
+                if responder.isKind(of: UIViewController.self) {
+                    return responder as? UIViewController
+                }
+            }
+        }
+        return nil
+    }
+    
+    @objc func onUsername() {
+        delegate?.didTapUsername(cell: self)
+        
     }
     
     func bindViewModel(_ viewModel: Any) {

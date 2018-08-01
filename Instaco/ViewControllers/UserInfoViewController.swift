@@ -13,11 +13,21 @@ import ObjectMapper
 
 class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
+    var username_id: String = ""
     var data: [ListDiffable] = []
     var postData: [UserFeed] = []
     var next_max_id = ""
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
+    
+    init(username_id id: String) {
+        super.init(nibName: nil, bundle: nil)
+        username_id = id
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,11 +78,11 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     }
     
     func getUserInfoHeader(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        insta.getUserInfo(userid: insta.username_id, success: success, failure: failure)
+        insta.getUserInfo(userid: self.username_id, success: success, failure: failure)
     }
     
     func getUserInfoFeed() {
-        insta.getUserFeed(userid: insta.username_id, success: {(JSONResponse) -> Void in
+        insta.getUserFeed(userid: self.username_id, success: {(JSONResponse) -> Void in
 //            print(JSONResponse)
             let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
             if userFeedResponse?.items != nil {

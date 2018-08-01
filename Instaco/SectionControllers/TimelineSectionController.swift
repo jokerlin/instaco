@@ -10,7 +10,7 @@ import UIKit
 import IGListKit
 import SnapKit
 
-final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ActionCellDelegate {
+final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ActionCellDelegate, UserCellDelegate {
     
     var localLikes: Int?
     var likedFlagChange: Bool = false
@@ -45,7 +45,9 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         }
         guard let cell = collectionContext!.dequeueReusableCell(of: cellClass, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }
-        
+        if let cell = cell as? UserCell {
+            cell.delegate = self
+        }
         if let cell = cell as? ActionCell {
             if mediaInfo?.beliked == true {
                 let btnImage = UIImage(named: "like_selected")
@@ -112,5 +114,10 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         }
         update(animated: true)
     }
-
+    
+    func didTapUsername(cell: UserCell) {
+        let current_vc = cell.responderViewController()
+        let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
+        current_vc?.present(userInfoViewController, animated: true, completion: nil)
+    }
 }

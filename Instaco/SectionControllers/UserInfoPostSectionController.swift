@@ -10,7 +10,6 @@ import IGListKit
 import SDWebImage
 
 class UserInfoPostSectionController: ListSectionController {
-
     private var object: GridItem?
     
     override init() {
@@ -41,5 +40,7 @@ class UserInfoPostSectionController: ListSectionController {
     
     override func didSelectItem(at index: Int) {
         print("Tap photo " + (object?.items[index].id)!)
+        let userInfoViewController = MediaViewController(media_id: (object?.items[index].id)!)
+        viewController?.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 }

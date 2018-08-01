@@ -99,12 +99,11 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     func timelineJSON2Object(params: [String: Any]) {
         insta.timelineFeed(params: params, success: { (JSONResponse) -> Void in
-            let json = JSONResponse
             print("GET JSON RESPONSE")
             
-            self.next_max_id = json["next_max_id"].stringValue
+            self.next_max_id = JSONResponse["next_max_id"].stringValue
             
-            let timelineResponse = Mapper<TimelineResponse>().map(JSONString: json.rawString()!)
+            let timelineResponse = Mapper<TimelineResponse>().map(JSONString: JSONResponse.rawString()!)
             if timelineResponse?.feed_items != nil {
                 
                 for item in (timelineResponse?.feed_items!)! {

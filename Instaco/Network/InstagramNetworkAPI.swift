@@ -206,8 +206,13 @@ class InstagramAPI {
         if max_id == "" {
             SendRequest(URI: "feed/user/" + userid + "/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
         } else {
-            SendRequest(URI: "feed/user/" + userid + "/?max_id=" + max_id!, method: .get, encoding: URLEncoding.default, success: success, failure: failure)
+            let parameters: Parameters = ["max_id": max_id!]
+            SendRequest(URI: "feed/user/" + userid + "/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
         }
+    }
+    
+    func getMediaInfo(id: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        SendRequest(URI: "media/" + id + "/info/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
     }
     
     func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
@@ -240,6 +245,7 @@ class InstagramAPI {
             if responseObject.result.isFailure {
                 let error: Error = responseObject.result.error!
                 failure(error)
+                print(responseObject.request.debugDescription)
             }
         }
     }

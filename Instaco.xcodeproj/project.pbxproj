@@ -28,6 +28,8 @@
 		8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3C0420FFAC4000C6CC46 /* MediaActionViewModel.swift */; };
 		8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */; };
 		8F37FC7B20F9C2A30035E303 /* TimelineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */; };
+		8F4B67AE211188240077068E /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4B67AD211188240077068E /* MediaViewController.swift */; };
+		8F4B67B021118CF00077068E /* MediaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4B67AF21118CF00077068E /* MediaResponse.swift */; };
 		8F59F797210EA352000A7833 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F796210EA352000A7833 /* UserInfoResponse.swift */; };
 		8F59F799210EAA14000A7833 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F798210EAA14000A7833 /* UserInfoViewController.swift */; };
 		8F59F79D210F3DB6000A7833 /* UserInfoHeaderSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F79C210F3DB6000A7833 /* UserInfoHeaderSectionController.swift */; };
@@ -95,6 +97,8 @@
 		8F2C3C0420FFAC4000C6CC46 /* MediaActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaActionViewModel.swift; sourceTree = "<group>"; };
 		8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCommentCell.swift; sourceTree = "<group>"; };
 		8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineResponse.swift; sourceTree = "<group>"; };
+		8F4B67AD211188240077068E /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		8F4B67AF21118CF00077068E /* MediaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaResponse.swift; sourceTree = "<group>"; };
 		8F59F796210EA352000A7833 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		8F59F798210EAA14000A7833 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		8F59F79C210F3DB6000A7833 /* UserInfoHeaderSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderSectionController.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 				8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */,
 				8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */,
 				8F59F796210EA352000A7833 /* UserInfoResponse.swift */,
+				8F4B67AF21118CF00077068E /* MediaResponse.swift */,
 				8F22868920FE51AA0005BB61 /* Basic */,
 			);
 			path = Network;
@@ -310,6 +315,7 @@
 				8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */,
 				8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */,
 				8F60943E21013B6200C360F8 /* LoginViewController.swift */,
+				8F4B67AD211188240077068E /* MediaViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -559,6 +565,7 @@
 				8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */,
 				8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */,
 				8F22519720F742DF00B39F6D /* hmac.swift in Sources */,
+				8F4B67B021118CF00077068E /* MediaResponse.swift in Sources */,
 				8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */,
 				8F59F7A5210F5CBD000A7833 /* UserInfoModel.swift in Sources */,
 				8F59F799210EAA14000A7833 /* UserInfoViewController.swift in Sources */,
@@ -567,6 +574,7 @@
 				8F59F7A7210FEBA2000A7833 /* UserInfoHeaderCell.swift in Sources */,
 				8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */,
 				8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */,
+				8F4B67AE211188240077068E /* MediaViewController.swift in Sources */,
 				8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

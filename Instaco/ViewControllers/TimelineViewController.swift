@@ -22,6 +22,7 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Timeline"
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         // solve blank on top of the collectionView

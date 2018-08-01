@@ -69,7 +69,9 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                                     pk: (userInfoResponse?.user?.pk)!,
                                     media_count: (userInfoResponse?.user?.media_count)!)
             self.data.append(userInfo)
+            
             self.navigationItem.title = userInfo.username
+            
             self.getUserInfoFeed()
         }, failure: { (JSONResponse) in
             print(JSONResponse)

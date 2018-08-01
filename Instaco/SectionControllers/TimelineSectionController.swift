@@ -118,6 +118,6 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     func didTapUsername(cell: UserCell) {
         let current_vc = cell.responderViewController()
         let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
-        current_vc?.present(userInfoViewController, animated: true, completion: nil)
+        current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 }

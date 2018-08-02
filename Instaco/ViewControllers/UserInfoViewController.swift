@@ -10,6 +10,7 @@ import UIKit
 import IGListKit
 import SwiftyJSON
 import ObjectMapper
+import KeychainAccess
 
 class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
@@ -36,6 +37,9 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         self.view.addSubview(collectionView)
         
         setup()
+        if username_id == insta.username_id {
+            setupLogOutButton()
+        }
         
         adapter.dataSource = self
         adapter.collectionView = collectionView
@@ -45,6 +49,32 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
+    }
+    
+    fileprivate func setupLogOutButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogOut))
+    }
+    
+    @objc func handleLogOut() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
+            do {
+                let keychain = Keychain(service: "com.instacoapp")
+                try keychain.removeAll()
+                
+                // present signout controller
+                let loginContoller = LoginController()
+                let navController = UINavigationController(rootViewController: loginContoller)
+                
+                self.present(navController, animated: true, completion: nil)
+            } catch let signOutErr {
+                print("Failed to sign out: ", signOutErr)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     func setup() {

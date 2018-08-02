@@ -10,9 +10,9 @@ import UIKit
 import IGListKit
 import SnapKit
 
-final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ActionCellDelegate{
+final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ActionCellDelegate, UserCellDelegate {
     
-    var localLikes: Int? = nil
+    var localLikes: Int?
     var likedFlagChange: Bool = false
     var mediaInfo: MediaInfo?
     
@@ -45,15 +45,16 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         }
         guard let cell = collectionContext!.dequeueReusableCell(of: cellClass, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }
-        
+        if let cell = cell as? UserCell {
+            cell.delegate = self
+        }
         if let cell = cell as? ActionCell {
-            if mediaInfo?.beliked == true{
+            if mediaInfo?.beliked == true {
                 let btnImage = UIImage(named: "like_selected")
-                cell.likeButton.setImage(btnImage , for: UIControlState.normal)
-            }
-            else{
+                cell.likeButton.setImage(btnImage, for: UIControlState.normal)
+            } else {
                 let btnImage = UIImage(named: "like_unselected")
-                cell.likeButton.setImage(btnImage , for: UIControlState.normal)
+                cell.likeButton.setImage(btnImage, for: UIControlState.normal)
             }
             cell.delegate = self
         }
@@ -72,8 +73,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         case is CommentViewModel:
             if mediaInfo?.comment_count == 0 {
                 height = 0
-            }
-            else{
+            } else {
                 height = 20
             }
             
@@ -83,40 +83,41 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     }
     
     func didTapHeart(cell: ActionCell) {
-        if mediaInfo?.beliked == true{
-            if likedFlagChange == false{
+        if mediaInfo?.beliked == true {
+            if likedFlagChange == false {
                 localLikes = (localLikes ?? mediaInfo?.likes ?? 0) - 1
                 likedFlagChange = true
                 let btnImage = UIImage(named: "like_unselected")
-                cell.likeButton.setImage(btnImage , for: UIControlState.normal)
+                cell.likeButton.setImage(btnImage, for: UIControlState.normal)
                 insta.likeOp(type: false, media_id: (mediaInfo?.id)!, username: (mediaInfo?.username)!, user_id: (mediaInfo?.userid)!)
-            }
-            else{
+            } else {
                 localLikes = (localLikes ?? mediaInfo?.likes ?? 0) + 1
                 likedFlagChange = false
                 let btnImage = UIImage(named: "like_selected")
-                cell.likeButton.setImage(btnImage , for: UIControlState.normal)
+                cell.likeButton.setImage(btnImage, for: UIControlState.normal)
                 insta.likeOp(type: true, media_id: (mediaInfo?.id)!, username: (mediaInfo?.username)!, user_id: (mediaInfo?.userid)!)
             }
-        }
-        else{
-            if likedFlagChange == false{
+        } else {
+            if likedFlagChange == false {
                 localLikes = (localLikes ?? mediaInfo?.likes ?? 0) + 1
                 likedFlagChange = true
                 let btnImage = UIImage(named: "like_selected")
-                cell.likeButton.setImage(btnImage , for: UIControlState.normal)
+                cell.likeButton.setImage(btnImage, for: UIControlState.normal)
                 insta.likeOp(type: true, media_id: (mediaInfo?.id)!, username: (mediaInfo?.username)!, user_id: (mediaInfo?.userid)!)
-            }
-            else{
+            } else {
                 localLikes = (localLikes ?? mediaInfo?.likes ?? 0) - 1
                 likedFlagChange = false
                 let btnImage = UIImage(named: "like_unselected")
-                cell.likeButton.setImage(btnImage , for: UIControlState.normal)
-                insta.likeOp(type:false, media_id: (mediaInfo?.id)!, username: (mediaInfo?.username)!, user_id: (mediaInfo?.userid)!)
+                cell.likeButton.setImage(btnImage, for: UIControlState.normal)
+                insta.likeOp(type: false, media_id: (mediaInfo?.id)!, username: (mediaInfo?.username)!, user_id: (mediaInfo?.userid)!)
             }
         }
         update(animated: true)
     }
-
+    
+    func didTapUsername(cell: UserCell) {
+        let current_vc = cell.responderViewController()
+        let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
+        current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
+    }
 }
-

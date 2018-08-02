@@ -21,7 +21,6 @@ class LoginController: UIViewController {
         logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        
         view.backgroundColor = UIColor.rgb(red: 255, green: 255, blue: 255)
         return view
     }()
@@ -80,8 +79,7 @@ class LoginController: UIViewController {
 
         insta.set_auth(username: username, password: password)
         insta.login(
-            success: {
-                (JSONResponse) in
+            success: { (JSONResponse) in
                 print("Login Success")
                 
                 // Store in Keychain
@@ -99,8 +97,7 @@ class LoginController: UIViewController {
                 
                 self.dismiss(animated: true, completion: nil)
                 },
-            failure: {
-                _ in
+            failure: { _ in
                 print("Login Failed")
         })
     }
@@ -139,9 +136,9 @@ class LoginController: UIViewController {
     
     let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         
-        attributedTitle.append(NSMutableAttributedString(string: "Sign Up", attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14),NSAttributedStringKey.foregroundColor: UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        attributedTitle.append(NSMutableAttributedString(string: "Sign Up", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(red: 17, green: 154, blue: 237)]))
         
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowSignup), for: .touchUpInside)

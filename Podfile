@@ -14,6 +14,7 @@ target 'Instaco' do
   pod 'StyledTextKit' 
   pod 'ActiveLabel'
   pod 'SnapKit', '~> 4.0.0'
+  pod 'SwiftLint'
 end
 
 #post_install do |installer|

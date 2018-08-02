@@ -28,13 +28,35 @@
 		8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3C0420FFAC4000C6CC46 /* MediaActionViewModel.swift */; };
 		8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */; };
 		8F37FC7B20F9C2A30035E303 /* TimelineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */; };
+		8F4B67AE211188240077068E /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4B67AD211188240077068E /* MediaViewController.swift */; };
+		8F4B67B021118CF00077068E /* MediaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4B67AF21118CF00077068E /* MediaResponse.swift */; };
+		8F59F797210EA352000A7833 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F796210EA352000A7833 /* UserInfoResponse.swift */; };
+		8F59F799210EAA14000A7833 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F798210EAA14000A7833 /* UserInfoViewController.swift */; };
+		8F59F79D210F3DB6000A7833 /* UserInfoHeaderSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F79C210F3DB6000A7833 /* UserInfoHeaderSectionController.swift */; };
+		8F59F79F210F3DD6000A7833 /* UserInfoPostSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F79E210F3DD6000A7833 /* UserInfoPostSectionController.swift */; };
+		8F59F7A5210F5CBD000A7833 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F7A4210F5CBD000A7833 /* UserInfoModel.swift */; };
+		8F59F7A7210FEBA2000A7833 /* UserInfoHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F7A6210FEBA2000A7833 /* UserInfoHeaderCell.swift */; };
+		8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F7A92110274E000A7833 /* UserFeedModel.swift */; };
+		8F59F7AE21103210000A7833 /* UserInfoPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F59F7AD21103210000A7833 /* UserInfoPostCell.swift */; };
 		8F60943F21013B6200C360F8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F60943E21013B6200C360F8 /* LoginViewController.swift */; };
 		8F6094532102F4D200C360F8 /* MediaCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */; };
 		8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */; };
 		8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */; };
 		8F6904C421084F6F000B1AB7 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */; };
-		8FB9A76B210A99FC005BE1F6 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9A76A210A99FC005BE1F6 /* Styles.swift */; };
 		8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD744120F7CCBD001ACD34 /* helper.swift */; };
+		8FCAD4972111EA29006908FE /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4962111EA29006908FE /* NewsViewController.swift */; };
+		8FCAD4992111F4D5006908FE /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4982111F4D5006908FE /* NewsResponse.swift */; };
+		8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD49E2112283A006908FE /* NewsModel.swift */; };
+		8FCAD4A121122B84006908FE /* NewsSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A021122B84006908FE /* NewsSectionController.swift */; };
+		8FCAD4A421122BDC006908FE /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A321122BDC006908FE /* NewsCell.swift */; };
+		8FCAD4A621129D76006908FE /* FeedLikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */; };
+		8FCAD4A82112D76F006908FE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A72112D76F006908FE /* SearchViewController.swift */; };
+		8FCAD4AB21134AD5006908FE /* SearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4AA21134AD5006908FE /* SearchBarCell.swift */; };
+		8FCAD4AD21134AFD006908FE /* SearchBarSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4AC21134AFD006908FE /* SearchBarSectionController.swift */; };
+		8FCAD4AF211350D6006908FE /* SearchUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4AE211350D6006908FE /* SearchUserResponse.swift */; };
+		8FCAD4B221135ADE006908FE /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4B121135ADE006908FE /* SearchUserModel.swift */; };
+		8FCAD4B421135EE3006908FE /* SearchResultSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4B321135EE3006908FE /* SearchResultSectionController.swift */; };
+		8FCAD4B621135FB8006908FE /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4B521135FB8006908FE /* SearchResultCell.swift */; };
 		8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */; };
 		8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDA614520F7056700B07D8A /* BaseNetworkService.swift */; };
 		EEC0FF090245A8A36F83F2B8 /* Pods_Instaco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */; };
@@ -88,13 +110,35 @@
 		8F2C3C0420FFAC4000C6CC46 /* MediaActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaActionViewModel.swift; sourceTree = "<group>"; };
 		8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCommentCell.swift; sourceTree = "<group>"; };
 		8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineResponse.swift; sourceTree = "<group>"; };
+		8F4B67AD211188240077068E /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		8F4B67AF21118CF00077068E /* MediaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaResponse.swift; sourceTree = "<group>"; };
+		8F59F796210EA352000A7833 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
+		8F59F798210EAA14000A7833 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		8F59F79C210F3DB6000A7833 /* UserInfoHeaderSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderSectionController.swift; sourceTree = "<group>"; };
+		8F59F79E210F3DD6000A7833 /* UserInfoPostSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPostSectionController.swift; sourceTree = "<group>"; };
+		8F59F7A4210F5CBD000A7833 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
+		8F59F7A6210FEBA2000A7833 /* UserInfoHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderCell.swift; sourceTree = "<group>"; };
+		8F59F7A92110274E000A7833 /* UserFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedModel.swift; sourceTree = "<group>"; };
+		8F59F7AD21103210000A7833 /* UserInfoPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPostCell.swift; sourceTree = "<group>"; };
 		8F60943E21013B6200C360F8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCaptionCell.swift; sourceTree = "<group>"; };
 		8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCaptionViewModel.swift; sourceTree = "<group>"; };
 		8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
-		8FB9A76A210A99FC005BE1F6 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		8FBD744120F7CCBD001ACD34 /* helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helper.swift; sourceTree = "<group>"; };
+		8FCAD4962111EA29006908FE /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		8FCAD4982111F4D5006908FE /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
+		8FCAD49E2112283A006908FE /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		8FCAD4A021122B84006908FE /* NewsSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSectionController.swift; sourceTree = "<group>"; };
+		8FCAD4A321122BDC006908FE /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLikedViewController.swift; sourceTree = "<group>"; };
+		8FCAD4A72112D76F006908FE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		8FCAD4AA21134AD5006908FE /* SearchBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarCell.swift; sourceTree = "<group>"; };
+		8FCAD4AC21134AFD006908FE /* SearchBarSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarSectionController.swift; sourceTree = "<group>"; };
+		8FCAD4AE211350D6006908FE /* SearchUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserResponse.swift; sourceTree = "<group>"; };
+		8FCAD4B121135ADE006908FE /* SearchUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
+		8FCAD4B321135EE3006908FE /* SearchResultSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSectionController.swift; sourceTree = "<group>"; };
+		8FCAD4B521135FB8006908FE /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramNetworkAPI.swift; sourceTree = "<group>"; };
 		8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instaco-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FDA614520F7056700B07D8A /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
@@ -202,7 +246,6 @@
 				8F22519320F7429300B39F6D /* MD5.swift */,
 				8F22519620F742DF00B39F6D /* hmac.swift */,
 				8FBD744120F7CCBD001ACD34 /* helper.swift */,
-				8FB9A76A210A99FC005BE1F6 /* Styles.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -211,7 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */,
-				8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */,
+				8FCAD49A2111F4DC006908FE /* Response */,
 				8F22868920FE51AA0005BB61 /* Basic */,
 			);
 			path = Network;
@@ -230,6 +273,17 @@
 		8F37FC7720F8F4530035E303 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8FCAD4B021135AD1006908FE /* Search */,
+				8FCAD49D21122829006908FE /* News */,
+				8F59F7A1210F5C6C000A7833 /* UserInfo */,
+				8F59F7A0210F5C54000A7833 /* Timeline */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8F59F7A0210F5C54000A7833 /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
 				8F2C3BF620FF7EAB00C6CC46 /* MediaModel.swift */,
 				8F2C3BFC20FFA50900C6CC46 /* MediaUserViewModel.swift */,
 				8F2C3C0220FFAC0600C6CC46 /* MediaImageViewModel.swift */,
@@ -237,28 +291,19 @@
 				8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */,
 				8F2C3BF820FF808200C6CC46 /* MediaCommentViewModel.swift */,
 			);
-			path = Model;
+			path = Timeline;
 			sourceTree = "<group>";
 		};
-		8F64165720FC88DF009B8BD6 /* SectionControllers */ = {
+		8F59F7A1210F5C6C000A7833 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
-				8F2C3BF420FF757200C6CC46 /* TimelineSectionController.swift */,
+				8F59F7A4210F5CBD000A7833 /* UserInfoModel.swift */,
+				8F59F7A92110274E000A7833 /* UserFeedModel.swift */,
 			);
-			path = SectionControllers;
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
-		8F64165820FC88F0009B8BD6 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */,
-				8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */,
-				8F60943E21013B6200C360F8 /* LoginViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		8F64165D20FC8DC8009B8BD6 /* Cell */ = {
+		8F59F7A2210F5C82000A7833 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
 				8F2C3BFA20FFA36A00C6CC46 /* MediaUserCell.swift */,
@@ -267,7 +312,100 @@
 				8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */,
 				8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */,
 			);
+			path = Timeline;
+			sourceTree = "<group>";
+		};
+		8F59F7A3210F5C93000A7833 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				8F59F7A6210FEBA2000A7833 /* UserInfoHeaderCell.swift */,
+				8F59F7AD21103210000A7833 /* UserInfoPostCell.swift */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		8F64165720FC88DF009B8BD6 /* SectionControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F2C3BF420FF757200C6CC46 /* TimelineSectionController.swift */,
+				8F59F79C210F3DB6000A7833 /* UserInfoHeaderSectionController.swift */,
+				8F59F79E210F3DD6000A7833 /* UserInfoPostSectionController.swift */,
+				8FCAD4A021122B84006908FE /* NewsSectionController.swift */,
+				8FCAD4AC21134AFD006908FE /* SearchBarSectionController.swift */,
+				8FCAD4B321135EE3006908FE /* SearchResultSectionController.swift */,
+			);
+			path = SectionControllers;
+			sourceTree = "<group>";
+		};
+		8F64165820FC88F0009B8BD6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8F59F798210EAA14000A7833 /* UserInfoViewController.swift */,
+				8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */,
+				8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */,
+				8F60943E21013B6200C360F8 /* LoginViewController.swift */,
+				8F4B67AD211188240077068E /* MediaViewController.swift */,
+				8FCAD4962111EA29006908FE /* NewsViewController.swift */,
+				8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */,
+				8FCAD4A72112D76F006908FE /* SearchViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8F64165D20FC8DC8009B8BD6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD4A921134ACA006908FE /* Search */,
+				8FCAD4A221122BCB006908FE /* News */,
+				8F59F7A3210F5C93000A7833 /* UserInfo */,
+				8F59F7A2210F5C82000A7833 /* Timeline */,
+			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8FCAD49A2111F4DC006908FE /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD4982111F4D5006908FE /* NewsResponse.swift */,
+				8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */,
+				8F59F796210EA352000A7833 /* UserInfoResponse.swift */,
+				8F4B67AF21118CF00077068E /* MediaResponse.swift */,
+				8FCAD4AE211350D6006908FE /* SearchUserResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		8FCAD49D21122829006908FE /* News */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD49E2112283A006908FE /* NewsModel.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		8FCAD4A221122BCB006908FE /* News */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD4A321122BDC006908FE /* NewsCell.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		8FCAD4A921134ACA006908FE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD4AA21134AD5006908FE /* SearchBarCell.swift */,
+				8FCAD4B521135FB8006908FE /* SearchResultCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		8FCAD4B021135AD1006908FE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8FCAD4B121135ADE006908FE /* SearchUserModel.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		8FD3885720F5213600B6C3E7 /* Frameworks */ = {
@@ -292,6 +430,7 @@
 				8F0A19E020F4CF3300872C1B /* Frameworks */,
 				8F0A19E120F4CF3300872C1B /* Resources */,
 				C810940B35B3F29075DE7673 /* [CP] Embed Pods Frameworks */,
+				8F59F7A82110016A000A7833 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -410,6 +549,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8F59F7A82110016A000A7833 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		C810940B35B3F29075DE7673 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -471,28 +623,50 @@
 			files = (
 				8F60943F21013B6200C360F8 /* LoginViewController.swift in Sources */,
 				8F22519420F7429300B39F6D /* MD5.swift in Sources */,
+				8F59F7AE21103210000A7833 /* UserInfoPostCell.swift in Sources */,
 				8F6094532102F4D200C360F8 /* MediaCaptionCell.swift in Sources */,
 				8F2C3C0120FFA67300C6CC46 /* MediaActionCell.swift in Sources */,
+				8FCAD4992111F4D5006908FE /* NewsResponse.swift in Sources */,
 				8F2C3BFD20FFA50900C6CC46 /* MediaUserViewModel.swift in Sources */,
 				8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */,
 				8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */,
 				8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */,
+				8FCAD4A121122B84006908FE /* NewsSectionController.swift in Sources */,
+				8F59F79F210F3DD6000A7833 /* UserInfoPostSectionController.swift in Sources */,
 				8F22519A20F750A500B39F6D /* NetworkManager.swift in Sources */,
 				8F2C3C0320FFAC0600C6CC46 /* MediaImageViewModel.swift in Sources */,
+				8F59F79D210F3DB6000A7833 /* UserInfoHeaderSectionController.swift in Sources */,
+				8FCAD4AF211350D6006908FE /* SearchUserResponse.swift in Sources */,
 				8F2C3BF720FF7EAC00C6CC46 /* MediaModel.swift in Sources */,
 				8F0A19E720F4CF3300872C1B /* AppDelegate.swift in Sources */,
 				8F2C3BF920FF808200C6CC46 /* MediaCommentViewModel.swift in Sources */,
+				8F59F797210EA352000A7833 /* UserInfoResponse.swift in Sources */,
+				8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */,
+				8FCAD4A621129D76006908FE /* FeedLikedViewController.swift in Sources */,
 				8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */,
+				8FCAD4972111EA29006908FE /* NewsViewController.swift in Sources */,
 				8F2C3BFB20FFA36A00C6CC46 /* MediaUserCell.swift in Sources */,
+				8FCAD4B621135FB8006908FE /* SearchResultCell.swift in Sources */,
 				8F2C3BFF20FFA65100C6CC46 /* MediaImageCell.swift in Sources */,
-				8FB9A76B210A99FC005BE1F6 /* Styles.swift in Sources */,
 				8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */,
 				8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */,
 				8F22519720F742DF00B39F6D /* hmac.swift in Sources */,
+				8F4B67B021118CF00077068E /* MediaResponse.swift in Sources */,
+				8FCAD4B221135ADE006908FE /* SearchUserModel.swift in Sources */,
+				8FCAD4A82112D76F006908FE /* SearchViewController.swift in Sources */,
 				8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */,
+				8FCAD4AB21134AD5006908FE /* SearchBarCell.swift in Sources */,
+				8F59F7A5210F5CBD000A7833 /* UserInfoModel.swift in Sources */,
+				8FCAD4AD21134AFD006908FE /* SearchBarSectionController.swift in Sources */,
+				8F59F799210EAA14000A7833 /* UserInfoViewController.swift in Sources */,
 				8F6904C421084F6F000B1AB7 /* TimelineViewController.swift in Sources */,
+				8FCAD4B421135EE3006908FE /* SearchResultSectionController.swift in Sources */,
 				8F37FC7B20F9C2A30035E303 /* TimelineResponse.swift in Sources */,
+				8F59F7A7210FEBA2000A7833 /* UserInfoHeaderCell.swift in Sources */,
+				8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */,
 				8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */,
+				8F4B67AE211188240077068E /* MediaViewController.swift in Sources */,
+				8FCAD4A421122BDC006908FE /* NewsCell.swift in Sources */,
 				8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

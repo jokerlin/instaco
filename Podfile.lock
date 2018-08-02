@@ -13,6 +13,7 @@ PODS:
   - SDWebImage/Core (4.4.1)
   - SnapKit (4.0.0)
   - StyledTextKit (0.1.1)
+  - SwiftLint (0.26.0)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - SDWebImage (~> 4.0)
   - SnapKit (~> 4.0.0)
   - StyledTextKit
+  - SwiftLint
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -35,6 +37,7 @@ SPEC REPOS:
     - SDWebImage
     - SnapKit
     - StyledTextKit
+    - SwiftLint
     - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -56,8 +59,9 @@ SPEC CHECKSUMS:
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   StyledTextKit: ea9a28a86955c16ea27f1a1a9278b004966f2bf6
+  SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: ae61f590beefb6396ad2afe6b5a1b4e47d31387d
+PODFILE CHECKSUM: a1539587f5892b2dfe2f1846e343b20ebd0b3423
 
 COCOAPODS: 1.5.3

@@ -82,7 +82,9 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     
     func searchSectionController(_ sectionController: SearchBarSectionController, didChangeText text: String) {
         data.removeAll()
-        searchUsers(quest: text)
+        if text != "" {
+            searchUsers(quest: text)
+        }
         adapter.performUpdates(animated: true, completion: nil)
     }
 }

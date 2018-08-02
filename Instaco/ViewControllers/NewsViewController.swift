@@ -53,7 +53,7 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
     
     func getNews() {
         insta.getNews(success: {(JSONResponse) -> Void in
-            print(JSONResponse)
+//            print(JSONResponse)
             let newsResponse = Mapper<NewsResponse>().map(JSONString: JSONResponse.rawString()!)
             if newsResponse?.next_max_id != nil {
                 self.next_max_id = (newsResponse?.next_max_id)!

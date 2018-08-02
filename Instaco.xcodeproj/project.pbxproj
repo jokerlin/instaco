@@ -49,6 +49,7 @@
 		8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD49E2112283A006908FE /* NewsModel.swift */; };
 		8FCAD4A121122B84006908FE /* NewsSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A021122B84006908FE /* NewsSectionController.swift */; };
 		8FCAD4A421122BDC006908FE /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A321122BDC006908FE /* NewsCell.swift */; };
+		8FCAD4A621129D76006908FE /* FeedLikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */; };
 		8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */; };
 		8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDA614520F7056700B07D8A /* BaseNetworkService.swift */; };
 		EEC0FF090245A8A36F83F2B8 /* Pods_Instaco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */; };
@@ -123,6 +124,7 @@
 		8FCAD49E2112283A006908FE /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		8FCAD4A021122B84006908FE /* NewsSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSectionController.swift; sourceTree = "<group>"; };
 		8FCAD4A321122BDC006908FE /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLikedViewController.swift; sourceTree = "<group>"; };
 		8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramNetworkAPI.swift; sourceTree = "<group>"; };
 		8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instaco-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FDA614520F7056700B07D8A /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				8F60943E21013B6200C360F8 /* LoginViewController.swift */,
 				8F4B67AD211188240077068E /* MediaViewController.swift */,
 				8FCAD4962111EA29006908FE /* NewsViewController.swift */,
+				8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				8F2C3BF920FF808200C6CC46 /* MediaCommentViewModel.swift in Sources */,
 				8F59F797210EA352000A7833 /* UserInfoResponse.swift in Sources */,
 				8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */,
+				8FCAD4A621129D76006908FE /* FeedLikedViewController.swift in Sources */,
 				8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */,
 				8FCAD4972111EA29006908FE /* NewsViewController.swift in Sources */,
 				8F2C3BFB20FFA36A00C6CC46 /* MediaUserCell.swift in Sources */,

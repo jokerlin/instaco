@@ -242,6 +242,14 @@ class InstagramAPI {
         }
     }
     
+    func searchUsers(q: String, rank_token: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let params: [String: Any] = ["timezone_offset": -14400,
+                                     "q": q,
+                                     "count": 30,
+                                     "rank_token": insta.uuid]
+        SendRequest(URI: "users/search/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
     func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestConfig = RequestConfiguration(url: API_URL)

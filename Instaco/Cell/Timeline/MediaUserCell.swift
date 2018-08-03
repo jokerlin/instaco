@@ -12,6 +12,7 @@ import SnapKit
 
 protocol UserCellDelegate: class {
     func didTapUsername(cell: UserCell)
+    func didTapProfileImage(cell: UserCell)
 }
 
 final class UserCell: UICollectionViewCell, ListBindable {
@@ -57,6 +58,7 @@ final class UserCell: UICollectionViewCell, ListBindable {
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -64,8 +66,10 @@ final class UserCell: UICollectionViewCell, ListBindable {
         super.init(frame: frame)
         contentView.addSubview(profileImageView)
         contentView.addSubview(usernameLabel)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UserCell.onUsername))
-        usernameLabel.addGestureRecognizer(tap)
+        let tapUsernameLabel = UITapGestureRecognizer(target: self, action: #selector(UserCell.onUsername))
+        usernameLabel.addGestureRecognizer(tapUsernameLabel)
+        let tapProfileImge = UITapGestureRecognizer(target: self, action: #selector(UserCell.onProfileImage))
+        profileImageView.addGestureRecognizer(tapProfileImge)
         contentView.addSubview(locationLabel)
         contentView.addSubview(timestampLabel)
     }
@@ -124,7 +128,10 @@ final class UserCell: UICollectionViewCell, ListBindable {
     
     @objc func onUsername() {
         delegate?.didTapUsername(cell: self)
-        
+    }
+    
+    @objc func onProfileImage() {
+        delegate?.didTapProfileImage(cell: self)
     }
     
     func bindViewModel(_ viewModel: Any) {

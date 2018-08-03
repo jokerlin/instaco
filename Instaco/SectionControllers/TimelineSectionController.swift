@@ -10,7 +10,7 @@ import UIKit
 import IGListKit
 import SnapKit
 
-final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ActionCellDelegate, UserCellDelegate {
+final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ActionCellDelegate, UserCellDelegate, CaptionCellDelegate {
     
     var localLikes: Int?
     var likedFlagChange: Bool = false
@@ -46,6 +46,9 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         guard let cell = collectionContext!.dequeueReusableCell(of: cellClass, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }
         if let cell = cell as? UserCell {
+            cell.delegate = self
+        }
+        if let cell = cell as? CaptionCell {
             cell.delegate = self
         }
         if let cell = cell as? ActionCell {
@@ -116,6 +119,18 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     }
     
     func didTapUsername(cell: UserCell) {
+        let current_vc = cell.responderViewController()
+        let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
+        current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
+    }
+    
+    func didTapProfileImage(cell: UserCell) {
+        let current_vc = cell.responderViewController()
+        let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
+        current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
+    }
+    
+    func didTapUsername(cell: CaptionCell) {
         let current_vc = cell.responderViewController()
         let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
         current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)

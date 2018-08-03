@@ -34,4 +34,10 @@ class SearchResultSectionController: ListBindingSectionController<ListDiffable>,
         return CGSize(width: width, height: height)
     }
     
+    override func didSelectItem(at index: Int) {
+        let searchUser = object as! SearchUserModel
+        let userInfoViewController = UserInfoViewController(username_id: String((searchUser.pk)))
+        viewController?.navigationController?.pushViewController(userInfoViewController, animated: true)
+    }
+    
 }

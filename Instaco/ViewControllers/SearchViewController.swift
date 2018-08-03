@@ -26,8 +26,6 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         self.view.addSubview(collectionView)
-
-//        searchUsers(quest: "linheng")
         
         adapter.dataSource = self
         adapter.collectionView = collectionView

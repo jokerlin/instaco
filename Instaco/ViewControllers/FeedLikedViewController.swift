@@ -14,22 +14,32 @@ import ObjectMapper
 class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
     var media_id: String = ""
+    var likedData = [ListDiffable]()
+    var savedData = [ListDiffable]()
     var data = [ListDiffable]()
     var loading = false
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     private let refreshControl = FixedRefreshControl()
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
+    let segments: [(String, String)] = [
+        ("Liked", "liked"),
+        ("Saved", "saved")
+    ]
+    var selectedClass: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Liked"
+        let control = UISegmentedControl(items: segments.map { return $0.0 })
+        control.selectedSegmentIndex = 0
+        control.addTarget(self, action: #selector(onControl(_:)), for: .valueChanged)
+        navigationItem.titleView = control
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshLikedData(_:)), for: .valueChanged)
         self.view.addSubview(collectionView)
         
-        mediaJSON2Object()
+        LikedMediaJSON2Object()
         
         adapter.dataSource = self
         adapter.collectionView = collectionView
@@ -44,6 +54,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
     // MARK: ListAdapterDataSource
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+        
         return data as [ListDiffable]
     }
     
@@ -55,7 +66,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
         return nil
     }
     
-    func mediaJSON2Object() {
+    func LikedMediaJSON2Object() {
         insta.getFeedLiked(success: { (JSONResponse) -> Void in
 //            print("GET JSON RESPONSE")
 //            print(JSONResponse)
@@ -92,9 +103,60 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
                         userid: (item.user?.pk)!,
                         comment_count: item.comment_count!
                     )
-                    self.data.append(mediainfo)
+                    self.likedData.append(mediainfo)
                 }
             }
+            self.data = self.likedData
+            self.adapter.performUpdates(animated: true)
+            self.refreshControl.endRefreshing()
+        }, failure: { (JSONResponse) -> Void in
+            print(JSONResponse)
+        })
+    }
+    
+    func SavedMediaJSON2Object() {
+        insta.getFeedSaved(success: { (JSONResponse) -> Void in
+//            print(JSONResponse)
+            
+            let mediaResponse = Mapper<SavedResponse>().map(JSONString: JSONResponse.rawString()!)
+            
+            if mediaResponse?.items != nil {
+                for item in (mediaResponse?.items!)! {
+//                    for item in (tmp.media!) {
+                    
+                        var location = ""
+                        var caption_username = ""
+                        var caption_text = ""
+                        
+                    if item.media?.location != nil {
+                        location = (item.media?.location?.name)!
+                        }
+                        
+                    if item.media?.caption != nil {
+                            caption_username = (item.media?.caption?.user?.username)!
+                            caption_text = (item.media?.caption?.text)!
+                        }
+                        
+                        let mediainfo = MediaInfo(
+                            username: (item.media?.user?.username)!,
+                            userProfileImage: URL(string: (item.media?.user?.profile_pic_url)!)!,
+                            location: location,
+                            timestamp: (item.media?.taken_at!)!,
+                            imageURL: URL(string: (item.media?.image_versions2![0].url!)!)!,
+                            imageHeight: (item.media?.image_versions2![0].height!)!,
+                            imageWidth: (item.media?.image_versions2![0].width!)!,
+                            likes: (item.media?.like_count!)!,
+                            beliked: (item.media?.has_liked!)!,
+                            caption: CaptionViewModel(username: caption_username, text: caption_text),
+                            id: (item.media?.id!)!,
+                            userid: (item.media?.user?.pk)!,
+                            comment_count: (item.media?.comment_count!)!
+                        )
+                        self.savedData.append(mediainfo)
+                    }
+//                }
+            }
+            self.data = self.savedData
             self.adapter.performUpdates(animated: true)
             self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) -> Void in
@@ -103,7 +165,28 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
     }
     
     @objc private func refreshLikedData(_ sender: Any) {
-        data.removeAll()
-        mediaJSON2Object()
+        if selectedClass == "liked" {
+            likedData.removeAll()
+            LikedMediaJSON2Object()
+        } else {
+            savedData.removeAll()
+            SavedMediaJSON2Object()
+        }
+        
+    }
+    
+    @objc func onControl(_ control: UISegmentedControl) {
+        selectedClass = segments[control.selectedSegmentIndex].1
+        if selectedClass == "liked" {
+            data.removeAll()
+            if data.count == 0 {
+                LikedMediaJSON2Object()
+            }
+        } else {
+            data.removeAll()
+            if data.count == 0 {
+                SavedMediaJSON2Object()
+            }
+        }
     }
 }

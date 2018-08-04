@@ -250,6 +250,20 @@ class InstagramAPI {
         SendRequest(URI: "users/search/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
     }
     
+    func searchSuggested(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let params: [String: Any] = ["type": "blended", "rank_token": insta.uuid]
+        SendRequest(URI: "fbsearch/suggested_searches/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func getFeedSaved(max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        if max_id == "" {
+            SendRequest(URI: "feed/saved/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
+        } else {
+            let parameters: Parameters = ["max_id": max_id!]
+            SendRequest(URI: "feed/saved/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
+        }
+    }
+    
     func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestConfig = RequestConfiguration(url: API_URL)

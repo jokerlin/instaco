@@ -58,6 +58,7 @@
 		8FCAD4B421135EE3006908FE /* SearchResultSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4B321135EE3006908FE /* SearchResultSectionController.swift */; };
 		8FCAD4B621135FB8006908FE /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4B521135FB8006908FE /* SearchResultCell.swift */; };
 		8FCAD4B92113F7EC006908FE /* FixedRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4B82113F7EC006908FE /* FixedRefreshControl.swift */; };
+		8FCAD4BD21156EB1006908FE /* SavedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4BC21156EB1006908FE /* SavedResponse.swift */; };
 		8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */; };
 		8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDA614520F7056700B07D8A /* BaseNetworkService.swift */; };
 		EEC0FF090245A8A36F83F2B8 /* Pods_Instaco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */; };
@@ -141,6 +142,7 @@
 		8FCAD4B321135EE3006908FE /* SearchResultSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSectionController.swift; sourceTree = "<group>"; };
 		8FCAD4B521135FB8006908FE /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8FCAD4B82113F7EC006908FE /* FixedRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedRefreshControl.swift; sourceTree = "<group>"; };
+		8FCAD4BC21156EB1006908FE /* SavedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedResponse.swift; sourceTree = "<group>"; };
 		8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramNetworkAPI.swift; sourceTree = "<group>"; };
 		8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instaco-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FDA614520F7056700B07D8A /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 				8F59F796210EA352000A7833 /* UserInfoResponse.swift */,
 				8F4B67AF21118CF00077068E /* MediaResponse.swift */,
 				8FCAD4AE211350D6006908FE /* SearchUserResponse.swift */,
+				8FCAD4BC21156EB1006908FE /* SavedResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				8F6094532102F4D200C360F8 /* MediaCaptionCell.swift in Sources */,
 				8F2C3C0120FFA67300C6CC46 /* MediaActionCell.swift in Sources */,
 				8FCAD4992111F4D5006908FE /* NewsResponse.swift in Sources */,
+				8FCAD4BD21156EB1006908FE /* SavedResponse.swift in Sources */,
 				8F2C3BFD20FFA50900C6CC46 /* MediaUserViewModel.swift in Sources */,
 				8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */,
 				8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */,

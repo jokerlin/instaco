@@ -17,10 +17,13 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
     var next_max_id = 0
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
+    private let refreshControl = FixedRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshNewsData(_:)), for: .valueChanged)
         self.view.addSubview(collectionView)
         getNews()
         // getInbox()
@@ -65,6 +68,7 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
                 }
             }
             self.adapter.performUpdates(animated: true)
+            self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) in
             print(JSONResponse)
         })
@@ -78,4 +82,8 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
         })
     }
     
+    @objc private func refreshNewsData(_ sender: Any) {
+        data.removeAll()
+        getNews()
+    }
 }

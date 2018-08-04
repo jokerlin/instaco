@@ -18,6 +18,8 @@ class MediaViewController: UIViewController, ListAdapterDataSource, UIScrollView
     var loading = false
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     
+    private let refreshControl = FixedRefreshControl()
+    
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
     
     init(media_id id: String) {
@@ -33,6 +35,9 @@ class MediaViewController: UIViewController, ListAdapterDataSource, UIScrollView
         super.viewDidLoad()
         self.navigationItem.title = "Photo"
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
+        
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshMediaData(_:)), for: .valueChanged)
         
         self.view.addSubview(collectionView)
 
@@ -103,8 +108,14 @@ class MediaViewController: UIViewController, ListAdapterDataSource, UIScrollView
                 }
             }
             self.adapter.performUpdates(animated: true)
+            self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
         })
+    }
+    
+    @objc private func refreshMediaData(_ sender: Any) {
+        data.removeAll()
+        self.mediaJSON2Object()
     }
 }

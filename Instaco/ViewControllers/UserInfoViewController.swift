@@ -21,6 +21,8 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
     
+    private let refreshControl = FixedRefreshControl()
+    
     init(username_id id: String) {
         super.init(nibName: nil, bundle: nil)
         username_id = id
@@ -34,6 +36,10 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         super.viewDidLoad()
         
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
+        
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshUserInfoData(_:)), for: .valueChanged)
+        
         self.view.addSubview(collectionView)
         
         setup()
@@ -126,6 +132,8 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
 
             self.data.append(GridItem(items: self.postData))
             self.adapter.performUpdates(animated: true)
+            
+            self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
         })
@@ -146,4 +154,9 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         return nil
     }
     
+    @objc private func refreshUserInfoData(_ sender: Any) {
+        data.removeAll()
+        postData.removeAll()
+        setup()
+    }
 }

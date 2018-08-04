@@ -20,6 +20,8 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
     
+    private let refreshControl = FixedRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Timeline"
@@ -28,6 +30,9 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
         // solve blank on top of the collectionView
 //        self.collectionView.contentInset = UIEdgeInsetsMake(-40, 0, 0, 0)
 //        self.navigationController?.isNavigationBarHidden = true
+        
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshTimelineData(_:)), for: .valueChanged)
         
         self.view.addSubview(collectionView)
         if insta.isLoggedIn {
@@ -83,23 +88,9 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
         
     }
     
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < -50 {
-            data.removeAll()
-            adapter.performUpdates(animated: true, completion: nil)
-            DispatchQueue.global(qos: .default).async {
-                DispatchQueue.main.async {
-                    self.loading = false
-                    self.timelineJSON2Object(params: insta.generatePostParamsTest())
-                    self.adapter.performUpdates(animated: true, completion: nil)
-                }
-            }
-        }
-    }
-    
     func timelineJSON2Object(params: [String: Any]) {
         insta.timelineFeed(params: params, success: { (JSONResponse) -> Void in
-            print("GET JSON RESPONSE")
+//            print("GET JSON RESPONSE")
             
             self.next_max_id = JSONResponse["next_max_id"].stringValue
             
@@ -141,8 +132,14 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
                 }
             }
             self.adapter.performUpdates(animated: true)
+            self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
         })
+    }
+    
+    @objc private func refreshTimelineData(_ sender: Any) {
+        data.removeAll()
+        self.timelineJSON2Object(params: insta.generatePostParamsTest())
     }
 }

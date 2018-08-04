@@ -17,7 +17,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
     var data = [ListDiffable]()
     var loading = false
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-    
+    private let refreshControl = FixedRefreshControl()
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
     
     override func viewDidLoad() {
@@ -25,6 +25,8 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
         self.navigationItem.title = "Liked"
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshLikedData(_:)), for: .valueChanged)
         self.view.addSubview(collectionView)
         
         mediaJSON2Object()
@@ -55,7 +57,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
     
     func mediaJSON2Object() {
         insta.getFeedLiked(success: { (JSONResponse) -> Void in
-            print("GET JSON RESPONSE")
+//            print("GET JSON RESPONSE")
 //            print(JSONResponse)
             let mediaResponse = Mapper<MediaResponse>().map(JSONString: JSONResponse.rawString()!)
 
@@ -94,8 +96,14 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
                 }
             }
             self.adapter.performUpdates(animated: true)
+            self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
         })
+    }
+    
+    @objc private func refreshLikedData(_ sender: Any) {
+        data.removeAll()
+        mediaJSON2Object()
     }
 }

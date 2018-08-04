@@ -260,10 +260,12 @@ class InstagramAPI {
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)
                 success(resJson)
+                print(responseObject.request.debugDescription)
             }
             if responseObject.result.isFailure {
                 let error: Error = responseObject.result.error!
                 failure(error)
+                print(responseObject.request.debugDescription)
             }
         }
     }
@@ -276,6 +278,7 @@ class InstagramAPI {
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)
                 success(resJson)
+                print(responseObject.request.debugDescription)
             }
             if responseObject.result.isFailure {
                 let error: Error = responseObject.result.error!

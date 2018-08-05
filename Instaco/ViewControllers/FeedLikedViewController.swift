@@ -39,7 +39,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
         refreshControl.addTarget(self, action: #selector(refreshLikedData(_:)), for: .valueChanged)
         self.view.addSubview(collectionView)
         
-        LikedMediaJSON2Object()
+        likedMediaJSON2Object()
         
         adapter.dataSource = self
         adapter.collectionView = collectionView
@@ -66,7 +66,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
         return nil
     }
     
-    func LikedMediaJSON2Object() {
+    func likedMediaJSON2Object() {
         insta.getFeedLiked(success: { (JSONResponse) -> Void in
 //            print("GET JSON RESPONSE")
 //            print(JSONResponse)
@@ -114,7 +114,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
         })
     }
     
-    func SavedMediaJSON2Object() {
+    func savedMediaJSON2Object() {
         insta.getFeedSaved(success: { (JSONResponse) -> Void in
 //            print(JSONResponse)
             
@@ -167,10 +167,10 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
     @objc private func refreshLikedData(_ sender: Any) {
         if selectedClass == "liked" {
             likedData.removeAll()
-            LikedMediaJSON2Object()
+            likedMediaJSON2Object()
         } else {
             savedData.removeAll()
-            SavedMediaJSON2Object()
+            savedMediaJSON2Object()
         }
         
     }
@@ -180,12 +180,12 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
         if selectedClass == "liked" {
             data.removeAll()
             if data.count == 0 {
-                LikedMediaJSON2Object()
+                likedMediaJSON2Object()
             }
         } else {
             data.removeAll()
             if data.count == 0 {
-                SavedMediaJSON2Object()
+                savedMediaJSON2Object()
             }
         }
     }

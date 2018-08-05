@@ -22,6 +22,22 @@ class NewsResponse: Mappable {
     
 }
 
+class InboxResponse: Mappable {
+    var continuation_token: Int?
+    var new_stories: [Stories]?
+    var old_stories: [Stories]?
+    
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        continuation_token <- map["continuation_token"]
+        new_stories <- map["new_stories"]
+        old_stories <- map["old_stories"]
+    }
+    
+}
+
 class Stories: Mappable {
     var type: Int?
     var args: Args?

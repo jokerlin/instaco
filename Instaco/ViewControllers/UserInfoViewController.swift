@@ -17,7 +17,10 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     var username_id: String = ""
     var data: [ListDiffable] = []
     var postData: [UserFeed] = []
+    var postDataId: [String] = []
     var next_max_id = ""
+    var loading = false
+    var friendshipflag: FriendshipResponse?
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
     
@@ -124,6 +127,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         insta.getUserFriendship(userid: self.username_id, success: { (JSONResponse) -> Void in
 //            print(JSONResponse)
             let friendshipResponse = Mapper<FriendshipResponse>().map(JSONString: JSONResponse.rawString()!)
+            self.friendshipflag = friendshipResponse
             self.setup(friendship: friendshipResponse!)
         }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
@@ -131,23 +135,57 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     }
     
     func getUserInfoFeed() {
-        insta.getUserFeed(userid: self.username_id, success: {(JSONResponse) -> Void in
-//            print(JSONResponse)
-            let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
-            if userFeedResponse?.items != nil {
-                for item in (userFeedResponse?.items!)! {
-                    let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!)
-                    self.postData.append(userFeed)
+        if self.next_max_id == "" {
+            insta.getUserFeed(userid: self.username_id, success: {(JSONResponse) -> Void in
+//                print(JSONResponse)
+                let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
+                if userFeedResponse?.next_max_id != nil {
+                    self.next_max_id = (userFeedResponse?.next_max_id)!
                 }
-            }
+                if userFeedResponse?.items != nil {
+                    self.postData.removeAll()
+                    for item in (userFeedResponse?.items!)! {
+                        if self.postDataId.index(of: item.id!) == nil {
+                            let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!)
+                            self.postData.append(userFeed)
+                            self.postDataId.append(item.id!)
+                        }
+                    }
+                }
 
-            self.data.append(GridItem(items: self.postData))
-            self.adapter.performUpdates(animated: true)
-            
-            self.refreshControl.endRefreshing()
-        }, failure: { (JSONResponse) -> Void in
-            print(JSONResponse)
-        })
+                self.data.append(GridItem(items: self.postData))
+                self.adapter.performUpdates(animated: true)
+                
+                self.refreshControl.endRefreshing()
+            }, failure: { (JSONResponse) -> Void in
+                print(JSONResponse)
+            })
+        } else {
+            insta.getUserFeed(userid: self.username_id, max_id: self.next_max_id, success: {(JSONResponse) -> Void in
+//                print(JSONResponse)
+                let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
+                if userFeedResponse?.next_max_id != nil {
+                    self.next_max_id = (userFeedResponse?.next_max_id)!
+                }
+                if userFeedResponse?.items != nil {
+                    self.postData.removeAll()
+                    for item in (userFeedResponse?.items!)! {
+                        if self.postDataId.index(of: item.id!) == nil {
+                            let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!)
+                            self.postData.append(userFeed)
+                            self.postDataId.append(item.id!)
+                        }
+                    }
+                }
+                
+                self.data.append(GridItem(items: self.postData))
+                self.adapter.performUpdates(animated: true)
+                
+                self.refreshControl.endRefreshing()
+            }, failure: { (JSONResponse) -> Void in
+                print(JSONResponse)
+            })
+        }
     }
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
@@ -169,5 +207,30 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         data.removeAll()
         postData.removeAll()
         getFriendship()
+    }
+    
+    // MARK: UIScrollViewDelegate
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
+        if !loading && distance < 200 {
+            
+            loading = true
+            adapter.performUpdates(animated: true, completion: nil)
+            DispatchQueue.global(qos: .default).async {
+                DispatchQueue.main.async {
+                    self.loading = false
+                    if self.next_max_id != "" {
+                        self.setup(friendship: self.friendshipflag!)
+                    }
+                    self.adapter.performUpdates(animated: true, completion: nil)
+                    
+                }
+            }
+        }
+        
     }
 }

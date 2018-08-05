@@ -42,7 +42,8 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         
         self.view.addSubview(collectionView)
         
-        setup()
+        getFriendship()
+        
         if username_id == insta.username_id {
             setupLogOutButton()
         }
@@ -83,7 +84,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         
     }
     
-    func setup() {
+    func setup(friendship: FriendshipResponse) {
         getUserInfoHeader(success: { (JSONResponse) in
             var is_private = false
             let userInfoResponse = Mapper<UserInfoResponse>().map(JSONString: JSONResponse.rawString()!)
@@ -103,11 +104,11 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                                     is_private: is_private,
                                     external_url: (userInfoResponse?.user?.external_url)!,
                                     pk: (userInfoResponse?.user?.pk)!,
-                                    media_count: (userInfoResponse?.user?.media_count)!)
+                                    media_count: (userInfoResponse?.user?.media_count)!,
+                                    friendship: friendship.following!)
             self.data.append(userInfo)
             
             self.navigationItem.title = userInfo.username
-            
             self.getUserInfoFeed()
         }, failure: { (JSONResponse) in
             print(JSONResponse)
@@ -117,6 +118,16 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     func getUserInfoHeader(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         insta.getUserInfo(userid: self.username_id, success: success, failure: failure)
+    }
+    
+    func getFriendship() {
+        insta.getUserFriendship(userid: self.username_id, success: { (JSONResponse) -> Void in
+//            print(JSONResponse)
+            let friendshipResponse = Mapper<FriendshipResponse>().map(JSONString: JSONResponse.rawString()!)
+            self.setup(friendship: friendshipResponse!)
+        }, failure: { (JSONResponse) -> Void in
+            print(JSONResponse)
+        })
     }
     
     func getUserInfoFeed() {
@@ -157,6 +168,6 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     @objc private func refreshUserInfoData(_ sender: Any) {
         data.removeAll()
         postData.removeAll()
-        setup()
+        getFriendship()
     }
 }

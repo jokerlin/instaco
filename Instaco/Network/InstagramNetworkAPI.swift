@@ -161,6 +161,34 @@ class InstagramAPI {
         }
     }
     
+    func FollowOp(type: Bool, user_id: String) {
+        let data = ["_csrftoken": self.csrftoken,
+                    "user_id": user_id,
+                    "radio_type": "wifi-none",
+                    "_uid": self.username_id,
+                    "_uuid": self.uuid]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        let sign_body = generateSignature(data: jsonString)
+        
+        if type {
+            SendRequestViaHttpBody(URI: "friendships/create/" + user_id + "/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body,
+                                   success: { (JSONResponse) -> Void in
+                                    print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)})
+        } else {
+            SendRequestViaHttpBody(URI: "friendships/destroy/" + user_id + "/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: {(JSONResponse) -> Void in
+                print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)
+            })
+        }
+    }
+    
     func login(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         // Get Request for csrftoken
@@ -200,6 +228,10 @@ class InstagramAPI {
     
     func getUserInfo(userid: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         SendRequest(URI: "users/" + userid + "/info/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
+    }
+    
+    func getUserFriendship(userid: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        SendRequest(URI: "friendships/show/" + userid + "/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
     }
     
     func getUserFeed(userid: String, max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {

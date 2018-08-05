@@ -8,7 +8,10 @@
 
 import IGListKit
 
-class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource {
+class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, UserInfoHeaderCellDelegate {
+    
+    var userInfo: UserInfo?
+    var followFlagChange: Bool = false
     
     override init() {
         super.init()
@@ -17,12 +20,16 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, viewModelsFor object: Any) -> [ListDiffable] {
         guard let object = object as? UserInfo else { fatalError() }
+        userInfo = object
         return [object]
     }
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, cellForViewModel viewModel: Any, at index: Int) -> UICollectionViewCell & ListBindable {
         guard let cell = collectionContext!.dequeueReusableCell(of: UserInfoHeaderCell.self, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }
+        if let cell = cell as? UserInfoHeaderCell {
+            cell.delegate = self
+        }
         return cell
     }
     
@@ -33,5 +40,37 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
         let height: CGFloat = 200
         return CGSize(width: width, height: height)
     }
-
+    
+    func didTapFollow(cell: UserInfoHeaderCell) {
+        if userInfo?.friendship == true {
+            if followFlagChange == false {
+                followFlagChange = true
+                cell.followButton.backgroundColor = UIColor.blue
+                cell.followButton.setTitleColor(UIColor.white, for: .normal)
+                cell.followButton.setTitle("follow", for: .normal)
+                insta.FollowOp(type: false, user_id: String(userInfo!.pk))
+            } else {
+                followFlagChange = false
+                cell.followButton.backgroundColor = UIColor.white
+                cell.followButton.setTitleColor(UIColor.black, for: .normal)
+                cell.followButton.setTitle("Following", for: .normal)
+                insta.FollowOp(type: true, user_id: String(userInfo!.pk))
+            }
+        } else {
+            if followFlagChange == false {
+                followFlagChange = true
+                cell.followButton.backgroundColor = UIColor.white
+                cell.followButton.setTitleColor(UIColor.black, for: .normal)
+                cell.followButton.setTitle("Following", for: .normal)
+                insta.FollowOp(type: true, user_id: String(userInfo!.pk))
+            } else {
+                followFlagChange = false
+                cell.followButton.backgroundColor = UIColor.blue
+                cell.followButton.setTitleColor(UIColor.white, for: .normal)
+                cell.followButton.setTitle("follow", for: .normal)
+                insta.FollowOp(type: false, user_id: String(userInfo!.pk))
+            }
+        }
+        update(animated: true)
+    }
 }

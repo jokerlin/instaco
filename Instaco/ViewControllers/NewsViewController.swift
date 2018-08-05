@@ -13,14 +13,29 @@ import SwiftyJSON
 
 class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
-    var data: [ListDiffable] = []
+    var newsData = [ListDiffable]()
+    var inboxData = [ListDiffable]()
+    var data = [ListDiffable]()
     var next_max_id = 0
+    var continuation_token = 0
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
+    private let refreshControl = FixedRefreshControl()
+    let segments: [(String, String)] = [
+        ("News", "news"),
+        ("Inbox", "inbox")
+    ]
+    var selectedClass: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let control = UISegmentedControl(items: segments.map { return $0.0 })
+        control.selectedSegmentIndex = 0
+        control.addTarget(self, action: #selector(onControl(_:)), for: .valueChanged)
+        navigationItem.titleView = control
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshNewsData(_:)), for: .valueChanged)
         self.view.addSubview(collectionView)
         getNews()
         // getInbox()
@@ -40,10 +55,6 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-//        switch object {
-//        case is UserInfo: return UserInfoHeaderSectionController()
-//        default: return UserInfoPostSectionController()
-//        }
         return NewsSectionController()
     }
     
@@ -61,21 +72,69 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
             if newsResponse?.stories != nil {
                 for item in (newsResponse?.stories)! {
                     let news = News(type: (item.type)!, profile_image: (item.args?.profile_image)!, text: (item.args?.text)!)
-                    self.data.append(news)
+                    self.newsData.append(news)
                 }
             }
+            self.data = self.newsData
             self.adapter.performUpdates(animated: true)
+            self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) in
             print(JSONResponse)
         })
     }
     
     func getInbox() {
+        self.adapter.performUpdates(animated: true)
         insta.getNewsInbox(success: {(JSONResponse) -> Void in
             print(JSONResponse)
+            let inboxResponse = Mapper<InboxResponse>().map(JSONString: JSONResponse.rawString()!)
+            if inboxResponse?.continuation_token != nil {
+                self.continuation_token = (inboxResponse?.continuation_token)!
+            }
+            if inboxResponse?.new_stories != nil {
+                for item in (inboxResponse?.new_stories)! {
+                    let news = News(type: (item.type)!, profile_image: (item.args?.profile_image)!, text: (item.args?.text)!)
+                    self.inboxData.append(news)
+                }
+            }
+            
+            if inboxResponse?.old_stories != nil {
+                for item in (inboxResponse?.old_stories)! {
+                    let news = News(type: (item.type)!, profile_image: (item.args?.profile_image)!, text: (item.args?.text)!)
+                    self.inboxData.append(news)
+                }
+            }
+            self.data = self.inboxData
+            self.adapter.performUpdates(animated: true)
+            self.refreshControl.endRefreshing()
+            
         }, failure: { (JSONResponse) in
             print(JSONResponse)
         })
     }
     
+    @objc private func refreshNewsData(_ sender: Any) {
+        if selectedClass == "news" {
+            newsData.removeAll()
+            getNews()
+        } else {
+            inboxData.removeAll()
+            getInbox()
+        }
+    }
+    
+    @objc func onControl(_ control: UISegmentedControl) {
+        selectedClass = segments[control.selectedSegmentIndex].1
+        if selectedClass == "news" {
+            data.removeAll()
+            if data.count == 0 {
+                getNews()
+            }
+        } else {
+            data.removeAll()
+            if data.count == 0 {
+                getInbox()
+            }
+        }
+    }
 }

@@ -161,6 +161,34 @@ class InstagramAPI {
         }
     }
     
+    func FollowOp(type: Bool, user_id: String) {
+        let data = ["_csrftoken": self.csrftoken,
+                    "user_id": user_id,
+                    "radio_type": "wifi-none",
+                    "_uid": self.username_id,
+                    "_uuid": self.uuid]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        let sign_body = generateSignature(data: jsonString)
+        
+        if type {
+            SendRequestViaHttpBody(URI: "friendships/create/" + user_id + "/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body,
+                                   success: { (JSONResponse) -> Void in
+                                    print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)})
+        } else {
+            SendRequestViaHttpBody(URI: "friendships/destroy/" + user_id + "/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: {(JSONResponse) -> Void in
+                print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)
+            })
+        }
+    }
+    
     func login(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         // Get Request for csrftoken
@@ -200,6 +228,10 @@ class InstagramAPI {
     
     func getUserInfo(userid: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         SendRequest(URI: "users/" + userid + "/info/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
+    }
+    
+    func getUserFriendship(userid: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        SendRequest(URI: "friendships/show/" + userid + "/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
     }
     
     func getUserFeed(userid: String, max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
@@ -250,6 +282,20 @@ class InstagramAPI {
         SendRequest(URI: "users/search/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
     }
     
+    func searchSuggested(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let params: [String: Any] = ["type": "blended", "rank_token": insta.uuid]
+        SendRequest(URI: "fbsearch/suggested_searches/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func getFeedSaved(max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        if max_id == "" {
+            SendRequest(URI: "feed/saved/", method: .get, encoding: URLEncoding.default, success: success, failure: failure)
+        } else {
+            let parameters: Parameters = ["max_id": max_id!]
+            SendRequest(URI: "feed/saved/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
+        }
+    }
+    
     func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestConfig = RequestConfiguration(url: API_URL)
@@ -260,10 +306,12 @@ class InstagramAPI {
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)
                 success(resJson)
+                print(responseObject.request.debugDescription)
             }
             if responseObject.result.isFailure {
                 let error: Error = responseObject.result.error!
                 failure(error)
+                print(responseObject.request.debugDescription)
             }
         }
     }
@@ -276,6 +324,7 @@ class InstagramAPI {
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)
                 success(resJson)
+                print(responseObject.request.debugDescription)
             }
             if responseObject.result.isFailure {
                 let error: Error = responseObject.result.error!

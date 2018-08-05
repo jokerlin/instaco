@@ -10,12 +10,13 @@ import ObjectMapper
 
 class MediaResponse: Mappable {
     var items: [Media_or_ad]?
+    var next_max_id: Int?
     
     required init?(map: Map) {
         
     }
     func mapping(map: Map) {
         items <- map["items"]
-        
+        next_max_id <- map["next_max_id"]
     }
 }

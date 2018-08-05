@@ -61,3 +61,27 @@ class Friendship_status: Mappable {
         is_bestie <- map["is_bestie"]
     }
 }
+
+class SuggestedSearchResponse: Mappable {
+    var suggested: [JSONSuggestUsers]?
+    
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        suggested <- map["suggested"]
+        
+    }
+}
+
+class JSONSuggestUsers: Mappable {
+    var user: JSONUsers?
+    
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        user <- map["user"]
+        
+    }
+}

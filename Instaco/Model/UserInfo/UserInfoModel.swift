@@ -22,8 +22,9 @@ final class UserInfo: ListDiffable {
     var username: String
     var profileImageimageHeight: Int
     var profileImageimageWidth: Int
+    var friendship: Bool
     
-    init(username: String, userProfileImage: URL, full_name: String, biography: String, profileImageimageHeight: Int, profileImageimageWidth: Int, follower_count: Int, following_count: Int, is_private: Bool, external_url: String, pk: Int, media_count: Int) {
+    init(username: String, userProfileImage: URL, full_name: String, biography: String, profileImageimageHeight: Int, profileImageimageWidth: Int, follower_count: Int, following_count: Int, is_private: Bool, external_url: String, pk: Int, media_count: Int, friendship: Bool) {
         self.username = username
         self.userProfileImage = userProfileImage
         self.full_name = full_name
@@ -36,6 +37,7 @@ final class UserInfo: ListDiffable {
         self.external_url = external_url
         self.pk = pk
         self.media_count = media_count
+        self.friendship = friendship
     }
     
     // MARK: ListDiffable

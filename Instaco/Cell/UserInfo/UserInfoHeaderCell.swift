@@ -9,7 +9,13 @@
 import IGListKit
 import SnapKit
 
+protocol UserInfoHeaderCellDelegate: class {
+    func didTapFollow(cell: UserInfoHeaderCell)
+}
+
 final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
+    
+    weak var delegate: UserInfoHeaderCellDelegate?
     
     let fullNameLabel: UILabel = {
         let label = UILabel()
@@ -82,6 +88,16 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         return view
     }()
     
+    let followButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("NA", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.sizeToFit()
+        button.backgroundColor = UIColor.white
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(profileImageView)
@@ -91,6 +107,8 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         contentView.addSubview(media_countLabel)
         contentView.addSubview(follower_countLabel)
         contentView.addSubview(following_countLabel)
+        followButton.addTarget(self, action: #selector(UserInfoHeaderCell.onFollow), for: .touchUpInside)
+        contentView.addSubview(followButton)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -139,6 +157,16 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
             make.centerY.equalTo(profileImageView)
             make.left.equalTo(profileImageView.snp.right).offset(200)
         }
+        
+        followButton.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(profileImageView)
+            make.left.equalTo(profileImageView.snp.right).offset(300)
+            
+        }
+    }
+    
+    @objc func onFollow() {
+        delegate?.didTapFollow(cell: self)
     }
     
     func bindViewModel(_ viewModel: Any) {
@@ -160,6 +188,19 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         
         following_countLabel.text = String(viewModel.following_count) + "\n following"
         profileImageView.sd_setImage(with: viewModel.userProfileImage)
-
+        
+        if viewModel.username != insta.username {
+            if viewModel.friendship == false {
+                followButton.backgroundColor = UIColor.blue
+                followButton.setTitleColor(UIColor.white, for: .normal)
+                followButton.setTitle("follow", for: .normal)
+            } else {
+                followButton.backgroundColor = UIColor.white
+                followButton.setTitleColor(UIColor.black, for: .normal)
+                followButton.setTitle("Following", for: .normal)
+            }
+        } else {
+            followButton.isHidden = true
+        }
     }
 }

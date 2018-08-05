@@ -9,8 +9,15 @@
 import UIKit
 import IGListKit
 import ActiveLabel
+import ObjectMapper
+
+protocol CaptionCellDelegate: class {
+    func didTapUsername(cell: CaptionCell)
+}
 
 final class CaptionCell: UICollectionViewCell, ListBindable {
+    
+    weak var delegate: CaptionCellDelegate?
     
     fileprivate static let insets = UIEdgeInsets(top: 8, left: 11, bottom: 8, right: 11)
     fileprivate static let font = UIFont.systemFont(ofSize: 14)
@@ -43,9 +50,9 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
         let usernameType = ActiveType.custom(pattern: "\\A[^\\s]+")
         captionLabel.customColor[usernameType] = UIColor.black
         captionLabel.hashtagColor = UIColor.rgb(red: 0, green: 0, blue: 128)
-        captionLabel.mentionColor = UIColor.black
+        captionLabel.mentionColor = UIColor.rgb(red: 0, green: 0, blue: 196)
         
-        // https://github.com/optonaut/ActiveLabel.swift/commit/c1ba467e214bcbc5cec89097a0bffa1f9ef9b895
+        // Reference: https://github.com/optonaut/ActiveLabel.swift/commit/c1ba467e214bcbc5cec89097a0bffa1f9ef9b895
         captionLabel.configureLinkAttribute = { (type, attributes, isSelected) in
             var atts = attributes
             switch type {
@@ -65,12 +72,28 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
         // for future features
         captionLabel.handleMentionTap { mentiontag in
             print("Success. You just tapped the \(mentiontag) hashtag")
+            insta.searchUsers(q: mentiontag, rank_token: insta.uuid, success: { (JSONResponse) in
+//                print(JSONResponse)
+                let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+                if searchUserResponse?.users != nil {
+                    let item = (searchUserResponse?.users![0])!
+                    let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
+                    if searchUserResult.username == mentiontag {
+                        let current_vc = self.responderViewController()
+                        let userInfoViewController = UserInfoViewController(username_id: String(item.pk!))
+                        current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
+                    }
+                }
+            }, failure: { (JSONResponse) in
+                print(JSONResponse)
+            })
         }
         captionLabel.handleHashtagTap { hashtag in
             print("Success. You just tapped the \(hashtag) hashtag")
         }
         captionLabel.handleCustomTap(for: usernameType) { usernameType in
             print("Success. You just tapped the \(usernameType) usernametag")
+            self.onUsername()
         }
         
         contentView.addSubview(captionLabel)
@@ -91,11 +114,25 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
         }
     }
 
+    func responderViewController() -> UIViewController? {
+        for view in sequence(first: self.superview, next: {$0?.superview}) {
+            if let responder = view?.next {
+                if responder.isKind(of: UIViewController.self) {
+                    return responder as? UIViewController
+                }
+            }
+        }
+        return nil
+    }
+    
+    func onUsername() {
+        delegate?.didTapUsername(cell: self)
+    }
+    
     func bindViewModel(_ viewModel: Any) {
         guard let viewModel = viewModel as? CaptionViewModel else { return }
 
         captionLabel.text = viewModel.username + " " + viewModel.text
         
     }
-    
 }

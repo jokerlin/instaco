@@ -82,7 +82,11 @@ final class SearchResultCell: UICollectionViewCell, ListBindable {
         profileImageView.sd_setImage(with: URL(string: viewModel.profile_image))
         usernameLabel.text = viewModel.username
         if let text = viewModel.search_social_context {
-            textLabel.text = text
+            if viewModel.full_name != "" {
+                textLabel.text = viewModel.full_name + " · " + text
+            } else {
+                textLabel.text = text
+            }
         } else {
             textLabel.text = viewModel.full_name
         }

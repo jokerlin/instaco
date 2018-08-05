@@ -26,8 +26,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         self.view.addSubview(collectionView)
-
-//        searchUsers(quest: "linheng")
+        searchSuggest()
         
         adapter.dataSource = self
         adapter.collectionView = collectionView
@@ -78,12 +77,30 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
         })
     }
     
+    func searchSuggest() {
+        insta.searchSuggested(success: { (JSONResponse) -> Void in
+            print(JSONResponse)
+            let suggestedSearchResponse = Mapper<SuggestedSearchResponse>().map(JSONString: JSONResponse.rawString()!)
+            if suggestedSearchResponse?.suggested != nil {
+                for item in (suggestedSearchResponse?.suggested)! {
+                    let searchUserResult = SearchUserModel (pk: (item.user?.pk!)!, profile_image: (item.user?.profile_pic_url!)!, search_social_context: item.user?.search_social_context, username: (item.user?.username!)!, full_name: (item.user?.full_name!)!)
+                    self.data.append(searchUserResult)
+                }
+            }
+            self.adapter.performUpdates(animated: true)
+        }, failure: { (JSONResponse) -> Void in
+            print(JSONResponse)
+        })
+    }
+    
     // MARK: SearchSectionControllerDelegate
     
     func searchSectionController(_ sectionController: SearchBarSectionController, didChangeText text: String) {
         data.removeAll()
         if text != "" {
             searchUsers(quest: text)
+        } else {
+           searchSuggest()
         }
         adapter.performUpdates(animated: true, completion: nil)
     }

@@ -34,6 +34,17 @@ class FeedItemsTimeline: Mappable {
     }
 }
 
+class Carousel_media: Mappable {
+    var image_versions2: [ImageTimeline]?
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        image_versions2 <- map["image_versions2.candidates"]
+        
+    }
+}
+
 class Media_or_ad: Mappable {
     var image_versions2: [ImageTimeline]?
     var like_count: Int?
@@ -46,6 +57,7 @@ class Media_or_ad: Mappable {
     var caption: Caption?
     var id: String?
     var comment_count: Int?
+    var carousel_media: [Carousel_media]?
     
     required init?(map: Map) {
         if map.JSON["image_versions2"] != nil {
@@ -75,6 +87,7 @@ class Media_or_ad: Mappable {
             comment_count <- map["comment_count"]
         } else {
             image_versions2 <- map["carousel_media.0.image_versions2.candidates"]
+            carousel_media <- map["carousel_media"]
             like_count <- map["like_count"]
             user <- map["user"]
             has_liked <- map["has_liked"]

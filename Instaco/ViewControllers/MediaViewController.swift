@@ -93,23 +93,47 @@ class MediaViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         comment_count = item.comment_count!
                     }
                     
-                    let mediainfo = MediaInfo(
-                        username: (item.user?.username)!,
-                        userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
-                        location: location,
-                        timestamp: item.taken_at!,
-                        imageURL: URL(string: item.image_versions2![0].url!)!,
-                        imageHeight: item.image_versions2![0].height!,
-                        imageWidth: item.image_versions2![0].width!,
-                        likes: item.like_count!,
-                        beliked: item.has_liked!,
-                        caption: CaptionViewModel(username: caption_username, text: caption_text),
-                        id: item.id!,
-                        userid: (item.user?.pk)!,
-                        comment_count: comment_count
-                    )
-                    self.data.append(mediainfo)
-                    
+                    if item.type == 2 {
+                        
+                        var urls: [String] = []
+                        for carousel in item.carousel_media! {
+                            urls.append(carousel.image_versions2![0].url!)
+                        }
+                        
+                        let mediainfo = MediaInfo(
+                            username: (item.user?.username)!,
+                            userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
+                            location: location,
+                            timestamp: item.taken_at!,
+                            imageURL: URL(string: item.image_versions2![0].url!)!,
+                            imageHeight: item.image_versions2![0].height!,
+                            imageWidth: item.image_versions2![0].width!,
+                            likes: item.like_count!,
+                            beliked: item.has_liked!,
+                            caption: CaptionViewModel(username: caption_username, text: caption_text),
+                            id: item.id!,
+                            userid: (item.user?.pk)!,
+                            comment_count: item.comment_count!,
+                            type: 2,
+                            carousel: urls)
+                        self.data.append(mediainfo)
+                    } else {
+                        let mediainfo = MediaInfo(
+                            username: (item.user?.username)!,
+                            userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
+                            location: location,
+                            timestamp: item.taken_at!,
+                            imageURL: URL(string: item.image_versions2![0].url!)!,
+                            imageHeight: item.image_versions2![0].height!,
+                            imageWidth: item.image_versions2![0].width!,
+                            likes: item.like_count!,
+                            beliked: item.has_liked!,
+                            caption: CaptionViewModel(username: caption_username, text: caption_text),
+                            id: item.id!,
+                            userid: (item.user?.pk)!,
+                            comment_count: comment_count)
+                        self.data.append(mediainfo)
+                    }
                 }
             }
             self.adapter.performUpdates(animated: true)

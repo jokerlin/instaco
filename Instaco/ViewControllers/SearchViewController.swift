@@ -79,7 +79,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     
     func searchSuggest() {
         insta.searchSuggested(success: { (JSONResponse) -> Void in
-            print(JSONResponse)
+//            print(JSONResponse)
             let suggestedSearchResponse = Mapper<SuggestedSearchResponse>().map(JSONString: JSONResponse.rawString()!)
             if suggestedSearchResponse?.suggested != nil {
                 for item in (suggestedSearchResponse?.suggested)! {

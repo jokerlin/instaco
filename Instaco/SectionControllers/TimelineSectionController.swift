@@ -9,6 +9,7 @@
 import UIKit
 import IGListKit
 import SnapKit
+import Player
 
 final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, CaptionCellDelegate {
 
@@ -34,22 +35,24 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         mediaInfo = object
         var results: [ListDiffable] = []
         if mediaInfo?.type == 1 {
-            results = [
-                UserViewModel(username: object.username, userProfileImage: object.userProfileImage, location: object.location, timestamp: object.timestamp),
-                ImageViewModel(url: object.imageURL),
-                ActionViewModel(likes: localLikes ?? object.likes),
-                CaptionViewModel(username: object.caption.username, text: object.caption.text),
-                CommentViewModel(comment_count: object.comment_count)
-                ]
+            results = [UserViewModel(username: object.username, userProfileImage: object.userProfileImage, location: object.location, timestamp: object.timestamp),
+                       ImageViewModel(url: object.imageURL),
+                       ActionViewModel(likes: localLikes ?? object.likes),
+                       CaptionViewModel(username: object.caption.username, text: object.caption.text),
+                       CommentViewModel(comment_count: object.comment_count)]
         } else if mediaInfo?.type == 2 {
             carousel_urls = object.carousel!
-            results = [
-                UserViewModel(username: object.username, userProfileImage: object.userProfileImage, location: object.location, timestamp: object.timestamp),
-                MediaCarouselViewModel(urls: object.carousel!),
-                ActionViewModel(likes: localLikes ?? object.likes),
-                CaptionViewModel(username: object.caption.username, text: object.caption.text),
-                CommentViewModel(comment_count: object.comment_count)
-            ]
+            results = [UserViewModel(username: object.username, userProfileImage: object.userProfileImage, location: object.location, timestamp: object.timestamp),
+                       MediaCarouselViewModel(urls: object.carousel!),
+                       ActionViewModel(likes: localLikes ?? object.likes),
+                       CaptionViewModel(username: object.caption.username, text: object.caption.text),
+                       CommentViewModel(comment_count: object.comment_count)]
+        } else {
+            results = [UserViewModel(username: object.username, userProfileImage: object.userProfileImage, location: object.location, timestamp: object.timestamp),
+                       VideoViewModel(url: object.videoURL!),
+                       ActionViewModel(likes: localLikes ?? object.likes),
+                       CaptionViewModel(username: object.caption.username, text: object.caption.text),
+                       CommentViewModel(comment_count: object.comment_count)]
         }
         return results 
     }
@@ -61,9 +64,10 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         switch viewModel {
         case is UserViewModel: cellClass = UserCell.self
         case is ImageViewModel: cellClass = ImageCell.self
+        case is MediaCarouselViewModel: cellClass = MediaCarouselCell.self
+        case is VideoViewModel: cellClass = VideoCell.self
         case is ActionViewModel: cellClass = ActionCell.self
         case is CaptionViewModel: cellClass = CaptionCell.self
-        case is MediaCarouselViewModel: cellClass = MediaCarouselCell.self
         default: cellClass = CommentCell.self
         }
         
@@ -74,6 +78,10 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         }
         if let cell = cell as? MediaCarouselCell {
             adapter.collectionView = cell.carousel
+        }
+        if let cell = cell as? VideoCell {
+            cell.player.url = mediaInfo?.videoURL
+            cell.player.playFromBeginning()
         }
         if let cell = cell as? CaptionCell {
             cell.delegate = self
@@ -99,6 +107,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         case is UserViewModel: height = 52
         case is ImageViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is MediaCarouselViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
+        case is VideoViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is ActionViewModel: height = 40
         case is CaptionViewModel:
             height = CaptionCell.textHeight(mediaInfo?.caption.text ?? "", width: width)
@@ -164,6 +173,8 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
         current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
+    
+    // MARK: Carousel
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         return carousel_urls as [ListDiffable]

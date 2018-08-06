@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0748380129578CAD68AB2029C84F888D"
+               BlueprintIdentifier = "C0DFE594855C5CAF03168DDC98367851"
                BuildableName = "StyledTextKit.framework"
                BlueprintName = "StyledTextKit"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0748380129578CAD68AB2029C84F888D"
+            BlueprintIdentifier = "C0DFE594855C5CAF03168DDC98367851"
             BuildableName = "StyledTextKit.framework"
             BlueprintName = "StyledTextKit"
             ReferencedContainer = "container:Pods.xcodeproj">

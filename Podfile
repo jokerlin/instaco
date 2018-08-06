@@ -15,6 +15,7 @@ target 'Instaco' do
   pod 'ActiveLabel'
   pod 'SnapKit', '~> 4.0.0'
   pod 'SwiftLint'
+  pod "Player", "~> 0.8.0"
 end
 
 #post_install do |installer|

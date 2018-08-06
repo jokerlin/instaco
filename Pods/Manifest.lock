@@ -8,6 +8,7 @@ PODS:
   - IGListKit/Diffing (3.4.0)
   - KeychainAccess (3.1.1)
   - ObjectMapper (3.3.0)
+  - Player (0.8.4)
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - IGListKit (from `https://github.com/Instagram/IGListKit.git`, branch `master`)
   - KeychainAccess
   - ObjectMapper (~> 3.3)
+  - Player (~> 0.8.0)
   - SDWebImage (~> 4.0)
   - SnapKit (~> 4.0.0)
   - StyledTextKit
@@ -34,6 +36,7 @@ SPEC REPOS:
     - Alamofire
     - KeychainAccess
     - ObjectMapper
+    - Player
     - SDWebImage
     - SnapKit
     - StyledTextKit
@@ -56,12 +59,13 @@ SPEC CHECKSUMS:
   IGListKit: 7a5d788e9fb746bcd402baa8e8b24bc3bd2a5a07
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  Player: e45514e9e5fb8ff18f50eb2ba6f84dac9b6a0024
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   StyledTextKit: ea9a28a86955c16ea27f1a1a9278b004966f2bf6
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: a1539587f5892b2dfe2f1846e343b20ebd0b3423
+PODFILE CHECKSUM: 1f3d59f94d50d1967d1a4835d51f757ac618431b
 
 COCOAPODS: 1.5.3

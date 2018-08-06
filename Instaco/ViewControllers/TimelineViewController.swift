@@ -111,7 +111,29 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
                         caption_text = (item.media_or_ad?.caption?.text)!
                     }
                     
-                    if item.media_or_ad?.type == 2 {
+                    if item.media_or_ad?.type == 3 {
+                        if let item = item.media_or_ad {
+                            let mediainfo = MediaInfo(
+                                username: (item.user?.username)!,
+                                userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
+                                location: location,
+                                timestamp: item.taken_at!,
+                                imageURL: URL(string: item.image_versions2![0].url!)!,
+                                imageHeight: item.image_versions2![0].height!,
+                                imageWidth: item.image_versions2![0].width!,
+                                likes: item.like_count!,
+                                beliked: item.has_liked!,
+                                caption: CaptionViewModel(username: caption_username, text: caption_text),
+                                id: item.id!,
+                                userid: (item.user?.pk)!,
+                                comment_count: item.comment_count!,
+                                type: 3,
+                                videoURL: URL(string: item.video_versions![0].url!))
+                            self.data.append(mediainfo)
+                        }
+                        
+                    } else if item.media_or_ad?.type == 2 {
+
                         if let item = item.media_or_ad {
                             var urls: [String] = []
                             for carousel in item.carousel_media! {

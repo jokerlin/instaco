@@ -186,7 +186,27 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
                     caption_text = (item.caption?.text)!
                 }
                 
-                if item.type == 2 {
+                if item.type == 3 {
+                    
+                    let mediainfo = MediaInfo(
+                        username: (item.user?.username)!,
+                        userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
+                        location: location,
+                        timestamp: item.taken_at!,
+                        imageURL: URL(string: item.image_versions2![0].url!)!,
+                        imageHeight: item.image_versions2![0].height!,
+                        imageWidth: item.image_versions2![0].width!,
+                        likes: item.like_count!,
+                        beliked: item.has_liked!,
+                        caption: CaptionViewModel(username: caption_username, text: caption_text),
+                        id: item.id!,
+                        userid: (item.user?.pk)!,
+                        comment_count: item.comment_count!,
+                        type: 3,
+                        videoURL: URL(string: item.video_versions![0].url!))
+                    self.likedData.append(mediainfo)
+                    
+                } else if item.type == 2 {
                     
                     var urls: [String] = []
                     for carousel in item.carousel_media! {
@@ -256,7 +276,28 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
                     caption_username = (item.media?.caption?.user?.username)!
                     caption_text = (item.media?.caption?.text)!
                 }
-                if item.media?.type == 2 {
+                
+                if item.media?.type == 3 {
+                    
+                    let mediainfo = MediaInfo(
+                        username: (item.media?.user?.username)!,
+                        userProfileImage: URL(string: (item.media?.user?.profile_pic_url)!)!,
+                        location: location,
+                        timestamp: (item.media?.taken_at!)!,
+                        imageURL: URL(string: (item.media?.image_versions2![0].url!)!)!,
+                        imageHeight: (item.media?.image_versions2![0].height!)!,
+                        imageWidth: (item.media?.image_versions2![0].width!)!,
+                        likes: (item.media?.like_count!)!,
+                        beliked: (item.media?.has_liked!)!,
+                        caption: CaptionViewModel(username: caption_username, text: caption_text),
+                        id: (item.media?.id!)!,
+                        userid: (item.media?.user?.pk)!,
+                        comment_count: (item.media?.comment_count!)!,
+                        type: 3,
+                        videoURL: URL(string: (item.media?.video_versions![0].url!)!))
+                    self.savedData.append(mediainfo)
+                    
+                } else if item.media?.type == 2 {
                     
                     var urls: [String] = []
                     for carousel in (item.media?.carousel_media!)! {
@@ -279,7 +320,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
                         comment_count: (item.media?.comment_count!)!,
                         type: 2,
                         carousel: urls)
-                    self.likedData.append(mediainfo)
+                    self.savedData.append(mediainfo)
                 } else {
                     let mediainfo = MediaInfo(
                         username: (item.media?.user?.username)!,

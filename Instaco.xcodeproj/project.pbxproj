@@ -64,6 +64,8 @@
 		8FCAD4C521176D5D006908FE /* MediaCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4C421176D5D006908FE /* MediaCarouselViewModel.swift */; };
 		8FCAD4C7211795DA006908FE /* CustomCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4C6211795DA006908FE /* CustomCarousel.swift */; };
 		8FCAD4C921181C89006908FE /* CarouselSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4C821181C89006908FE /* CarouselSectionController.swift */; };
+		8FCAD4CB211888C6006908FE /* MediaVideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4CA211888C6006908FE /* MediaVideoViewModel.swift */; };
+		8FCAD4CD2118895A006908FE /* MediaVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4CC2118895A006908FE /* MediaVideoCell.swift */; };
 		8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */; };
 		8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDA614520F7056700B07D8A /* BaseNetworkService.swift */; };
 		EEC0FF090245A8A36F83F2B8 /* Pods_Instaco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */; };
@@ -153,6 +155,8 @@
 		8FCAD4C421176D5D006908FE /* MediaCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCarouselViewModel.swift; sourceTree = "<group>"; };
 		8FCAD4C6211795DA006908FE /* CustomCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCarousel.swift; sourceTree = "<group>"; };
 		8FCAD4C821181C89006908FE /* CarouselSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSectionController.swift; sourceTree = "<group>"; };
+		8FCAD4CA211888C6006908FE /* MediaVideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaVideoViewModel.swift; sourceTree = "<group>"; };
+		8FCAD4CC2118895A006908FE /* MediaVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaVideoCell.swift; sourceTree = "<group>"; };
 		8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramNetworkAPI.swift; sourceTree = "<group>"; };
 		8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instaco-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FDA614520F7056700B07D8A /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 				8F2C3BFC20FFA50900C6CC46 /* MediaUserViewModel.swift */,
 				8F2C3C0220FFAC0600C6CC46 /* MediaImageViewModel.swift */,
 				8FCAD4C421176D5D006908FE /* MediaCarouselViewModel.swift */,
+				8FCAD4CA211888C6006908FE /* MediaVideoViewModel.swift */,
 				8F2C3C0420FFAC4000C6CC46 /* MediaActionViewModel.swift */,
 				8F6094542102FCE900C360F8 /* MediaCaptionViewModel.swift */,
 				8F2C3BF820FF808200C6CC46 /* MediaCommentViewModel.swift */,
@@ -326,6 +331,7 @@
 				8F2C3BFA20FFA36A00C6CC46 /* MediaUserCell.swift */,
 				8F2C3BFE20FFA65100C6CC46 /* MediaImageCell.swift */,
 				8FCAD4C221176CCC006908FE /* MediaCarouselCell.swift */,
+				8FCAD4CC2118895A006908FE /* MediaVideoCell.swift */,
 				8F2C3C0020FFA67300C6CC46 /* MediaActionCell.swift */,
 				8F6094522102F4D200C360F8 /* MediaCaptionCell.swift */,
 				8F2C3C0620FFAC9300C6CC46 /* MediaCommentCell.swift */,
@@ -595,6 +601,7 @@
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Player/Player.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/StyledTextKit/StyledTextKit.framework",
@@ -607,6 +614,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Player.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StyledTextKit.framework",
@@ -656,6 +664,7 @@
 				8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */,
 				8FCAD4A121122B84006908FE /* NewsSectionController.swift in Sources */,
 				8FCAD4C921181C89006908FE /* CarouselSectionController.swift in Sources */,
+				8FCAD4CD2118895A006908FE /* MediaVideoCell.swift in Sources */,
 				8F59F79F210F3DD6000A7833 /* UserInfoPostSectionController.swift in Sources */,
 				8F22519A20F750A500B39F6D /* NetworkManager.swift in Sources */,
 				8F2C3C0320FFAC0600C6CC46 /* MediaImageViewModel.swift in Sources */,
@@ -694,6 +703,7 @@
 				8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */,
 				8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */,
 				8F4B67AE211188240077068E /* MediaViewController.swift in Sources */,
+				8FCAD4CB211888C6006908FE /* MediaVideoViewModel.swift in Sources */,
 				8FCAD4A421122BDC006908FE /* NewsCell.swift in Sources */,
 				8F2C3C0720FFAC9300C6CC46 /* MediaCommentCell.swift in Sources */,
 			);

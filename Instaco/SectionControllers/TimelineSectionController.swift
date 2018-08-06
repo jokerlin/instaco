@@ -22,6 +22,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         let adapter = ListAdapter(updater: ListAdapterUpdater(),
                                   viewController: self.viewController)
         adapter.dataSource = self
+        
         return adapter
     }()
     
@@ -78,6 +79,8 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         }
         if let cell = cell as? MediaCarouselCell {
             adapter.collectionView = cell.carousel
+            adapter.scrollViewDelegate = cell
+            cell.pageControl.numberOfPages = (mediaInfo?.carousel?.count)!
         }
         if let cell = cell as? VideoCell {
             cell.player.url = mediaInfo?.videoURL
@@ -187,4 +190,5 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
         return nil
     }
+
 }

@@ -79,10 +79,10 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     
     func searchSuggest() {
         insta.searchSuggested(success: { (JSONResponse) -> Void in
-//            print(JSONResponse)
+            print(JSONResponse)
             let suggestedSearchResponse = Mapper<SuggestedSearchResponse>().map(JSONString: JSONResponse.rawString()!)
             if suggestedSearchResponse?.suggested != nil {
-                for item in (suggestedSearchResponse?.suggested)! {
+                for item in (suggestedSearchResponse?.suggested)! where item.user != nil {
                     let searchUserResult = SearchUserModel (pk: (item.user?.pk!)!, profile_image: (item.user?.profile_pic_url!)!, search_social_context: item.user?.search_social_context, username: (item.user?.username!)!, full_name: (item.user?.full_name!)!)
                     self.data.append(searchUserResult)
                 }

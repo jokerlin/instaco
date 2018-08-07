@@ -119,7 +119,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             if mediaInfo?.comment_count == 0 {
                 height = 0
             } else {
-                height = 20
+                height = 30
             }
             
         default: height = 0

@@ -33,6 +33,14 @@ final class ActionCell: UICollectionViewCell, ListBindable {
         return button
     }()
     
+    let ribbonButton: UIButton = {
+        let button = UIButton()
+        let btnImage = UIImage(named: "ibook")
+        button.setImage(btnImage, for: UIControlState.normal)
+        button.sizeToFit()
+        return button
+    }()
+    
     let likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -47,6 +55,7 @@ final class ActionCell: UICollectionViewCell, ListBindable {
         super.init(frame: frame)
         contentView.addSubview(likeButton)
         contentView.addSubview(commentButton)
+        contentView.addSubview(ribbonButton)
         likeButton.addTarget(self, action: #selector(ActionCell.onHeart), for: .touchUpInside)
         contentView.addSubview(likesLabel)
     }
@@ -66,6 +75,11 @@ final class ActionCell: UICollectionViewCell, ListBindable {
         commentButton.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(contentView)
             make.left.equalTo(likeButton).offset(40)
+        }
+        
+        ribbonButton.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(contentView)
+            make.left.equalTo(commentButton).offset(40)
         }
         
         likesLabel.snp.makeConstraints { (make) -> Void in

@@ -313,14 +313,15 @@ class InstagramAPI {
         
         baseNetworkService.execute(request: request).responseJSON { responseObject in
             if responseObject.result.isSuccess {
+                print(responseObject.request.debugDescription)
                 let resJson = JSON(responseObject.result.value!)
                 success(resJson)
-                print(responseObject.request.debugDescription)
             }
             if responseObject.result.isFailure {
+                print(responseObject.request.debugDescription)
                 let error: Error = responseObject.result.error!
                 failure(error)
-                print(responseObject.request.debugDescription)
+                
             }
         }
     }
@@ -331,14 +332,14 @@ class InstagramAPI {
         
         baseNetworkService.execute(request: request).responseJSON { responseObject in
             if responseObject.result.isSuccess {
+                print(responseObject.request.debugDescription)
                 let resJson = JSON(responseObject.result.value!)
                 success(resJson)
-                print(responseObject.request.debugDescription)
             }
             if responseObject.result.isFailure {
+                print(responseObject.request.debugDescription)
                 let error: Error = responseObject.result.error!
                 failure(error)
-                print(responseObject.request.debugDescription)
             }
         }
     }

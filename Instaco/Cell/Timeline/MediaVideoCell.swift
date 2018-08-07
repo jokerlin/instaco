@@ -40,10 +40,18 @@ final class VideoCell: UICollectionViewCell, ListBindable {
     }
     
     @objc func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
-        if player.muted == true {
-            player.muted = false
-        } else {
-            player.muted = true
+        
+        switch self.player.playbackState.rawValue {
+        case PlaybackState.stopped.rawValue:
+            self.player.playFromBeginning()
+        case PlaybackState.paused.rawValue:
+            self.player.playFromCurrentTime()
+        default:
+            if player.muted == true {
+                player.muted = false
+            } else {
+                player.muted = true
+            }
         }
     }
 }

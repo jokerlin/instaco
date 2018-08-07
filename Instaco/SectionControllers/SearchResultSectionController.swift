@@ -28,8 +28,6 @@ class SearchResultSectionController: ListBindingSectionController<ListDiffable>,
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, sizeForViewModel viewModel: Any, at index: Int) -> CGSize {
         guard let width = collectionContext?.containerSize.width else { fatalError() }
-        
-        // TODO: Calculate Height
         let height: CGFloat = 50
         return CGSize(width: width, height: height)
     }

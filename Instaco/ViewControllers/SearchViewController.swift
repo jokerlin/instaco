@@ -31,6 +31,8 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
         adapter.dataSource = self
         adapter.collectionView = collectionView
         adapter.scrollViewDelegate = self
+        
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewDidLayoutSubviews() {

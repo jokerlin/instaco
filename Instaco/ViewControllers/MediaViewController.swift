@@ -33,7 +33,8 @@ class MediaViewController: UIViewController, ListAdapterDataSource, UIScrollView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Photo"
+        self.navigationItem.title = "Media"
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         collectionView.refreshControl = refreshControl

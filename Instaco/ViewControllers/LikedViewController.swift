@@ -27,6 +27,7 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
         super.viewDidLoad()
         
         navigationItem.title = "Likes"
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         collectionView.refreshControl = refreshControl

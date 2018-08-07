@@ -26,6 +26,7 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Saved"
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         collectionView.refreshControl = refreshControl

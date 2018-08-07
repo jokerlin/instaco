@@ -39,7 +39,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         super.viewDidLoad()
         
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshUserInfoData(_:)), for: .valueChanged)
         

@@ -26,6 +26,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Search"
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         self.view.addSubview(collectionView)

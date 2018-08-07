@@ -1,5 +1,5 @@
 //
-//  FeedLikedViewController.swift
+//  LikedAndSavedViewController.swift
 //  Instaco
 //
 //  Created by Henry Lin on 8/1/18.

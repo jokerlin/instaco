@@ -12,6 +12,8 @@
 		8F0A19F120F4CF3500872C1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F0A19EF20F4CF3500872C1B /* LaunchScreen.storyboard */; };
 		8F0A19FC20F4CF3500872C1B /* InstacoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0A19FB20F4CF3500872C1B /* InstacoTests.swift */; };
 		8F0A1A0720F4CF3500872C1B /* InstacoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0A1A0620F4CF3500872C1B /* InstacoUITests.swift */; };
+		8F0BC7432119EC2300F75301 /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0BC7422119EC2300F75301 /* LikedViewController.swift */; };
+		8F0BC7452119EC3A00F75301 /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0BC7442119EC3A00F75301 /* SavedViewController.swift */; };
 		8F19C29F20FFD67400A7FB56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F19C29E20FFD67400A7FB56 /* Main.storyboard */; };
 		8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519120F73E7100B39F6D /* RequestConfiguration.swift */; };
 		8F22519420F7429300B39F6D /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519320F7429300B39F6D /* MD5.swift */; };
@@ -49,7 +51,7 @@
 		8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD49E2112283A006908FE /* NewsModel.swift */; };
 		8FCAD4A121122B84006908FE /* NewsSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A021122B84006908FE /* NewsSectionController.swift */; };
 		8FCAD4A421122BDC006908FE /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A321122BDC006908FE /* NewsCell.swift */; };
-		8FCAD4A621129D76006908FE /* FeedLikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */; };
+		8FCAD4A621129D76006908FE /* LikedAndSavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A521129D76006908FE /* LikedAndSavedViewController.swift */; };
 		8FCAD4A82112D76F006908FE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4A72112D76F006908FE /* SearchViewController.swift */; };
 		8FCAD4AB21134AD5006908FE /* SearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4AA21134AD5006908FE /* SearchBarCell.swift */; };
 		8FCAD4AD21134AFD006908FE /* SearchBarSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4AC21134AFD006908FE /* SearchBarSectionController.swift */; };
@@ -103,6 +105,8 @@
 		8F0A1A0220F4CF3500872C1B /* InstacoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstacoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F0A1A0620F4CF3500872C1B /* InstacoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstacoUITests.swift; sourceTree = "<group>"; };
 		8F0A1A0820F4CF3500872C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F0BC7422119EC2300F75301 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
+		8F0BC7442119EC3A00F75301 /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		8F19C29E20FFD67400A7FB56 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8F22519120F73E7100B39F6D /* RequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfiguration.swift; sourceTree = "<group>"; };
 		8F22519320F7429300B39F6D /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
@@ -140,7 +144,7 @@
 		8FCAD49E2112283A006908FE /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		8FCAD4A021122B84006908FE /* NewsSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSectionController.swift; sourceTree = "<group>"; };
 		8FCAD4A321122BDC006908FE /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
-		8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLikedViewController.swift; sourceTree = "<group>"; };
+		8FCAD4A521129D76006908FE /* LikedAndSavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedAndSavedViewController.swift; sourceTree = "<group>"; };
 		8FCAD4A72112D76F006908FE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8FCAD4AA21134AD5006908FE /* SearchBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarCell.swift; sourceTree = "<group>"; };
 		8FCAD4AC21134AFD006908FE /* SearchBarSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarSectionController.swift; sourceTree = "<group>"; };
@@ -367,12 +371,14 @@
 			children = (
 				8F6904C221084F6F000B1AB7 /* TimelineViewController.swift */,
 				8FCAD4A72112D76F006908FE /* SearchViewController.swift */,
-				8FCAD4962111EA29006908FE /* NewsViewController.swift */,
-				8FCAD4A521129D76006908FE /* FeedLikedViewController.swift */,
+				8F0BC7422119EC2300F75301 /* LikedViewController.swift */,
+				8F0BC7442119EC3A00F75301 /* SavedViewController.swift */,
 				8F59F798210EAA14000A7833 /* UserInfoViewController.swift */,
 				8F4B67AD211188240077068E /* MediaViewController.swift */,
 				8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */,
 				8F60943E21013B6200C360F8 /* LoginViewController.swift */,
+				8FCAD4962111EA29006908FE /* NewsViewController.swift */,
+				8FCAD4A521129D76006908FE /* LikedAndSavedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -670,13 +676,14 @@
 				8F2C3C0320FFAC0600C6CC46 /* MediaImageViewModel.swift in Sources */,
 				8F59F79D210F3DB6000A7833 /* UserInfoHeaderSectionController.swift in Sources */,
 				8FCAD4AF211350D6006908FE /* SearchUserResponse.swift in Sources */,
+				8F0BC7452119EC3A00F75301 /* SavedViewController.swift in Sources */,
 				8F2C3BF720FF7EAC00C6CC46 /* MediaModel.swift in Sources */,
 				8F0A19E720F4CF3300872C1B /* AppDelegate.swift in Sources */,
 				8F2C3BF920FF808200C6CC46 /* MediaCommentViewModel.swift in Sources */,
 				8F59F797210EA352000A7833 /* UserInfoResponse.swift in Sources */,
 				8FCAD4B92113F7EC006908FE /* FixedRefreshControl.swift in Sources */,
 				8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */,
-				8FCAD4A621129D76006908FE /* FeedLikedViewController.swift in Sources */,
+				8FCAD4A621129D76006908FE /* LikedAndSavedViewController.swift in Sources */,
 				8FCAD4C521176D5D006908FE /* MediaCarouselViewModel.swift in Sources */,
 				8F2C3C0520FFAC4000C6CC46 /* MediaActionViewModel.swift in Sources */,
 				8FCAD4972111EA29006908FE /* NewsViewController.swift in Sources */,
@@ -687,6 +694,7 @@
 				8F6094552102FCE900C360F8 /* MediaCaptionViewModel.swift in Sources */,
 				8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */,
 				8F22519720F742DF00B39F6D /* hmac.swift in Sources */,
+				8F0BC7432119EC2300F75301 /* LikedViewController.swift in Sources */,
 				8F4B67B021118CF00077068E /* MediaResponse.swift in Sources */,
 				8FCAD4B221135ADE006908FE /* SearchUserModel.swift in Sources */,
 				8FCAD4A82112D76F006908FE /* SearchViewController.swift in Sources */,

@@ -34,6 +34,17 @@ class FeedItemsTimeline: Mappable {
     }
 }
 
+class Carousel_media: Mappable {
+    var image_versions2: [ImageTimeline]?
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        image_versions2 <- map["image_versions2.candidates"]
+        
+    }
+}
+
 class Media_or_ad: Mappable {
     var image_versions2: [ImageTimeline]?
     var like_count: Int?
@@ -46,16 +57,17 @@ class Media_or_ad: Mappable {
     var caption: Caption?
     var id: String?
     var comment_count: Int?
+    var carousel_media: [Carousel_media]?
+    var video_versions: [ImageTimeline]?
     
     required init?(map: Map) {
-        if map.JSON["image_versions2"] != nil {
+        if map.JSON["video_versions"] != nil {
+            type = 3
+        } else if map.JSON["image_versions2"] != nil {
             type = 1
-        }
-        
-        if map.JSON["carousel_media"] != nil {
+        } else if map.JSON["carousel_media"] != nil {
             type = 2
         }
-        
         if map.JSON["ad_header_style"] != nil {
             return nil
         }
@@ -73,8 +85,21 @@ class Media_or_ad: Mappable {
             caption <- map["caption"]
             id <- map["id"]
             comment_count <- map["comment_count"]
-        } else {
+        } else if type == 2 {
             image_versions2 <- map["carousel_media.0.image_versions2.candidates"]
+            carousel_media <- map["carousel_media"]
+            like_count <- map["like_count"]
+            user <- map["user"]
+            has_liked <- map["has_liked"]
+            location <- map["location"]
+            taken_at <- map["taken_at"]
+            preview_comments <- map["preview_comments"]
+            caption <- map["caption"]
+            id <- map["id"]
+            comment_count <- map["comment_count"]
+        } else {
+            image_versions2 <- map["image_versions2.candidates"]
+            video_versions <- map["video_versions"]
             like_count <- map["like_count"]
             user <- map["user"]
             has_liked <- map["has_liked"]

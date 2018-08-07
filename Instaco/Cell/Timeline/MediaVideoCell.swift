@@ -17,7 +17,7 @@ final class VideoCell: UICollectionViewCell, ListBindable {
         super.init(frame: frame)
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         player.view.backgroundColor = .clear
-        print(contentView.bounds)
+//        print(contentView.bounds)
         player.view.frame = contentView.bounds
         contentView.addSubview(self.player.view)
         player.playbackLoops = true

@@ -6,14 +6,6 @@
 //  Copyright © 2018 Heng Lin. All rights reserved.
 //
 
-//
-//  LikedAndSavedViewController.swift
-//  Instaco
-//
-//  Created by Henry Lin on 8/1/18.
-//  Copyright © 2018 Heng Lin. All rights reserved.
-//
-
 import UIKit
 import IGListKit
 import SwiftyJSON
@@ -69,7 +61,7 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     
     func savedMediaJSON2Object() {
         insta.getFeedSaved(success: { (JSONResponse) -> Void in
-            //            print(JSONResponse)
+//                        print(JSONResponse)
             self.savedSetup(JSONResponse: JSONResponse)
         }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
@@ -120,10 +112,10 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     
     func savedSetup(JSONResponse: JSON) {
         let mediaResponse = Mapper<SavedResponse>().map(JSONString: JSONResponse.rawString()!)
-        //            if mediaResponse?.next_max_id != nil {
-        //                self.next_max_id_saved_previous = self.next_max_id_saved
-        //                self.next_max_id_saved = String((mediaResponse?.next_max_id)!)
-        //            }
+        if mediaResponse?.next_max_id != nil {
+            self.next_max_id_saved_previous = self.next_max_id_saved
+            self.next_max_id_saved = String((mediaResponse?.next_max_id)!)
+        }
         if mediaResponse?.items != nil {
             for item in (mediaResponse?.items!)! {
                 
@@ -210,4 +202,3 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
         self.refreshControl.endRefreshing()
     }
 }
-

@@ -202,4 +202,3 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
         self.refreshControl.endRefreshing()
     }
 }
-

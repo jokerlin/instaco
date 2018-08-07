@@ -274,11 +274,20 @@ class InstagramAPI {
         }
     }
     
-    func searchUsers(q: String, rank_token: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let params: [String: Any] = ["timezone_offset": -14400,
-                                     "q": q,
-                                     "count": 30,
-                                     "rank_token": insta.uuid]
+    func searchUsers(exclude_list: JSON? = nil, q: String, rank_token: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        var params: [String: Any]
+        if exclude_list == nil {
+            params = ["timezone_offset": -14400,
+                     "q": q,
+                     "count": 30,
+                     "rank_token": insta.uuid]
+        } else {
+            params = ["exclude_list": exclude_list?.rawString() ?? "",
+                     "timezone_offset": -14400,
+                     "q": q,
+                     "count": 30,
+            "rank_token": insta.uuid]
+        }
         SendRequest(URI: "users/search/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
     }
     

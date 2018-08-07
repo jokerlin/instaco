@@ -184,17 +184,17 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         
         media_countLabel.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(follower_countLabel.snp.top).offset(-35)
-            make.left.equalTo(profileImageView.snp.right).offset(30)
+            make.left.equalTo(profileImageView.snp.right).offset(15)
         }
         
         follower_countLabel.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(profileImageView)
-            make.left.equalTo(profileImageView.snp.right).offset(30)
+            make.left.equalTo(profileImageView.snp.right).offset(15)
         }
         
         following_countLabel.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(follower_countLabel.snp.top).offset(35)
-            make.left.equalTo(profileImageView.snp.right).offset(30)
+            make.left.equalTo(profileImageView.snp.right).offset(15)
         }
         
         fixPostLabel.snp.makeConstraints { (make) -> Void in

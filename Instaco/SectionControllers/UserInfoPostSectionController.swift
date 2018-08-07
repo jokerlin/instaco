@@ -31,6 +31,11 @@ class UserInfoPostSectionController: ListSectionController {
     override func cellForItem(at index: Int) -> UICollectionViewCell {
         guard let cell = collectionContext!.dequeueReusableCell(of: UserInfoPostCell.self, for: self, at: index) as? UserInfoPostCell else { fatalError("Cell not bindable") }
         cell.imageView.sd_setImage(with: object?.items[index].imageURL)
+        if object?.items[index].type == 2 {
+            cell.carouselFlag.isHidden = false
+        } else if object?.items[index].type == 3 {
+            cell.videoFlag.isHidden = false
+        }
         return cell
     }
     

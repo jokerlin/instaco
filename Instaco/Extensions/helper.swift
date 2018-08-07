@@ -10,7 +10,7 @@ import UIKit
 
 // Get afterHeight
 func transfromHeight(originalHeight: Int, OriginalWidth: Int, afterWidth: CGFloat) -> CGFloat {
-    return afterWidth / CGFloat(OriginalWidth) * CGFloat(originalHeight)
+    return ceil(afterWidth / CGFloat(OriginalWidth) * CGFloat(originalHeight))
 }
 
 // "Time ago" function for Swift

@@ -190,6 +190,7 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     @objc private func refreshTimelineData(_ sender: Any) {
         data.removeAll()
+        next_max_id = ""
         self.timelineJSON2Object(params: insta.generatePostParamsTest())
     }
 }

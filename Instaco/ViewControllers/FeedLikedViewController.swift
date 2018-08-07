@@ -109,9 +109,13 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
     @objc private func refreshLikedData(_ sender: Any) {
         if selectedClass == "liked" {
             likedData.removeAll()
+            next_max_id_liked = ""
+            next_max_id_liked_previous = ""
             likedMediaJSON2Object()
         } else {
             savedData.removeAll()
+            next_max_id_saved = ""
+            next_max_id_saved_previous = ""
             savedMediaJSON2Object()
         }
         

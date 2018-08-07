@@ -206,6 +206,8 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     @objc private func refreshUserInfoData(_ sender: Any) {
         data.removeAll()
         postData.removeAll()
+        postDataId.removeAll()
+        self.next_max_id = ""
         getFriendship()
     }
     

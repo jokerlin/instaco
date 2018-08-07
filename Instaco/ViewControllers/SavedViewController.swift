@@ -123,7 +123,7 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                 var location = ""
                 var caption_username = ""
                 var caption_text = ""
-                
+                var has_viewer_saved = false
                 if item.media?.location != nil {
                     location = (item.media?.location?.name)!
                 }
@@ -131,6 +131,10 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                 if item.media?.caption != nil {
                     caption_username = (item.media?.caption?.user?.username)!
                     caption_text = (item.media?.caption?.text)!
+                }
+                
+                if item.media?.has_viewer_saved != nil {
+                    has_viewer_saved = (item.media?.has_viewer_saved!)!
                 }
                 
                 if item.media?.type == 3 {
@@ -152,7 +156,8 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         type: 3,
                         videoURL: URL(string: (item.media?.video_versions![0].url!)!),
                         videoHeight: item.media?.video_versions![0].height,
-                        videoWidth: item.media?.video_versions![0].width)
+                        videoWidth: item.media?.video_versions![0].width,
+                        beSaved: has_viewer_saved)
                     self.savedData.append(mediainfo)
                     
                 } else if item.media?.type == 2 {
@@ -177,7 +182,8 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         userid: (item.media?.user?.pk)!,
                         comment_count: (item.media?.comment_count!)!,
                         type: 2,
-                        carousel: urls)
+                        carousel: urls,
+                        beSaved: has_viewer_saved)
                     self.savedData.append(mediainfo)
                 } else {
                     let mediainfo = MediaInfo(
@@ -193,7 +199,8 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         caption: CaptionViewModel(username: caption_username, text: caption_text),
                         id: (item.media?.id!)!,
                         userid: (item.media?.user?.pk)!,
-                        comment_count: (item.media?.comment_count!)!)
+                        comment_count: (item.media?.comment_count!)!,
+                        beSaved: has_viewer_saved)
                     self.savedData.append(mediainfo)
                 }
             }

@@ -189,6 +189,34 @@ class InstagramAPI {
         }
     }
     
+    func saveOp(type: Bool, media_id: String) {
+        let data = ["module_name": "photo_view_other",
+                    "_csrftoken": self.csrftoken,
+                    "radio_type": "wifi-none",
+                    "_uid": self.username_id,
+                    "_uuid": self.uuid]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        let sign_body = generateSignature(data: jsonString)
+        
+        if type {
+            SendRequestViaHttpBody(URI: "media/" + media_id + "/save/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body,
+                                   success: { (JSONResponse) -> Void in
+                                    print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)})
+        } else {
+            SendRequestViaHttpBody(URI: "media/" + media_id + "/unsave/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: {(JSONResponse) -> Void in
+                print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)
+            })
+        }
+    }
+    
     func login(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         // Get Request for csrftoken

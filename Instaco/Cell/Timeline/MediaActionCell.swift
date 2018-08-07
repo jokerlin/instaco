@@ -11,6 +11,7 @@ import IGListKit
 
 protocol ActionCellDelegate: class {
     func didTapHeart(cell: ActionCell)
+    func didTapRibbon(cell: ActionCell)
 }
 
 final class ActionCell: UICollectionViewCell, ListBindable {
@@ -53,10 +54,11 @@ final class ActionCell: UICollectionViewCell, ListBindable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        likeButton.addTarget(self, action: #selector(ActionCell.onHeart), for: .touchUpInside)
         contentView.addSubview(likeButton)
         contentView.addSubview(commentButton)
+        ribbonButton.addTarget(self, action: #selector(ActionCell.onRibbon), for: .touchUpInside)
         contentView.addSubview(ribbonButton)
-        likeButton.addTarget(self, action: #selector(ActionCell.onHeart), for: .touchUpInside)
         contentView.addSubview(likesLabel)
     }
     
@@ -91,6 +93,10 @@ final class ActionCell: UICollectionViewCell, ListBindable {
 
     @objc func onHeart() {
         delegate?.didTapHeart(cell: self)
+    }
+    
+    @objc func onRibbon() {
+        delegate?.didTapRibbon(cell: self)
     }
     
     func bindViewModel(_ viewModel: Any) {

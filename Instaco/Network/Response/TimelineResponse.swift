@@ -59,6 +59,7 @@ class Media_or_ad: Mappable {
     var comment_count: Int?
     var carousel_media: [Carousel_media]?
     var video_versions: [ImageTimeline]?
+    var has_viewer_saved: Bool?
     
     required init?(map: Map) {
         if map.JSON["video_versions"] != nil {
@@ -85,6 +86,7 @@ class Media_or_ad: Mappable {
             caption <- map["caption"]
             id <- map["id"]
             comment_count <- map["comment_count"]
+            has_viewer_saved <- map["has_viewer_saved"]
         } else if type == 2 {
             image_versions2 <- map["carousel_media.0.image_versions2.candidates"]
             carousel_media <- map["carousel_media"]
@@ -97,6 +99,7 @@ class Media_or_ad: Mappable {
             caption <- map["caption"]
             id <- map["id"]
             comment_count <- map["comment_count"]
+            has_viewer_saved <- map["has_viewer_saved"]
         } else {
             image_versions2 <- map["image_versions2.candidates"]
             video_versions <- map["video_versions"]
@@ -109,6 +112,7 @@ class Media_or_ad: Mappable {
             caption <- map["caption"]
             id <- map["id"]
             comment_count <- map["comment_count"]
+            has_viewer_saved <- map["has_viewer_saved"]
         }
     }
 }

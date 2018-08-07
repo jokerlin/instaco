@@ -397,13 +397,13 @@
 		8FCAD49A2111F4DC006908FE /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				8FCAD4982111F4D5006908FE /* NewsResponse.swift */,
 				8F37FC7A20F9C2A30035E303 /* TimelineResponse.swift */,
 				8F59F796210EA352000A7833 /* UserInfoResponse.swift */,
 				8F4B67AF21118CF00077068E /* MediaResponse.swift */,
 				8FCAD4AE211350D6006908FE /* SearchUserResponse.swift */,
 				8FCAD4BC21156EB1006908FE /* SavedResponse.swift */,
 				8FCAD4C021171CF9006908FE /* FriendshipResponse.swift */,
+				8FCAD4982111F4D5006908FE /* NewsResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";

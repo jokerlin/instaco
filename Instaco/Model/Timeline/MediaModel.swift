@@ -26,8 +26,10 @@ final class MediaInfo: ListDiffable {
     let carousel: [String]?
     let type: Int?
     let videoURL: URL?
+    let videoHeight: Int?
+    let videoWidth: Int?
     
-    init(username: String, userProfileImage: URL, location: String, timestamp: Int, imageURL: URL, imageHeight: Int, imageWidth: Int, likes: Int, beliked: Bool, caption: CaptionViewModel, id: String, userid: Int, comment_count: Int, type: Int? = 1, carousel: [String]? = nil, videoURL: URL? = nil) {
+    init(username: String, userProfileImage: URL, location: String, timestamp: Int, imageURL: URL, imageHeight: Int, imageWidth: Int, likes: Int, beliked: Bool, caption: CaptionViewModel, id: String, userid: Int, comment_count: Int, type: Int? = 1, carousel: [String]? = nil, videoURL: URL? = nil, videoHeight: Int? = nil, videoWidth: Int? = nil) {
         self.username = username
         self.userProfileImage = userProfileImage
         self.location = location
@@ -44,6 +46,8 @@ final class MediaInfo: ListDiffable {
         self.type = type
         self.carousel = carousel
         self.videoURL = videoURL
+        self.videoHeight = videoHeight
+        self.videoWidth = videoWidth
     }
     
     // MARK: ListDiffable

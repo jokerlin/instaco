@@ -110,7 +110,9 @@ class MediaViewController: UIViewController, ListAdapterDataSource, UIScrollView
                             userid: (item.user?.pk)!,
                             comment_count: item.comment_count!,
                             type: 3,
-                            videoURL: URL(string: item.video_versions![0].url!))
+                            videoURL: URL(string: item.video_versions![0].url!),
+                            videoHeight: item.video_versions![0].height,
+                            videoWidth: item.video_versions![0].width)
                         self.data.append(mediainfo)
                         
                     } else if item.type == 2 {

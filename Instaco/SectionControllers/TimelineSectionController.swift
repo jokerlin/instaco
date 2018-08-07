@@ -11,7 +11,7 @@ import IGListKit
 import SnapKit
 import Player
 
-final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, CaptionCellDelegate {
+final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, CaptionCellDelegate, ListDisplayDelegate {
 
     var localLikes: Int?
     var likedFlagChange: Bool = false
@@ -29,6 +29,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     override init() {
         super.init()
         dataSource = self
+        displayDelegate = self
     }
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, viewModelsFor object: Any) -> [ListDiffable] {
@@ -83,8 +84,8 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             cell.pageControl.numberOfPages = (mediaInfo?.carousel?.count)!
         }
         if let cell = cell as? VideoCell {
+            cell.player.view.frame = cell.bounds
             cell.player.url = mediaInfo?.videoURL
-            cell.player.playFromBeginning()
         }
         if let cell = cell as? CaptionCell {
             cell.delegate = self
@@ -110,7 +111,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         case is UserViewModel: height = 52
         case is ImageViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is MediaCarouselViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
-        case is VideoViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
+        case is VideoViewModel: height = transfromHeight(originalHeight: (mediaInfo?.videoHeight)!, OriginalWidth: (mediaInfo?.videoWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is ActionViewModel: height = 40
         case is CaptionViewModel:
             height = CaptionCell.textHeight(mediaInfo?.caption.text ?? "", width: width)
@@ -177,7 +178,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
     
-    // MARK: Carousel
+    // MARK: ListAdapterDataSource of CarouselCell
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         return carousel_urls as [ListDiffable]
@@ -190,5 +191,25 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
         return nil
     }
-
+    
+    // MARK: DisplayDelegate
+    
+    func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController) {
+    }
+    
+    func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController) {
+    }
+    
+    func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
+        if let cell = cell as? VideoCell {
+            cell.player.muted = true
+            cell.player.playFromBeginning()
+        }
+    }
+    
+    func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
+        if let cell = cell as? VideoCell {
+            cell.player.stop()
+        }
+    }
 }

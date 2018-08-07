@@ -203,7 +203,9 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
                         userid: (item.user?.pk)!,
                         comment_count: item.comment_count!,
                         type: 3,
-                        videoURL: URL(string: item.video_versions![0].url!))
+                        videoURL: URL(string: item.video_versions![0].url!),
+                        videoHeight: item.video_versions![0].height,
+                        videoWidth: item.video_versions![0].width)
                     self.likedData.append(mediainfo)
                     
                 } else if item.type == 2 {
@@ -294,7 +296,9 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
                         userid: (item.media?.user?.pk)!,
                         comment_count: (item.media?.comment_count!)!,
                         type: 3,
-                        videoURL: URL(string: (item.media?.video_versions![0].url!)!))
+                        videoURL: URL(string: (item.media?.video_versions![0].url!)!),
+                        videoHeight: item.media?.video_versions![0].height,
+                        videoWidth: item.media?.video_versions![0].width)
                     self.savedData.append(mediainfo)
                     
                 } else if item.media?.type == 2 {

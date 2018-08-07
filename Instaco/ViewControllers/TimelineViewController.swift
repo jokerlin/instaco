@@ -11,7 +11,7 @@ import IGListKit
 import SwiftyJSON
 import ObjectMapper
 
-class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
+class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate, UICollectionViewDelegate {
     
     var data = [ListDiffable]()
     var next_max_id = ""
@@ -128,7 +128,9 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
                                 userid: (item.user?.pk)!,
                                 comment_count: item.comment_count!,
                                 type: 3,
-                                videoURL: URL(string: item.video_versions![0].url!))
+                                videoURL: URL(string: item.video_versions![0].url!),
+                                videoHeight: item.video_versions![0].height,
+                                videoWidth: item.video_versions![0].width)
                             self.data.append(mediainfo)
                         }
                         

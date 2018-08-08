@@ -79,6 +79,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
             }
             self.adapter.performUpdates(animated: true)
         }, failure: {(JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }
@@ -116,6 +117,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
             }
             self.adapter.performUpdates(animated: true)
         }, failure: { (JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }

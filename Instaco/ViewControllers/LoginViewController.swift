@@ -8,6 +8,7 @@
 
 import UIKit
 import KeychainAccess
+import SwiftyJSON
 
 class LoginController: UIViewController {
     
@@ -84,13 +85,14 @@ class LoginController: UIViewController {
                 
                 // Store in Keychain
                 let keychain = Keychain(service: "com.instacoapp")
+                try! keychain.removeAll()
                 keychain[username] = password
                 
                 // set insta object
                 insta.LastJson = JSONResponse
                 insta.isLoggedIn = true
                 insta.username_id = insta.LastJson["logged_in_user"]["pk"].stringValue
-                
+                insta.error = ""
                 guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
                 
                 mainTabBarController.setupViewControllers()
@@ -99,6 +101,14 @@ class LoginController: UIViewController {
                 },
             failure: { _ in
                 print("Login Failed")
+                var title = "Oops, an error occurred."
+                var json = JSON.init(parseJSON: insta.error)
+                title = json["message"].string ?? title
+                let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+                self.present(alertController, animated: true, completion: nil)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                    self.presentedViewController?.dismiss(animated: false, completion: nil)
+                }
         })
     }
     
@@ -147,6 +157,8 @@ class LoginController: UIViewController {
     }()
     
     @objc func handleShowSignup() {
+        let keychain = Keychain(service: "com.instacoapp")
+        try! keychain.removeAll()
         if let link = URL(string: "https://www.instagram.com/accounts/emailsignup/?hl=en") {
             UIApplication.shared.open(link)
         }

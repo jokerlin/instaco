@@ -65,6 +65,7 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
 //                        print(JSONResponse)
             self.savedSetup(JSONResponse: JSONResponse)
         }, failure: { (JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }

@@ -35,6 +35,7 @@ class InstagramAPI {
     var device_id: String
     var csrftoken: String
     var username_id: String
+    var error: String
     
     var LastJson: JSON
     var baseNetworkService: BaseNetworkService
@@ -53,6 +54,7 @@ class InstagramAPI {
         self.username = ""
         self.password = ""
         self.LastJson = JSON()
+        self.error = ""
     }
     
     func set_auth(username: String, password: String) {
@@ -372,7 +374,13 @@ class InstagramAPI {
                 success(resJson)
             }
             if responseObject.result.isFailure {
-                print(responseObject.request.debugDescription)
+                if let data = responseObject.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print(utf8Text)
+                    self.error = utf8Text
+                    if utf8Text.contains("login_required") {
+                        
+                    }
+                }
                 let error: Error = responseObject.result.error!
                 failure(error)
                 
@@ -391,7 +399,13 @@ class InstagramAPI {
                 success(resJson)
             }
             if responseObject.result.isFailure {
-                print(responseObject.request.debugDescription)
+                if let data = responseObject.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print(utf8Text)
+                    self.error = utf8Text
+                    if utf8Text.contains("login_required") {
+                        
+                    }
+                }
                 let error: Error = responseObject.result.error!
                 failure(error)
             }

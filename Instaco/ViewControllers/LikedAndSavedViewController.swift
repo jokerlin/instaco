@@ -75,6 +75,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
 //            print(JSONResponse)
             self.likedSetup(JSONResponse: JSONResponse)
         }, failure: { (JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }
@@ -93,6 +94,7 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
 //            print(JSONResponse)
             self.savedSetup(JSONResponse: JSONResponse)
         }, failure: { (JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }

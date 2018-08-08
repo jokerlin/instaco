@@ -52,15 +52,17 @@ final class CarouselSectionController: ListSectionController, ImageCellDelegate 
         if error == nil {
             print("Save Successfully")
             let alertController = UIAlertController(title: "Successfully saved", message: nil, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
             viewController?.present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.viewController?.dismiss(animated: false, completion: nil)
+            }
         } else {
             print("Save Fail")
             let alertController = UIAlertController(title: "Failed to save", message: "Please enable camera roll access in Settings", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
             viewController?.present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.viewController?.dismiss(animated: false, completion: nil)
+            }
         }
     }
 

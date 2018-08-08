@@ -79,6 +79,7 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
             self.adapter.performUpdates(animated: true)
             self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }
@@ -109,6 +110,7 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
             self.refreshControl.endRefreshing()
             
         }, failure: { (JSONResponse) in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }

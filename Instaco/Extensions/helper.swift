@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 // Get afterHeight
 func transfromHeight(originalHeight: Int, OriginalWidth: Int, afterWidth: CGFloat) -> CGFloat {
@@ -152,5 +153,24 @@ extension Double {
         }
         
         return String(format: "%.0f", locale: Locale.current, self)
+    }
+}
+
+// Login Require
+func ifLoginRequire(viewController: UIViewController) {
+    print(insta.error)
+    var json = JSON.init(parseJSON: insta.error)
+    if json["message"].string == "login_required"{
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Login Required", message: nil, preferredStyle: .alert)
+            viewController.present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                viewController.presentedViewController?.dismiss(animated: false, completion: nil)
+                let loginController = LoginController()
+                let navController = UINavigationController(rootViewController: loginController)
+                viewController.present(navController, animated: true, completion: nil)
+            }
+        }
+        return
     }
 }

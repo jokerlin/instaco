@@ -9,6 +9,7 @@
 import UIKit
 import KeychainAccess
 import IGListKit
+import SwiftyJSON
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
@@ -17,9 +18,9 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         
         let keychain = Keychain(service: "com.instacoapp")
-        
+
 //        try! keychain.removeAll()
-        
+    
         if keychain.allKeys() == [] {
             DispatchQueue.main.async {
                 let loginController = LoginController()
@@ -37,11 +38,25 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
                     insta.LastJson = JSONResponse
                     insta.isLoggedIn = true
                     insta.username_id = insta.LastJson["logged_in_user"]["pk"].stringValue
-
+                    insta.error = ""
                     self.setupViewControllers()
                     },
                 failure: { _ in
                     print("Login Failed")
+                    var title = "Oops, an error occurred."
+                    var json = JSON.init(parseJSON: insta.error)
+                    title = json["message"].string ?? title
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+                        self.present(alertController, animated: true, completion: nil)
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                            self.presentedViewController?.dismiss(animated: false, completion: nil)
+                            let loginController = LoginController()
+                            let navController = UINavigationController(rootViewController: loginController)
+                            self.present(navController, animated: true, completion: nil)
+                        }
+                    }
+                    return
             })
         }
     }

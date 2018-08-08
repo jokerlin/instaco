@@ -170,6 +170,7 @@ class MediaViewController: UIViewController, ListAdapterDataSource, UIScrollView
             self.adapter.performUpdates(animated: true)
             self.refreshControl.endRefreshing()
         }, failure: { (JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }

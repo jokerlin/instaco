@@ -21,7 +21,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
 //        try! keychain.removeAll()
     
-        if keychain.allKeys() == [] {
+        if keychain.allKeys() == []  ||  keychain["username"] == nil || keychain["password"] == nil || keychain["csrftoken"] == nil || keychain["device_id"] == nil || keychain["uuid"] == nil {
             DispatchQueue.main.async {
                 let loginController = LoginController()
                 let navController = UINavigationController(rootViewController: loginController)

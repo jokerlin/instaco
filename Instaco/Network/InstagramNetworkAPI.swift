@@ -302,7 +302,7 @@ class InstagramAPI {
         }
     }
     
-    func searchUsers(exclude_list: JSON? = nil, q: String, rank_token: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+    func searchUsers(exclude_list: JSON? = nil, q: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         var params: [String: Any]
         if exclude_list == nil {
             params = ["timezone_offset": -14400,
@@ -322,6 +322,32 @@ class InstagramAPI {
     func searchSuggested(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         let params: [String: Any] = ["type": "blended", "rank_token": insta.uuid]
         SendRequest(URI: "fbsearch/suggested_searches/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func getUserFriendshipFollowing(user_id: Int, next_max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        var params: [String: Any] = ["rank_token": insta.uuid]
+        if next_max_id != "" {
+            params = ["rank_token": insta.uuid, "max_id": next_max_id!]
+        }
+        SendRequest(URI: "friendships/" + String(user_id) + "/following/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func getUserFriendshipFollower(user_id: Int, next_max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        var params: [String: Any] = ["rank_token": insta.uuid]
+        if next_max_id != "" {
+            params = ["rank_token": insta.uuid, "max_id": next_max_id!]
+        }
+        SendRequest(URI: "friendships/" + String(user_id) + "/followers/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func searchUserFriendshipFollowing(query: String, user_id: Int, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let params: [String: Any] = ["rank_token": insta.uuid, "query": query]
+        SendRequest(URI: "friendships/" + String(user_id) + "/following/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func searchUserFriendshipFollower(query: String, user_id: Int, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let params: [String: Any] = ["rank_token": insta.uuid, "query": query]
+        SendRequest(URI: "friendships/" + String(user_id) + "/followers/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
     }
     
     func getFeedSaved(max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
@@ -371,5 +397,4 @@ class InstagramAPI {
             }
         }
     }
-    
 }

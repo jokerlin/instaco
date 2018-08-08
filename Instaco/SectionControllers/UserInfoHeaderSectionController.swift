@@ -63,4 +63,14 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
         }
         update(animated: true)
     }
+    
+    func didTapFollowerCount(cell: UserInfoHeaderCell) {
+        let friendshipViewController = FriendshipViewController(username_id: (userInfo?.pk)!, type: "Follower")
+        viewController?.navigationController?.pushViewController(friendshipViewController, animated: true)
+    }
+    
+    func didTapFollowingCount(cell: UserInfoHeaderCell) {
+        let friendshipViewController = FriendshipViewController(username_id: (userInfo?.pk)!, type: "Following")
+        viewController?.navigationController?.pushViewController(friendshipViewController, animated: true)
+    }
 }

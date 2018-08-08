@@ -72,7 +72,7 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
         // for future features
         captionLabel.handleMentionTap { mentiontag in
             print("Success. You just tapped the \(mentiontag) hashtag")
-            insta.searchUsers(q: mentiontag, rank_token: insta.uuid, success: { (JSONResponse) in
+            insta.searchUsers(q: mentiontag, success: { (JSONResponse) in
 //                print(JSONResponse)
                 let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
                 if searchUserResponse?.users != nil {

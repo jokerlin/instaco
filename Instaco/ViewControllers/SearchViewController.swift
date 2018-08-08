@@ -67,7 +67,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     }
     
     func searchUsers(quest: String) {
-        insta.searchUsers(q: quest, rank_token: insta.uuid, success: { (JSONResponse) -> Void in
+        insta.searchUsers(q: quest, success: { (JSONResponse) -> Void in
 //            print(JSONResponse)
             let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
             if searchUserResponse?.users != nil {
@@ -86,7 +86,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     func searchSuggestPagination(q: String) {
         let exlist = ("users", searched as Any)
         let json = JSON(dictionaryLiteral: exlist)
-        insta.searchUsers(exclude_list: json, q: q, rank_token: insta.uuid, success: { (JSONResponse) in
+        insta.searchUsers(exclude_list: json, q: q, success: { (JSONResponse) in
             //            print(JSONResponse)
             let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
             if searchUserResponse?.users != nil {

@@ -11,6 +11,8 @@ import SnapKit
 
 protocol UserInfoHeaderCellDelegate: class {
     func didTapFollow(cell: UserInfoHeaderCell)
+    func didTapFollowerCount(cell: UserInfoHeaderCell)
+    func didTapFollowingCount(cell: UserInfoHeaderCell)
 }
 
 final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
@@ -67,6 +69,7 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         label.textColor = UIColor.darkText
         label.textAlignment = .left
         label.numberOfLines = 0
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -77,6 +80,7 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         label.textColor = UIColor.darkText
         label.textAlignment = .left
         label.numberOfLines = 0
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -137,11 +141,15 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         contentView.addSubview(profileImageView)
         contentView.addSubview(fullNameLabel)
         contentView.addSubview(biographyLabel)
-        contentView.addSubview(external_urlLabel)
         let tapURL = UITapGestureRecognizer(target: self, action: #selector(tapExternalURL))
         external_urlLabel.addGestureRecognizer(tapURL)
+        contentView.addSubview(external_urlLabel)
         contentView.addSubview(media_countLabel)
+        let tapFollower = UITapGestureRecognizer(target: self, action: #selector(self.tapFollowerCount))
+        follower_countLabel.addGestureRecognizer(tapFollower)
         contentView.addSubview(follower_countLabel)
+        let tapFollowing = UITapGestureRecognizer(target: self, action: #selector(self.tapFollowingCount))
+        following_countLabel.addGestureRecognizer(tapFollowing)
         contentView.addSubview(following_countLabel)
         followButton.addTarget(self, action: #selector(UserInfoHeaderCell.onFollow), for: .touchUpInside)
         contentView.addSubview(followButton)
@@ -220,6 +228,17 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         }
     }
     
+    func responderViewController() -> UIViewController? {
+        for view in sequence(first: self.superview, next: {$0?.superview}) {
+            if let responder = view?.next {
+                if responder.isKind(of: UIViewController.self) {
+                    return responder as? UIViewController
+                }
+            }
+        }
+        return nil
+    }
+    
     @objc func onFollow() {
         delegate?.didTapFollow(cell: self)
     }
@@ -228,6 +247,14 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         if let link = URL(string: externalURL) {
             UIApplication.shared.open(link)
         }
+    }
+    
+    @objc func tapFollowerCount() {
+        delegate?.didTapFollowerCount(cell: self)
+    }
+    
+    @objc func tapFollowingCount() {
+        delegate?.didTapFollowingCount(cell: self)
     }
     
     fileprivate static let insets = UIEdgeInsets(top: 8, left: 11, bottom: 8, right: 11)

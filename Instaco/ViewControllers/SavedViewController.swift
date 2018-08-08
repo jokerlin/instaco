@@ -6,14 +6,6 @@
 //  Copyright © 2018 Heng Lin. All rights reserved.
 //
 
-//
-//  LikedAndSavedViewController.swift
-//  Instaco
-//
-//  Created by Henry Lin on 8/1/18.
-//  Copyright © 2018 Heng Lin. All rights reserved.
-//
-
 import UIKit
 import IGListKit
 import SwiftyJSON
@@ -34,6 +26,7 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Saved"
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         collectionView.refreshControl = refreshControl
@@ -69,7 +62,7 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     
     func savedMediaJSON2Object() {
         insta.getFeedSaved(success: { (JSONResponse) -> Void in
-            //            print(JSONResponse)
+//                        print(JSONResponse)
             self.savedSetup(JSONResponse: JSONResponse)
         }, failure: { (JSONResponse) -> Void in
             print(JSONResponse)
@@ -120,17 +113,17 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     
     func savedSetup(JSONResponse: JSON) {
         let mediaResponse = Mapper<SavedResponse>().map(JSONString: JSONResponse.rawString()!)
-        //            if mediaResponse?.next_max_id != nil {
-        //                self.next_max_id_saved_previous = self.next_max_id_saved
-        //                self.next_max_id_saved = String((mediaResponse?.next_max_id)!)
-        //            }
+        if mediaResponse?.next_max_id != nil {
+            self.next_max_id_saved_previous = self.next_max_id_saved
+            self.next_max_id_saved = String((mediaResponse?.next_max_id)!)
+        }
         if mediaResponse?.items != nil {
             for item in (mediaResponse?.items!)! {
                 
                 var location = ""
                 var caption_username = ""
                 var caption_text = ""
-                
+                var has_viewer_saved = false
                 if item.media?.location != nil {
                     location = (item.media?.location?.name)!
                 }
@@ -138,6 +131,10 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                 if item.media?.caption != nil {
                     caption_username = (item.media?.caption?.user?.username)!
                     caption_text = (item.media?.caption?.text)!
+                }
+                
+                if item.media?.has_viewer_saved != nil {
+                    has_viewer_saved = (item.media?.has_viewer_saved!)!
                 }
                 
                 if item.media?.type == 3 {
@@ -159,7 +156,8 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         type: 3,
                         videoURL: URL(string: (item.media?.video_versions![0].url!)!),
                         videoHeight: item.media?.video_versions![0].height,
-                        videoWidth: item.media?.video_versions![0].width)
+                        videoWidth: item.media?.video_versions![0].width,
+                        beSaved: has_viewer_saved)
                     self.savedData.append(mediainfo)
                     
                 } else if item.media?.type == 2 {
@@ -184,7 +182,8 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         userid: (item.media?.user?.pk)!,
                         comment_count: (item.media?.comment_count!)!,
                         type: 2,
-                        carousel: urls)
+                        carousel: urls,
+                        beSaved: has_viewer_saved)
                     self.savedData.append(mediainfo)
                 } else {
                     let mediainfo = MediaInfo(
@@ -200,7 +199,8 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         caption: CaptionViewModel(username: caption_username, text: caption_text),
                         id: (item.media?.id!)!,
                         userid: (item.media?.user?.pk)!,
-                        comment_count: (item.media?.comment_count!)!)
+                        comment_count: (item.media?.comment_count!)!,
+                        beSaved: has_viewer_saved)
                     self.savedData.append(mediainfo)
                 }
             }
@@ -210,4 +210,3 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
         self.refreshControl.endRefreshing()
     }
 }
-

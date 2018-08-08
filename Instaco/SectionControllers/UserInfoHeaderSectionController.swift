@@ -35,9 +35,7 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, sizeForViewModel viewModel: Any, at index: Int) -> CGSize {
         guard let width = collectionContext?.containerSize.width else { fatalError() }
-        
-        // TODO: Calculate Height
-        let height: CGFloat = 200
+        let height: CGFloat = 180 + UserInfoHeaderCell.textHeight((userInfo?.biography)!, width: width)
         return CGSize(width: width, height: height)
     }
     
@@ -45,32 +43,34 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
         if userInfo?.friendship == true {
             if followFlagChange == false {
                 followFlagChange = true
-                cell.followButton.backgroundColor = UIColor.blue
-                cell.followButton.setTitleColor(UIColor.white, for: .normal)
                 cell.followButton.setTitle("follow", for: .normal)
                 insta.FollowOp(type: false, user_id: String(userInfo!.pk))
             } else {
                 followFlagChange = false
-                cell.followButton.backgroundColor = UIColor.white
-                cell.followButton.setTitleColor(UIColor.black, for: .normal)
                 cell.followButton.setTitle("Following", for: .normal)
                 insta.FollowOp(type: true, user_id: String(userInfo!.pk))
             }
         } else {
             if followFlagChange == false {
                 followFlagChange = true
-                cell.followButton.backgroundColor = UIColor.white
-                cell.followButton.setTitleColor(UIColor.black, for: .normal)
                 cell.followButton.setTitle("Following", for: .normal)
                 insta.FollowOp(type: true, user_id: String(userInfo!.pk))
             } else {
                 followFlagChange = false
-                cell.followButton.backgroundColor = UIColor.blue
-                cell.followButton.setTitleColor(UIColor.white, for: .normal)
                 cell.followButton.setTitle("follow", for: .normal)
                 insta.FollowOp(type: false, user_id: String(userInfo!.pk))
             }
         }
         update(animated: true)
+    }
+    
+    func didTapFollowerCount(cell: UserInfoHeaderCell) {
+        let friendshipViewController = FriendshipViewController(username_id: (userInfo?.pk)!, type: "Follower")
+        viewController?.navigationController?.pushViewController(friendshipViewController, animated: true)
+    }
+    
+    func didTapFollowingCount(cell: UserInfoHeaderCell) {
+        let friendshipViewController = FriendshipViewController(username_id: (userInfo?.pk)!, type: "Following")
+        viewController?.navigationController?.pushViewController(friendshipViewController, animated: true)
     }
 }

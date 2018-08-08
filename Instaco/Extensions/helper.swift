@@ -10,7 +10,7 @@ import UIKit
 
 // Get afterHeight
 func transfromHeight(originalHeight: Int, OriginalWidth: Int, afterWidth: CGFloat) -> CGFloat {
-    return afterWidth / CGFloat(OriginalWidth) * CGFloat(originalHeight)
+    return ceil(afterWidth / CGFloat(OriginalWidth) * CGFloat(originalHeight))
 }
 
 // "Time ago" function for Swift
@@ -139,19 +139,18 @@ extension UIViewController {
     }
 }
 
-// renderImageWithColor
-extension UIImage{
-    public class func renderImageWithColor(_ color: UIColor, size: CGSize) -> UIImage {
-        UIGraphicsBeginImageContext(size)
-        guard let context = UIGraphicsGetCurrentContext() else {
-            UIGraphicsEndImageContext()
-            return UIImage()
+// friendly numbers
+extension Double {
+    var kmFormatted: String {
+        
+        if self >= 10000, self <= 999999 {
+            return String(format: "%.1fK", locale: Locale.current, self/1000).replacingOccurrences(of: ".0", with: "")
         }
-        context.setFillColor(color.cgColor);
-        context.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height));
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img ?? UIImage()
+        
+        if self > 999999 {
+            return String(format: "%.1fM", locale: Locale.current, self/1000000).replacingOccurrences(of: ".0", with: "")
+        }
+        
+        return String(format: "%.0f", locale: Locale.current, self)
     }
 }
-

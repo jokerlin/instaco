@@ -15,7 +15,7 @@ final class CommentCell: UICollectionViewCell, ListBindable {
     let commentLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = UIColor.gray
         label.textAlignment = .left
         label.sizeToFit()
@@ -36,7 +36,7 @@ final class CommentCell: UICollectionViewCell, ListBindable {
         super.layoutSubviews()
         
         commentLabel.snp.makeConstraints { (make) -> Void in
-            make.centerY.equalTo(contentView)
+            make.top.equalTo(4)
             make.left.equalTo(11)
         }
     }

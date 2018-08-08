@@ -39,7 +39,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         super.viewDidLoad()
         
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshUserInfoData(_:)), for: .valueChanged)
         
@@ -146,7 +146,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                     self.postData.removeAll()
                     for item in (userFeedResponse?.items!)! {
                         if self.postDataId.index(of: item.id!) == nil {
-                            let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!)
+                            let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!, type: item.type!)
                             self.postData.append(userFeed)
                             self.postDataId.append(item.id!)
                         }
@@ -171,7 +171,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                     self.postData.removeAll()
                     for item in (userFeedResponse?.items!)! {
                         if self.postDataId.index(of: item.id!) == nil {
-                            let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!)
+                            let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!, type: item.type!)
                             self.postData.append(userFeed)
                             self.postDataId.append(item.id!)
                         }

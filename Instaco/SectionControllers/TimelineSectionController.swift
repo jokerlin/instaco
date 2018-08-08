@@ -15,6 +15,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
 
     var localLikes: Int?
     var likedFlagChange: Bool = false
+    var savedFlagChange: Bool = false
     var mediaInfo: MediaInfo?
     var carousel_urls: [String] = []
     
@@ -98,6 +99,13 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
                 let btnImage = UIImage(named: "like_unselected")
                 cell.likeButton.setImage(btnImage, for: UIControlState.normal)
             }
+            if mediaInfo?.beSaved == true {
+                let btnImage = UIImage(named: "ibook_selected")
+                cell.ribbonButton.setImage(btnImage, for: UIControlState.normal)
+            } else {
+                let btnImage = UIImage(named: "ibook")
+                cell.ribbonButton.setImage(btnImage, for: UIControlState.normal)
+            }
             cell.delegate = self
         }
         
@@ -119,7 +127,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             if mediaInfo?.comment_count == 0 {
                 height = 0
             } else {
-                height = 20
+                height = 30
             }
             
         default: height = 0
@@ -155,6 +163,35 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
                 let btnImage = UIImage(named: "like_unselected")
                 cell.likeButton.setImage(btnImage, for: UIControlState.normal)
                 insta.likeOp(type: false, media_id: (mediaInfo?.id)!, username: (mediaInfo?.username)!, user_id: (mediaInfo?.userid)!)
+            }
+        }
+        update(animated: true)
+    }
+    
+    func didTapRibbon(cell: ActionCell) {
+        if mediaInfo?.beSaved == true {
+            if savedFlagChange == false {
+                savedFlagChange = true
+                let btnImage = UIImage(named: "ibook")
+                cell.ribbonButton.setImage(btnImage, for: UIControlState.normal)
+                insta.saveOp(type: false, media_id: (mediaInfo?.id)!)
+            } else {
+                savedFlagChange = false
+                let btnImage = UIImage(named: "ibook_selected")
+                cell.ribbonButton.setImage(btnImage, for: UIControlState.normal)
+                insta.saveOp(type: true, media_id: (mediaInfo?.id)!)
+            }
+        } else {
+            if savedFlagChange == false {
+                savedFlagChange = true
+                let btnImage = UIImage(named: "ibook_selected")
+                cell.ribbonButton.setImage(btnImage, for: UIControlState.normal)
+                insta.saveOp(type: true, media_id: (mediaInfo?.id)!)
+            } else {
+                savedFlagChange = false
+                let btnImage = UIImage(named: "ibook")
+                cell.ribbonButton.setImage(btnImage, for: UIControlState.normal)
+                insta.saveOp(type: false, media_id: (mediaInfo?.id)!)   
             }
         }
         update(animated: true)

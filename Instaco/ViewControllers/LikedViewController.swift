@@ -27,6 +27,7 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
         super.viewDidLoad()
         
         navigationItem.title = "Likes"
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         
         collectionView.refreshControl = refreshControl
@@ -121,7 +122,7 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                 var location = ""
                 var caption_username = ""
                 var caption_text = ""
-                
+                var has_viewer_saved = false
                 if item.location != nil {
                     location = (item.location?.name)!
                 }
@@ -130,7 +131,9 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                     caption_username = (item.caption?.user?.username)!
                     caption_text = (item.caption?.text)!
                 }
-                
+                if item.has_viewer_saved != nil {
+                    has_viewer_saved = item.has_viewer_saved!
+                }
                 if item.type == 3 {
                     
                     let mediainfo = MediaInfo(
@@ -150,7 +153,8 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         type: 3,
                         videoURL: URL(string: item.video_versions![0].url!),
                         videoHeight: item.video_versions![0].height,
-                        videoWidth: item.video_versions![0].width)
+                        videoWidth: item.video_versions![0].width,
+                        beSaved: has_viewer_saved)
                     self.likedData.append(mediainfo)
                     
                 } else if item.type == 2 {
@@ -175,7 +179,8 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         userid: (item.user?.pk)!,
                         comment_count: item.comment_count!,
                         type: 2,
-                        carousel: urls)
+                        carousel: urls,
+                        beSaved: has_viewer_saved)
                     self.likedData.append(mediainfo)
                 } else {
                     
@@ -192,7 +197,8 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                         caption: CaptionViewModel(username: caption_username, text: caption_text),
                         id: item.id!,
                         userid: (item.user?.pk)!,
-                        comment_count: item.comment_count!)
+                        comment_count: item.comment_count!,
+                        beSaved: has_viewer_saved)
                     self.likedData.append(mediainfo)
                 }
             }
@@ -202,4 +208,3 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
         self.refreshControl.endRefreshing()
     }
 }
-

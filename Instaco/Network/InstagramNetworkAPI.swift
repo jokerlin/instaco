@@ -189,6 +189,34 @@ class InstagramAPI {
         }
     }
     
+    func saveOp(type: Bool, media_id: String) {
+        let data = ["module_name": "photo_view_other",
+                    "_csrftoken": self.csrftoken,
+                    "radio_type": "wifi-none",
+                    "_uid": self.username_id,
+                    "_uuid": self.uuid]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        let sign_body = generateSignature(data: jsonString)
+        
+        if type {
+            SendRequestViaHttpBody(URI: "media/" + media_id + "/save/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body,
+                                   success: { (JSONResponse) -> Void in
+                                    print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)})
+        } else {
+            SendRequestViaHttpBody(URI: "media/" + media_id + "/unsave/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: {(JSONResponse) -> Void in
+                print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)
+            })
+        }
+    }
+    
     func login(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         // Get Request for csrftoken
@@ -274,17 +302,52 @@ class InstagramAPI {
         }
     }
     
-    func searchUsers(q: String, rank_token: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let params: [String: Any] = ["timezone_offset": -14400,
-                                     "q": q,
-                                     "count": 30,
-                                     "rank_token": insta.uuid]
+    func searchUsers(exclude_list: JSON? = nil, q: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        var params: [String: Any]
+        if exclude_list == nil {
+            params = ["timezone_offset": -14400,
+                     "q": q,
+                     "count": 30,
+                     "rank_token": insta.uuid]
+        } else {
+            params = ["exclude_list": exclude_list?.rawString() ?? "",
+                     "timezone_offset": -14400,
+                     "q": q,
+                     "count": 30,
+            "rank_token": insta.uuid]
+        }
         SendRequest(URI: "users/search/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
     }
     
     func searchSuggested(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         let params: [String: Any] = ["type": "blended", "rank_token": insta.uuid]
         SendRequest(URI: "fbsearch/suggested_searches/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func getUserFriendshipFollowing(user_id: Int, next_max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        var params: [String: Any] = ["rank_token": insta.uuid]
+        if next_max_id != "" {
+            params = ["rank_token": insta.uuid, "max_id": next_max_id!]
+        }
+        SendRequest(URI: "friendships/" + String(user_id) + "/following/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func getUserFriendshipFollower(user_id: Int, next_max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        var params: [String: Any] = ["rank_token": insta.uuid]
+        if next_max_id != "" {
+            params = ["rank_token": insta.uuid, "max_id": next_max_id!]
+        }
+        SendRequest(URI: "friendships/" + String(user_id) + "/followers/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func searchUserFriendshipFollowing(query: String, user_id: Int, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let params: [String: Any] = ["rank_token": insta.uuid, "query": query]
+        SendRequest(URI: "friendships/" + String(user_id) + "/following/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+    func searchUserFriendshipFollower(query: String, user_id: Int, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let params: [String: Any] = ["rank_token": insta.uuid, "query": query]
+        SendRequest(URI: "friendships/" + String(user_id) + "/followers/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
     }
     
     func getFeedSaved(max_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
@@ -304,14 +367,15 @@ class InstagramAPI {
         
         baseNetworkService.execute(request: request).responseJSON { responseObject in
             if responseObject.result.isSuccess {
+                print(responseObject.request.debugDescription)
                 let resJson = JSON(responseObject.result.value!)
                 success(resJson)
-                print(responseObject.request.debugDescription)
             }
             if responseObject.result.isFailure {
+                print(responseObject.request.debugDescription)
                 let error: Error = responseObject.result.error!
                 failure(error)
-                print(responseObject.request.debugDescription)
+                
             }
         }
     }
@@ -322,16 +386,15 @@ class InstagramAPI {
         
         baseNetworkService.execute(request: request).responseJSON { responseObject in
             if responseObject.result.isSuccess {
+                print(responseObject.request.debugDescription)
                 let resJson = JSON(responseObject.result.value!)
                 success(resJson)
-                print(responseObject.request.debugDescription)
             }
             if responseObject.result.isFailure {
+                print(responseObject.request.debugDescription)
                 let error: Error = responseObject.result.error!
                 failure(error)
-                print(responseObject.request.debugDescription)
             }
         }
     }
-    
 }

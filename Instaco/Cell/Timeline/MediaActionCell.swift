@@ -11,6 +11,7 @@ import IGListKit
 
 protocol ActionCellDelegate: class {
     func didTapHeart(cell: ActionCell)
+    func didTapRibbon(cell: ActionCell)
 }
 
 final class ActionCell: UICollectionViewCell, ListBindable {
@@ -33,6 +34,14 @@ final class ActionCell: UICollectionViewCell, ListBindable {
         return button
     }()
     
+    let ribbonButton: UIButton = {
+        let button = UIButton()
+        let btnImage = UIImage(named: "ibook")
+        button.setImage(btnImage, for: UIControlState.normal)
+        button.sizeToFit()
+        return button
+    }()
+    
     let likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -45,9 +54,11 @@ final class ActionCell: UICollectionViewCell, ListBindable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        likeButton.addTarget(self, action: #selector(ActionCell.onHeart), for: .touchUpInside)
         contentView.addSubview(likeButton)
         contentView.addSubview(commentButton)
-        likeButton.addTarget(self, action: #selector(ActionCell.onHeart), for: .touchUpInside)
+        ribbonButton.addTarget(self, action: #selector(ActionCell.onRibbon), for: .touchUpInside)
+        contentView.addSubview(ribbonButton)
         contentView.addSubview(likesLabel)
     }
     
@@ -68,6 +79,11 @@ final class ActionCell: UICollectionViewCell, ListBindable {
             make.left.equalTo(likeButton).offset(40)
         }
         
+        ribbonButton.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(contentView)
+            make.left.equalTo(commentButton).offset(40)
+        }
+        
         likesLabel.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(contentView)
             make.right.equalTo(contentView).offset(-11)
@@ -77,6 +93,10 @@ final class ActionCell: UICollectionViewCell, ListBindable {
 
     @objc func onHeart() {
         delegate?.didTapHeart(cell: self)
+    }
+    
+    @objc func onRibbon() {
+        delegate?.didTapRibbon(cell: self)
     }
     
     func bindViewModel(_ viewModel: Any) {

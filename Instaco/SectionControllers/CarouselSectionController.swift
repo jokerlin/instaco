@@ -8,7 +8,7 @@
 
 import IGListKit
 
-final class CarouselSectionController: ListSectionController {
+final class CarouselSectionController: ListSectionController, ImageCellDelegate {
     private var url: String?
     
     override init() {
@@ -26,11 +26,42 @@ final class CarouselSectionController: ListSectionController {
             fatalError()
         }
         cell.imageView.sd_setImage(with: URL(string: url!))
+        cell.delegate = self
         return cell
     }
     
     override func didUpdate(to object: Any) {
         url = object as? String
+    }
+    
+    // MARK: ImageCellDelegate
+    
+    func didLongPressImage(cell: ImageCell) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Save to Camera Roll", style: .default, handler: { (_) in
+            
+            let selector = #selector(self.onCompleteCapture(image:error:contextInfo:))
+            UIImageWriteToSavedPhotosAlbum(cell.imageView.image!, self, selector, nil)
+            
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        viewController?.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func onCompleteCapture(image: UIImage, error: NSError?, contextInfo: UnsafeRawPointer) {
+        if error == nil {
+            print("Save Successfully")
+            let alertController = UIAlertController(title: "Successfully saved", message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            viewController?.present(alertController, animated: true, completion: nil)
+        } else {
+            print("Save Fail")
+            let alertController = UIAlertController(title: "Failed to save", message: "Please enable camera roll access in Settings", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            viewController?.present(alertController, animated: true, completion: nil)
+        }
     }
 
 }

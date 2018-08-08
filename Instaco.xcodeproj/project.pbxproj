@@ -892,7 +892,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.Instaco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.instaco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Instaco/Instaco-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -915,7 +915,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.Instaco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.instaco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Instaco/Instaco-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

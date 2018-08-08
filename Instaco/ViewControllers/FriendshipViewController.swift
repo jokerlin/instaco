@@ -135,6 +135,7 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
             }
             self.adapter.performUpdates(animated: true)
         }, failure: { (JSONResponse) in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }
@@ -173,6 +174,7 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
             }
             self.adapter.performUpdates(animated: true)
         }, failure: { (JSONResponse) in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }
@@ -209,6 +211,7 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
                 }
                 self.adapter.performUpdates(animated: true)
             }, failure: {(JSONResponse) -> Void in
+                ifLoginRequire(viewController: self)
                 print(JSONResponse)
             })
         } else {
@@ -223,6 +226,7 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
                 }
                 self.adapter.performUpdates(animated: true)
             }, failure: {(JSONResponse) -> Void in
+                ifLoginRequire(viewController: self)
                 print(JSONResponse)
             })
         }

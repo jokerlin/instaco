@@ -130,6 +130,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
             self.friendshipflag = friendshipResponse
             self.setup(friendship: friendshipResponse!)
         }, failure: { (JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }

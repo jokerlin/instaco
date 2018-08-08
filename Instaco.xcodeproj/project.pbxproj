@@ -71,6 +71,7 @@
 		8FCAD4CD2118895A006908FE /* MediaVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4CC2118895A006908FE /* MediaVideoCell.swift */; };
 		8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3885920F5266300B6C3E7 /* InstagramNetworkAPI.swift */; };
 		8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDA614520F7056700B07D8A /* BaseNetworkService.swift */; };
+		E306714B0A9CF541DCC833C4 /* Pods_InstacoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA7A5293962383459874598 /* Pods_InstacoTests.framework */; };
 		EEC0FF090245A8A36F83F2B8 /* Pods_Instaco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,7 @@
 
 /* Begin PBXFileReference section */
 		1298D6FE1DC918E4A53C30D0 /* Pods_InstacoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstacoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A975B2AE68EEB002522DF2D /* Pods-InstacoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstacoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstacoTests/Pods-InstacoTests.release.xcconfig"; sourceTree = "<group>"; };
 		2E765C1EB5C97718E893A386 /* Pods-Instaco.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instaco.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instaco/Pods-Instaco.debug.xcconfig"; sourceTree = "<group>"; };
 		2EA7A5293962383459874598 /* Pods_InstacoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstacoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F0A19E320F4CF3300872C1B /* Instaco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instaco.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +169,7 @@
 		8FDA612420F53B5D00B07D8A /* Instaco-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Instaco-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FDA614520F7056700B07D8A /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
 		A44B594BE77548476B176952 /* Pods-Instaco.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instaco.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instaco/Pods-Instaco.release.xcconfig"; sourceTree = "<group>"; };
+		BDC3D190C4135A435A8CD3D2 /* Pods-InstacoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstacoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstacoTests/Pods-InstacoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C340DA659AC45101A62EFF35 /* Pods_Instaco.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instaco.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -183,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E306714B0A9CF541DCC833C4 /* Pods_InstacoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +205,8 @@
 			children = (
 				2E765C1EB5C97718E893A386 /* Pods-Instaco.debug.xcconfig */,
 				A44B594BE77548476B176952 /* Pods-Instaco.release.xcconfig */,
+				BDC3D190C4135A435A8CD3D2 /* Pods-InstacoTests.debug.xcconfig */,
+				2A975B2AE68EEB002522DF2D /* Pods-InstacoTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -481,9 +487,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F0A1A0E20F4CF3500872C1B /* Build configuration list for PBXNativeTarget "InstacoTests" */;
 			buildPhases = (
+				C3A37836DBE9B1D8F9E65E38 /* [CP] Check Pods Manifest.lock */,
 				8F0A19F320F4CF3500872C1B /* Sources */,
 				8F0A19F420F4CF3500872C1B /* Frameworks */,
 				8F0A19F520F4CF3500872C1B /* Resources */,
+				B6792D7253877377EFBF59C2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -597,6 +605,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		B6792D7253877377EFBF59C2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-InstacoTests/Pods-InstacoTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InstacoTests/Pods-InstacoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3A37836DBE9B1D8F9E65E38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InstacoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		C810940B35B3F29075DE7673 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -892,7 +936,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.Instaco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.instaco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Instaco/Instaco-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -915,7 +959,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.Instaco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jokerlin.instaco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Instaco/Instaco-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -925,8 +969,8 @@
 		};
 		8F0A1A0F20F4CF3500872C1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDC3D190C4135A435A8CD3D2 /* Pods-InstacoTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5T4ZJ88AT;
@@ -946,8 +990,8 @@
 		};
 		8F0A1A1020F4CF3500872C1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A975B2AE68EEB002522DF2D /* Pods-InstacoTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5T4ZJ88AT;
@@ -968,7 +1012,6 @@
 		8F0A1A1220F4CF3500872C1B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5T4ZJ88AT;
 				INFOPLIST_FILE = InstacoUITests/Info.plist;
@@ -988,7 +1031,6 @@
 		8F0A1A1320F4CF3500872C1B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5T4ZJ88AT;
 				INFOPLIST_FILE = InstacoUITests/Info.plist;

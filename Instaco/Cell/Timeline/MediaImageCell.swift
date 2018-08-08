@@ -10,18 +10,28 @@ import UIKit
 import SDWebImage
 import IGListKit
 
+protocol ImageCellDelegate: class {
+    func didLongPressImage(cell: ImageCell)
+}
+
 final class ImageCell: UICollectionViewCell, ListBindable {
+    
+    weak var delegate: ImageCellDelegate?
     
     let imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ImageCell.onImage))
+        longPressRecognizer.minimumPressDuration = 0.5
+        imageView.addGestureRecognizer(longPressRecognizer)
         contentView.addSubview(imageView)
     }
     
@@ -33,6 +43,10 @@ final class ImageCell: UICollectionViewCell, ListBindable {
         super.layoutSubviews()
         let bounds = contentView.bounds
         imageView.frame = bounds
+    }
+    
+    @objc func onImage() {
+        delegate?.didLongPressImage(cell: self)
     }
     
     func bindViewModel(_ viewModel: Any) {

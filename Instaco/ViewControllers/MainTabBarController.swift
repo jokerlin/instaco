@@ -9,6 +9,7 @@
 import UIKit
 import KeychainAccess
 import IGListKit
+import SwiftyJSON
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
@@ -17,9 +18,9 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         
         let keychain = Keychain(service: "com.instacoapp")
-        
+
 //        try! keychain.removeAll()
-        
+    
         if keychain.allKeys() == [] {
             DispatchQueue.main.async {
                 let loginController = LoginController()
@@ -28,21 +29,15 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
             return
         } else {
-            print("Login by \(keychain.allKeys()[0])")
-            
-            insta.set_auth(username: keychain.allKeys()[0], password: keychain[keychain.allKeys()[0]]!)
-            insta.login(
-                success: { (JSONResponse) in
-                    print("Login Success")
-                    insta.LastJson = JSONResponse
-                    insta.isLoggedIn = true
-                    insta.username_id = insta.LastJson["logged_in_user"]["pk"].stringValue
-
-                    self.setupViewControllers()
-                    },
-                failure: { _ in
-                    print("Login Failed")
-            })
+            print("Login by \(String(describing: keychain["username"]))")
+            insta.set_auth(username: keychain["username"]!, password: keychain["password"]!)
+            insta.uuid = keychain["uuid"]!
+            insta.username_id = keychain["username_id"]!
+            insta.csrftoken = keychain["csrftoken"]!
+            insta.device_id = keychain["device_id"]!
+            insta.error = ""
+            insta.isLoggedIn = true
+            self.setupViewControllers()
         }
     }
     

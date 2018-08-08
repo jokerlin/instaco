@@ -11,7 +11,7 @@ import IGListKit
 import SnapKit
 import Player
 
-final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, CaptionCellDelegate, ListDisplayDelegate {
+final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, ImageCellDelegate, CaptionCellDelegate, ListDisplayDelegate {
 
     var localLikes: Int?
     var likedFlagChange: Bool = false
@@ -77,6 +77,9 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         guard let cell = collectionContext!.dequeueReusableCell(of: cellClass, for: self, at: index) as? UICollectionViewCell & ListBindable
             else { fatalError("Cell not bindable") }
         if let cell = cell as? UserCell {
+            cell.delegate = self
+        }
+        if let cell = cell as? ImageCell {
             cell.delegate = self
         }
         if let cell = cell as? MediaCarouselCell {
@@ -197,6 +200,8 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         update(animated: true)
     }
     
+    // MARK: UserCellDelegate
+    
     func didTapUsername(cell: UserCell) {
         let current_vc = cell.responderViewController()
         let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
@@ -209,10 +214,44 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
     
+    // MARK: CaptionCellDelegate
+    
     func didTapUsername(cell: CaptionCell) {
         let current_vc = cell.responderViewController()
         let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
         current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
+    }
+    
+    // MARK: ImageCellDelegate
+    
+    func didLongPressImage(cell: ImageCell) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Save to Camera Roll", style: .default, handler: { (_) in
+        
+            let selector = #selector(self.onCompleteCapture(image:error:contextInfo:))
+            UIImageWriteToSavedPhotosAlbum(cell.imageView.image!, self, selector, nil)
+
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        viewController?.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func onCompleteCapture(image: UIImage, error: NSError?, contextInfo: UnsafeRawPointer) {
+        if error == nil {
+            print("Save Successfully")
+            let alertController = UIAlertController(title: "Successfully saved", message: nil, preferredStyle: .alert)
+            viewController?.present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.viewController?.dismiss(animated: false, completion: nil)
+            }
+        } else {
+            print("Save Fail")
+            let alertController = UIAlertController(title: "Failed to save", message: "Please enable camera roll access in Settings", preferredStyle: .alert)
+            viewController?.present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.viewController?.dismiss(animated: false, completion: nil)
+            }
+        }
     }
     
     // MARK: ListAdapterDataSource of CarouselCell

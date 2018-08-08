@@ -66,6 +66,7 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
             //            print(JSONResponse)
             self.likedSetup(JSONResponse: JSONResponse)
         }, failure: { (JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
             print(JSONResponse)
         })
     }

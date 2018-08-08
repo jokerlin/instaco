@@ -11,11 +11,17 @@ target 'Instaco' do
   pod 'IGListKit', :git => 'https://github.com/Instagram/IGListKit.git', :branch => 'master'
   pod 'SDWebImage', '~> 4.0'
   pod 'KeychainAccess'
-  pod 'StyledTextKit' 
+  pod 'StyledTextKit'
   pod 'ActiveLabel'
   pod 'SnapKit', '~> 4.0.0'
   pod 'SwiftLint'
   pod "Player", "~> 0.8.0"
+
+  target 'InstacoTests' do
+    inherit! :search_paths
+    pod 'SwiftyJSON', '~> 4.0'
+  end
+
 end
 
 #post_install do |installer|

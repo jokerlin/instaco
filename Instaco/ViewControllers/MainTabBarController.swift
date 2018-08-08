@@ -29,35 +29,15 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
             return
         } else {
-            print("Login by \(keychain.allKeys()[0])")
-            
-            insta.set_auth(username: keychain.allKeys()[0], password: keychain[keychain.allKeys()[0]]!)
-            insta.login(
-                success: { (JSONResponse) in
-                    print("Login Success")
-                    insta.LastJson = JSONResponse
-                    insta.isLoggedIn = true
-                    insta.username_id = insta.LastJson["logged_in_user"]["pk"].stringValue
-                    insta.error = ""
-                    self.setupViewControllers()
-                    },
-                failure: { _ in
-                    print("Login Failed")
-                    var title = "Oops, an error occurred."
-                    var json = JSON.init(parseJSON: insta.error)
-                    title = json["message"].string ?? title
-                    DispatchQueue.main.async {
-                        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-                        self.present(alertController, animated: true, completion: nil)
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                            self.presentedViewController?.dismiss(animated: false, completion: nil)
-                            let loginController = LoginController()
-                            let navController = UINavigationController(rootViewController: loginController)
-                            self.present(navController, animated: true, completion: nil)
-                        }
-                    }
-                    return
-            })
+            print("Login by \(String(describing: keychain["username"]))")
+            insta.set_auth(username: keychain["username"]!, password: keychain["password"]!)
+            insta.uuid = keychain["uuid"]!
+            insta.username_id = keychain["username_id"]!
+            insta.csrftoken = keychain["csrftoken"]!
+            insta.device_id = keychain["device_id"]!
+            insta.error = ""
+            insta.isLoggedIn = true
+            self.setupViewControllers()
         }
     }
     

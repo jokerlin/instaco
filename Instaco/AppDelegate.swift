@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         self.window?.rootViewController = MainTabBarController()
-
+//        self.window?.rootViewController = LoginController()
+        
         return true
     }
 

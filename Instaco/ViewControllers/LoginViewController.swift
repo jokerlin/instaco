@@ -86,7 +86,12 @@ class LoginController: UIViewController {
                 // Store in Keychain
                 let keychain = Keychain(service: "com.instacoapp")
                 try! keychain.removeAll()
-                keychain[username] = password
+                keychain["username"] = username
+                keychain["password"] = password
+                keychain["username_id"] = JSONResponse["logged_in_user"]["pk"].stringValue
+                keychain["device_id"] = insta.device_id
+                keychain["uuid"] = insta.uuid
+                keychain["csrftoken"] = insta.csrftoken
                 
                 // set insta object
                 insta.LastJson = JSONResponse

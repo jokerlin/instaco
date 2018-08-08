@@ -361,6 +361,21 @@ class InstagramAPI {
         }
     }
     
+    func read_msisdn_header(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let data = ["_uid": insta.username_id,
+                    "device_id": insta.device_id,
+                    "_uuid": self.uuid]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        let sign_body = generateSignature(data: jsonString)
+        
+        SendRequestViaHttpBody(URI: "accounts/read_msisdn_header/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: { (JSONResponse) -> Void in
+                print(JSONResponse)
+        }, failure: {(error) -> Void in
+                print(error)})
+    }
+    
     func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestConfig = RequestConfiguration(url: API_URL)

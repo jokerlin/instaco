@@ -8,6 +8,7 @@
 
 import UIKit
 
+let INSTACOAPPVERSION = "v0.5"
 let insta = InstagramAPI()
 
 @UIApplicationMain

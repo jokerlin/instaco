@@ -92,6 +92,7 @@ class LoginController: UIViewController {
                 keychain["device_id"] = insta.device_id
                 keychain["uuid"] = insta.uuid
                 keychain["csrftoken"] = insta.csrftoken
+                keychain["version"] = INSTACOAPPVERSION
                 
                 // set insta object
                 insta.LastJson = JSONResponse

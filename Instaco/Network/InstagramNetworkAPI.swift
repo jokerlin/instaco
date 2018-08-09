@@ -9,17 +9,15 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import UIKit
 
 class InstagramAPI {
     
     let API_URL = "https://i.instagram.com/api/v1/"
     let IG_SIG_KEY = "4f8732eb9ba7d1c8e8897a75d6474d4eb3f5279137431b2aafb71fafe2abe178"
-    let headers = ["Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-                   "User-Agent": "Instagram 19.1.0.31.91 Android (23/6.0.1; 515dpi; 1440x2416; huawei/google; Nexus 6P; angler; angler; en_US)",
-                   "X-Ads-Opt-Out": "1",
-                   "X-DEVICE-ID": "android-04bb78408befb7b3",
+    var headers = ["Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+                   "User-Agent": "Instagram 27.0.0.13.98 (iPhone7,2; iPhone OS 11_4_1; zh_CN; zh-Hans-CN; scale=2.00; gamut=normal; 750x1334) AppleWebKit/420+)",
                    "X-FB-HTTP-Engine": "Liger",
-                   "X-Google-AD-ID": "446104a7-9ff2-4338-add1-ccab3003253e",
                    "X-IG-App-ID": "567067343352427",
                    "X-IG-Bandwidth-Speed-KBPS": "117,000",
                    "X-IG-Bandwidth-TotalBytes-B": "0",
@@ -73,7 +71,7 @@ class InstagramAPI {
     
     func generateDeviceId(seed: String) -> String {
         let volatile_seed = "12345"
-        return "android-" + (seed + volatile_seed).md5().prefix(16)
+        return "iphone-" + (seed + volatile_seed).md5().prefix(16)
     }
     
     func generateUUID(type: Bool) -> String {

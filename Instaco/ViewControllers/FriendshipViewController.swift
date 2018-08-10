@@ -101,6 +101,8 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
                     if self.next_max_id != "" {
                         if self.type == "Follower" {
                             self.followerJSON2ObjectPagination()
+                        } else {
+                            self.followingJSON2ObjectPagination()
                         }
                     }
                     self.adapter.performUpdates(animated: true, completion: nil)

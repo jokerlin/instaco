@@ -484,6 +484,16 @@ class InstagramAPI {
         SendRequest(URI: "accounts/logout/", method: .post, encoding: URLEncoding.httpBody, params: params, success: success, failure: failure)
     }
     
+    func getLikers(media_id: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let params = ["rank_token": self.uuid]
+        SendRequest(URI: "media/" + media_id + "/likers/", method: .post, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+    }
+    
+//    func searchLikers(media_id: String, query: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+//        let params: [String: Any] = ["rank_token": insta.uuid, "query": query]
+//        SendRequest(URI: "media/" + media_id + "/likers/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+//    }
+//
     private func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestConfig = RequestConfiguration(url: API_URL)
@@ -494,7 +504,7 @@ class InstagramAPI {
             if responseObject.result.isSuccess {
                 print(responseObject.request.debugDescription)
                 let resJson = JSON(responseObject.result.value!)
-                print(resJson)
+//                print(resJson)
                 success(resJson)
             }
             if responseObject.result.isFailure {
@@ -502,9 +512,6 @@ class InstagramAPI {
                 if let data = responseObject.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print(utf8Text)
                     self.error = utf8Text
-                    if utf8Text.contains("login_required") {
-                        
-                    }
                 }
                 let error: Error = responseObject.result.error!
                 failure(error)
@@ -521,7 +528,7 @@ class InstagramAPI {
             if responseObject.result.isSuccess {
                 print(responseObject.request.debugDescription)
                 let resJson = JSON(responseObject.result.value!)
-                print(resJson)
+//                print(resJson)
                 success(resJson)
             }
             if responseObject.result.isFailure {
@@ -529,9 +536,6 @@ class InstagramAPI {
                 if let data = responseObject.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print(utf8Text)
                     self.error = utf8Text
-                    if utf8Text.contains("login_required") {
-                        
-                    }
                 }
                 let error: Error = responseObject.result.error!
                 failure(error)

@@ -12,7 +12,7 @@ import SnapKit
 import Player
 
 final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, ImageCellDelegate, CaptionCellDelegate, ListDisplayDelegate {
-
+    
     var localLikes: Int?
     var likedFlagChange: Bool = false
     var savedFlagChange: Bool = false
@@ -138,6 +138,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         return CGSize(width: width, height: height)
     }
     
+    // MARK: ActionCellDelegate
     func didTapHeart(cell: ActionCell) {
         if mediaInfo?.beliked == true {
             if likedFlagChange == false {
@@ -198,6 +199,12 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             }
         }
         update(animated: true)
+    }
+    
+    func didTapLikesCount(cell: ActionCell) {
+        
+        let likesCountViewController = LikesCountViewController(media_id: (mediaInfo?.id)!)
+        viewController?.navigationController?.pushViewController(likesCountViewController, animated: true)
     }
     
     // MARK: UserCellDelegate

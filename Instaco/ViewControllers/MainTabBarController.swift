@@ -37,7 +37,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             insta.device_id = keychain["device_id"]!
             insta.error = ""
             insta.isLoggedIn = true
-            insta.simulation()
+//            insta.simulation()
             self.setupViewControllers()
         }
     }

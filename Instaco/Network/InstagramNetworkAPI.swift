@@ -16,7 +16,7 @@ class InstagramAPI {
     let API_URL = "https://i.instagram.com/api/v1/"
     let IG_SIG_KEY = "4f8732eb9ba7d1c8e8897a75d6474d4eb3f5279137431b2aafb71fafe2abe178"
     var headers = ["Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-                   "User-Agent": "Instagram 27.0.0.13.98 (iPhone7,2; iPhone OS 11_4_1; zh_CN; zh-Hans-CN; scale=2.00; gamut=normal; 750x1334) AppleWebKit/420+)",
+                   "User-Agent": "Instagram 11.0.0.21.20 (iPhone5,2; iPhone OS 9_0_2; zh_CN; zh-Hans-CN; scale=2.00; gamut=normal; 640x1136) AppleWebKit/420+",
                    "X-FB-HTTP-Engine": "Liger",
                    "X-IG-App-ID": "567067343352427",
                    "X-IG-Bandwidth-Speed-KBPS": "117,000",
@@ -57,10 +57,11 @@ class InstagramAPI {
     
     func set_auth(username: String, password: String) {
         self.setUser(username: username, password: password)
-        self.device_id = self.generateDeviceId(seed: (username+password).md5())
+//        self.device_id = self.generateDeviceId(seed: (username+password).md5())
+        self.device_id = uuid
     }
     
-    func generateSignature(data: String) -> String {
+    private func generateSignature(data: String) -> String {
         
         var parsedData: String
         parsedData = data.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
@@ -69,12 +70,12 @@ class InstagramAPI {
         return data.hmac(algorithm: .SHA256, key: self.IG_SIG_KEY) + "." + parsedData
     }
     
-    func generateDeviceId(seed: String) -> String {
+    private func generateDeviceId(seed: String) -> String {
         let volatile_seed = "12345"
         return "iphone-" + (seed + volatile_seed).md5().prefix(16)
     }
     
-    func generateUUID(type: Bool) -> String {
+    private func generateUUID(type: Bool) -> String {
         let generated_uuid = UUID().uuidString
         if type {
             return generated_uuid
@@ -252,6 +253,8 @@ class InstagramAPI {
     
     func timelineFeed(params: [String: Any], success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         SendRequest(URI: "feed/timeline/", method: .post, encoding: URLEncoding.httpBody, params: params, success: success, failure: failure)
+        // get reels tray
+        self.reels_tray(success: {_ in}, failure: {_ in})
     }
     
     func getUserInfo(userid: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
@@ -368,13 +371,120 @@ class InstagramAPI {
         let jsonString = String(data: jsonData!, encoding: .utf8)!
         let sign_body = generateSignature(data: jsonString)
         
-        SendRequestViaHttpBody(URI: "accounts/read_msisdn_header/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: { (JSONResponse) -> Void in
-                print(JSONResponse)
-        }, failure: {(error) -> Void in
-                print(error)})
+        SendRequestViaHttpBody(URI: "accounts/read_msisdn_header/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: success, failure: failure)
     }
     
-    func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+    private func direct_v2_ranked_recipients(mode: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let parameters: Parameters = ["mode": mode, "show_threads": true, "use_unified_inbox": true]
+        SendRequest(URI: "direct_v2/ranked_recipients/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
+    }
+    
+    private func direct_v2_inbox(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let parameters: Parameters = ["persistentBadging": true, "use_unified_inbox": true]
+        SendRequest(URI: "direct_v2/inbox/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
+    }
+    
+    private func users_profile_notice(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        SendRequest(URI: "users/profile_notice/", method: .get, encoding: URLEncoding(destination: .queryString), success: success, failure: failure)
+    }
+    
+    private func qp_fetch(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let data: [String: Any] = ["vc_policy": "photo_view_other",
+                    "_csrftoken": self.csrftoken,
+                    "_uid": self.username_id,
+                    "_uuid": self.uuid,
+                    "query": EXPERIMENTS_QP,
+                    "version": 1,
+                    "surface_param": "4715"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        let sign_body = generateSignature(data: jsonString)
+        
+        SendRequestViaHttpBody(URI: "qp/fetch/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: success, failure: failure)
+    }
+    
+    func reels_tray(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let parameters: Parameters = ["_csrftoken": self.csrftoken, "_uuid": self.uuid]
+        SendRequest(URI: "feed/reels_tray/", method: .post, encoding: URLEncoding.httpBody, params: parameters, success: success, failure: failure)
+    }
+    
+    func getFeedStory(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        SendRequest(URI: "feed/user/" + insta.username_id + "/", method: .get, encoding: URLEncoding(destination: .queryString), success: success, failure: failure)
+    }
+    
+    private func qe_sync(id: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let data: [String: Any] = ["_uuid": self.uuid,
+                                   "id": id,
+                                   "_uid": self.username_id,
+                                   "_csrftoken": self.csrftoken,
+                                   "experiments": EXPERIMENTS_QE]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        let sign_body = generateSignature(data: jsonString)
+        
+        SendRequestViaHttpBody(URI: "qe/sync/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: success, failure: failure)
+    }
+    
+    func getDiscover(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let parameters: Parameters = ["is_prefetch": true,
+                                      "is_from_promote": false,
+                                      "max_id": 0,
+                                      "timezone_offset": -14400,
+                                      "session_id": self.uuid]
+        SendRequest(URI: "discover/explore/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
+    }
+    
+    func facebookOTA(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        let parameters: Parameters = ["version_name": 11.0  ,
+                                      "custom_user_id": insta.username_id,
+                                      "fields": "update{download_uri,file_size,uncompressed_size,version_code,resources_checksum,ota_update_policy,download_uri_delta,file_size_delta,fallback_to_full_update,download_uri_delta_base,version_code_delta_base}",
+                                      "version_code": 68662588,
+                                      "custom_app_id": 1464225827161561]
+        SendRequest(URI: "facebook_ota/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
+    }
+    
+    func simulation() {
+        
+        // Flume
+        self.read_msisdn_header(success: {_ in}, failure: {_ in})
+        
+        // feed
+        self.getFeedStory(success: {_ in}, failure: {_ in})
+        
+        // direct_v2
+        self.direct_v2_ranked_recipients(mode: "raven", success: {_ in}, failure: {_ in})
+        self.direct_v2_ranked_recipients(mode: "reshare", success: {_ in}, failure: {_ in})
+        self.direct_v2_inbox(success: {_ in}, failure: {_ in})
+        
+        // qp
+        self.qp_fetch(success: {_ in}, failure: {_ in})
+        
+        // news
+        self.getNewsInbox(success: {_ in}, failure: {_ in})
+        
+        // qe
+        self.qe_sync(id: insta.uuid, success: {_ in}, failure: {_ in})
+        self.qe_sync(id: insta.username_id, success: {_ in}, failure: {_ in})
+        
+        // discover
+        self.getDiscover(success: {_ in}, failure: {_ in})
+        
+        // ota
+        self.facebookOTA(success: {_ in}, failure: {_ in})
+        
+        // users
+        self.users_profile_notice(success: {_ in}, failure: {_ in})
+        self.getUserInfo(userid: insta.username_id, success: {_ in}, failure: {_ in})
+    }
+    
+    func logout(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) throws {
+        let params: [String: Any] = ["device_id": insta.device_id]
+        SendRequest(URI: "accounts/logout/", method: .post, encoding: URLEncoding.httpBody, params: params, success: success, failure: failure)
+    }
+    
+    private func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestConfig = RequestConfiguration(url: API_URL)
         let baseNetworkService = BaseNetworkService.init(config: requestConfig)
@@ -384,9 +494,11 @@ class InstagramAPI {
             if responseObject.result.isSuccess {
                 print(responseObject.request.debugDescription)
                 let resJson = JSON(responseObject.result.value!)
+                print(resJson)
                 success(resJson)
             }
             if responseObject.result.isFailure {
+                print("Requesting \(String(describing: responseObject.request?.description)) ERROR!")
                 if let data = responseObject.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print(utf8Text)
                     self.error = utf8Text
@@ -401,7 +513,7 @@ class InstagramAPI {
         }
     }
     
-    func SendRequest(URI: String, method: HTTPMethod, encoding: ParameterEncoding, params: Parameters? = nil, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+    private func SendRequest(URI: String, method: HTTPMethod, encoding: ParameterEncoding, params: Parameters? = nil, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let request: URLRequest = baseNetworkService.buildRequest(path: URI, method: method, encoding: encoding, params: params, headers: self.headers)
         
@@ -409,9 +521,11 @@ class InstagramAPI {
             if responseObject.result.isSuccess {
                 print(responseObject.request.debugDescription)
                 let resJson = JSON(responseObject.result.value!)
+                print(resJson)
                 success(resJson)
             }
             if responseObject.result.isFailure {
+                print("Requesting \(String(describing: responseObject.request?.description)) ERROR!")
                 if let data = responseObject.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print(utf8Text)
                     self.error = utf8Text

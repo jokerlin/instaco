@@ -66,11 +66,17 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     }
     
     @objc func handleLogOut() {
+        
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             do {
-                let keychain = Keychain(service: "com.instacoapp")
-                try keychain.removeAll()
+                try insta.logout(success: {_ in
+                    print("Logout " + insta.username)
+                    insta.isLoggedIn = false
+                    insta.error = ""
+                    let keychain = Keychain(service: "com.instacoapp")
+                    try! keychain.removeAll()
+                }, failure: {_ in})
                 
                 // present signout controller
                 let loginContoller = LoginController()

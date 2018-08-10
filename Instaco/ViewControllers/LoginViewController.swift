@@ -99,6 +99,8 @@ class LoginController: UIViewController {
                 insta.isLoggedIn = true
                 insta.username_id = insta.LastJson["logged_in_user"]["pk"].stringValue
                 insta.error = ""
+                insta.simulation()
+                
                 guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
                 
                 mainTabBarController.setupViewControllers()

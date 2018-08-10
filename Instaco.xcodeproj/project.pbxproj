@@ -20,6 +20,7 @@
 		8F22519420F7429300B39F6D /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519320F7429300B39F6D /* MD5.swift */; };
 		8F22519720F742DF00B39F6D /* hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519620F742DF00B39F6D /* hmac.swift */; };
 		8F22519A20F750A500B39F6D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519920F750A500B39F6D /* NetworkManager.swift */; };
+		8F2465CB211D1669006F0C94 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2465CA211D1669006F0C94 /* Constraints.swift */; };
 		8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BF420FF757200C6CC46 /* TimelineSectionController.swift */; };
 		8F2C3BF720FF7EAC00C6CC46 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BF620FF7EAB00C6CC46 /* MediaModel.swift */; };
 		8F2C3BF920FF808200C6CC46 /* MediaCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C3BF820FF808200C6CC46 /* MediaCommentViewModel.swift */; };
@@ -116,6 +117,7 @@
 		8F22519320F7429300B39F6D /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
 		8F22519620F742DF00B39F6D /* hmac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hmac.swift; sourceTree = "<group>"; };
 		8F22519920F750A500B39F6D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		8F2465CA211D1669006F0C94 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		8F2C3BF420FF757200C6CC46 /* TimelineSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSectionController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8F2C3BF620FF7EAB00C6CC46 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		8F2C3BF820FF808200C6CC46 /* MediaCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCommentViewModel.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				8FBD744120F7CCBD001ACD34 /* helper.swift */,
 				8FCAD4B82113F7EC006908FE /* FixedRefreshControl.swift */,
 				8FCAD4C6211795DA006908FE /* CustomCarousel.swift */,
+				8F2465CA211D1669006F0C94 /* Constraints.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				8F6904C421084F6F000B1AB7 /* TimelineViewController.swift in Sources */,
 				8FCAD4B421135EE3006908FE /* SearchResultSectionController.swift in Sources */,
 				8F37FC7B20F9C2A30035E303 /* TimelineResponse.swift in Sources */,
+				8F2465CB211D1669006F0C94 /* Constraints.swift in Sources */,
 				8F59F7A7210FEBA2000A7833 /* UserInfoHeaderCell.swift in Sources */,
 				8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */,
 				8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */,

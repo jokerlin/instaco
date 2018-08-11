@@ -8,9 +8,9 @@
 
 import ObjectMapper
 
-class UserInfoResponse: Mappable {
+class ObjectUserInfoResponse: Mappable {
     var status: String?
-    var user: JSONUserInfo?
+    var user: ObjectUserInfoHeader?
     
     required init?(map: Map) {
         
@@ -21,9 +21,9 @@ class UserInfoResponse: Mappable {
     }
 }
 
-class UserFeedResponse: Mappable {
+class ObjectUserFeedResponse: Mappable {
     var next_max_id: String?
-    var items: [Media_or_ad]?
+    var items: [ObjectMedia_or_ad]?
     var num_results: Int?
     
     required init?(map: Map) {
@@ -36,12 +36,12 @@ class UserFeedResponse: Mappable {
     }
 }
 
-class JSONUserInfo: Mappable {
+class ObjectUserInfoHeader: Mappable {
     var biography: String?
     var follower_count: Int?
     var following_count: Int?
     var full_name: String?
-    var hd_profile_pic_url_info: ImageTimeline?
+    var hd_profile_pic_url_info: ObjectImageTimeline?
     var is_private: Int?
     var external_url: String?
     var pk: Int?

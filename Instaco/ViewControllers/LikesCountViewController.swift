@@ -70,7 +70,7 @@ class LikesCountViewController: UIViewController, ListAdapterDataSource, UIScrol
     func likersJSON2Object() {
         insta.getLikers(media_id: self.media_id, success: { (JSONResponse) in
 //            print(JSONResponse)
-            let likersResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+            let likersResponse = Mapper<ObjectSearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
             if likersResponse != nil {
                 self.data += search2ObjectHelper(searchResponse: likersResponse!)
             }

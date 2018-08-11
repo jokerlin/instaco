@@ -16,10 +16,9 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     var data = [ListDiffable]()
     var next_max_id = ""
     var loading = false
+    
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-    
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
-    
     private let refreshControl = FixedRefreshControl()
     
     override func viewDidLoad() {
@@ -27,15 +26,13 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
         self.navigationItem.title = "Timeline"
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
-        
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshTimelineData(_:)), for: .valueChanged)
+        self.view.addSubview(collectionView)
         // solve blank on top of the collectionView
 //        self.collectionView.contentInset = UIEdgeInsetsMake(-40, 0, 0, 0)
 //        self.navigationController?.isNavigationBarHidden = true
-        
-        collectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshTimelineData(_:)), for: .valueChanged)
-        
-        self.view.addSubview(collectionView)
+
         if insta.isLoggedIn {
             timelineJSON2Object(params: insta.generatePostParamsTest())
         }
@@ -78,7 +75,7 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
 //            print(JSONResponse)
             self.next_max_id = JSONResponse["next_max_id"].stringValue
             
-            let timelineResponse = Mapper<TimelineResponse>().map(JSONString: JSONResponse.rawString()!)
+            let timelineResponse = Mapper<ObjectTimelineResponse>().map(JSONString: JSONResponse.rawString()!)
             if timelineResponse?.feed_items != nil {
                 
                 for item in (timelineResponse?.feed_items!)! {

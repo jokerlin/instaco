@@ -47,7 +47,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     func searchUsers(quest: String) {
         insta.searchUsers(q: quest, success: { (JSONResponse) -> Void in
 //            print(JSONResponse)
-            let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+            let searchUserResponse = Mapper<ObjectSearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
             self.data += search2ObjectHelper(searchResponse: searchUserResponse!)
             if searchUserResponse?.users != nil {
                 for item in (searchUserResponse?.users)! where item.pk != nil {
@@ -67,7 +67,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
         insta.searchUsers(exclude_list: json, q: q, success: { (JSONResponse) in
             //            print(JSONResponse)
             
-            let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+            let searchUserResponse = Mapper<ObjectSearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
             self.data += search2ObjectHelper(searchResponse: searchUserResponse!)
             if searchUserResponse?.users != nil {
                 for item in (searchUserResponse?.users)! where item.pk != nil {
@@ -84,7 +84,7 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     func searchSuggest() {
         insta.searchSuggested(success: { (JSONResponse) -> Void in
 //            print(JSONResponse)
-            let suggestedSearchResponse = Mapper<SuggestedSearchResponse>().map(JSONString: JSONResponse.rawString()!)
+            let suggestedSearchResponse = Mapper<ObjectSuggestedSearchResponse>().map(JSONString: JSONResponse.rawString()!)
             if suggestedSearchResponse?.suggested != nil {
                 for item in (suggestedSearchResponse?.suggested)! where item.user != nil {
                     

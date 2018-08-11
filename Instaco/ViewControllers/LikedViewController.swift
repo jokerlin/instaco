@@ -72,7 +72,7 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     }
     
     func likedSetup(JSONResponse: JSON) {
-        let mediaResponse = Mapper<MediaResponse>().map(JSONString: JSONResponse.rawString()!)
+        let mediaResponse = Mapper<ObjectMediaResponse>().map(JSONString: JSONResponse.rawString()!)
         if mediaResponse?.next_max_id != nil {
             self.next_max_id_liked_previous = self.next_max_id_liked
             self.next_max_id_liked = String((mediaResponse?.next_max_id)!)

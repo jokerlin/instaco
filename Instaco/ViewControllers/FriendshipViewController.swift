@@ -93,7 +93,7 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
     }
     
     func followerJSON2ObjectHelper(JSONResponse: JSON) {
-        let followerResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+        let followerResponse = Mapper<ObjectSearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
         if followerResponse?.next_max_id != nil {
             self.next_max_id = (followerResponse?.next_max_id!)!
         }
@@ -123,7 +123,7 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
     }
     
     func followingJSON2ObjectHelper(JSONResponse: JSON) {
-        let followingResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+        let followingResponse = Mapper<ObjectSearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
         if followingResponse?.next_max_id != nil {
             self.next_max_id = (followingResponse?.next_max_id!)!
         }
@@ -137,7 +137,7 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
         if self.type == "Follower" {
             insta.searchUserFriendshipFollower(query: quest, user_id: self.username_id, success: { (JSONResponse) -> Void in
 //                print(JSONResponse)
-                let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+                let searchUserResponse = Mapper<ObjectSearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
                 if searchUserResponse != nil {
                     self.data += search2ObjectHelper(searchResponse: searchUserResponse!)
                 }
@@ -149,7 +149,7 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
         } else {
             insta.searchUserFriendshipFollowing(query: quest, user_id: self.username_id, success: { (JSONResponse) -> Void in
 //                print(JSONResponse)
-                let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+                let searchUserResponse = Mapper<ObjectSearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
                 if searchUserResponse != nil {
                     self.data += search2ObjectHelper(searchResponse: searchUserResponse!)
                 }

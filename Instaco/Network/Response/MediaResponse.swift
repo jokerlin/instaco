@@ -8,8 +8,8 @@
 
 import ObjectMapper
 
-class MediaResponse: Mappable {
-    var items: [Media_or_ad]?
+class ObjectMediaResponse: Mappable {
+    var items: [ObjectMedia_or_ad]?
     var next_max_id: Int?
     
     required init?(map: Map) {

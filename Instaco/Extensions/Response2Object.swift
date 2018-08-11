@@ -10,7 +10,7 @@ import SwiftyJSON
 import IGListKit
 
 // Media2ObjectHelper
-func media2ObjectHelper(item: Media_or_ad) -> MediaInfo? {
+func media2ObjectHelper(item: ObjectMedia_or_ad) -> MediaInfo? {
     
     var mediainfo: MediaInfo?
     
@@ -85,7 +85,7 @@ func media2ObjectHelper(item: Media_or_ad) -> MediaInfo? {
 }
 
 // search2ObjectHelper
-func search2ObjectHelper(searchResponse: SearchUserResponse) -> [ListDiffable] {
+func search2ObjectHelper(searchResponse: ObjectSearchUserResponse) -> [ListDiffable] {
     var data: [ListDiffable] = []
     
     if searchResponse.users != nil {

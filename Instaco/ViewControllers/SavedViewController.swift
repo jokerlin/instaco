@@ -71,7 +71,7 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     }
     
     func savedSetup(JSONResponse: JSON) {
-        let mediaResponse = Mapper<SavedResponse>().map(JSONString: JSONResponse.rawString()!)
+        let mediaResponse = Mapper<ObjectSavedResponse>().map(JSONString: JSONResponse.rawString()!)
         if mediaResponse?.next_max_id != nil {
             self.next_max_id_saved_previous = self.next_max_id_saved
             self.next_max_id_saved = String((mediaResponse?.next_max_id)!)

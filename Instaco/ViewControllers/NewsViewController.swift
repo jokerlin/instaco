@@ -67,7 +67,7 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
     func getNews() {
         insta.getNews(success: {(JSONResponse) -> Void in
 //            print(JSONResponse)
-            let newsResponse = Mapper<NewsResponse>().map(JSONString: JSONResponse.rawString()!)
+            let newsResponse = Mapper<ObjectNewsResponse>().map(JSONString: JSONResponse.rawString()!)
             if newsResponse?.next_max_id != nil {
                 self.next_max_id = (newsResponse?.next_max_id)!
             }
@@ -90,7 +90,7 @@ class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewD
         self.adapter.performUpdates(animated: true)
         insta.getNewsInbox(success: {(JSONResponse) -> Void in
             print(JSONResponse)
-            let inboxResponse = Mapper<InboxResponse>().map(JSONString: JSONResponse.rawString()!)
+            let inboxResponse = Mapper<ObjectInboxResponse>().map(JSONString: JSONResponse.rawString()!)
             if inboxResponse?.continuation_token != nil {
                 self.continuation_token = (inboxResponse?.continuation_token)!
             }

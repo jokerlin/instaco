@@ -59,7 +59,7 @@ class MediaViewController: UIViewController, ListAdapterDataSource, UIScrollView
     func mediaJSON2Object() {
         insta.getMediaInfo(id: self.media_id, success: { (JSONResponse) -> Void in
 //            print(JSONResponse)
-            let mediaResponse = Mapper<MediaResponse>().map(JSONString: JSONResponse.rawString()!)
+            let mediaResponse = Mapper<ObjectMediaResponse>().map(JSONString: JSONResponse.rawString()!)
             if mediaResponse != nil, mediaResponse?.items != nil {
                 for item in (mediaResponse?.items)! where item.image_versions2 != nil {
                     if let mediaInfo = media2ObjectHelper(item: item) {

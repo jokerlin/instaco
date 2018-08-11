@@ -20,7 +20,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     var postDataId: [String] = []
     var next_max_id = ""
     var loading = false
-    var friendshipflag: FriendshipResponse?
+    var friendshipflag: ObjectFriendshipResponse?
     private let refreshControl = FixedRefreshControl()
     
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -105,10 +105,10 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         
     }
     
-    func setup(friendship: FriendshipResponse) {
+    func setup(friendship: ObjectFriendshipResponse) {
         getUserInfoHeader(success: { (JSONResponse) in
             
-            let userInfoResponse = Mapper<UserInfoResponse>().map(JSONString: JSONResponse.rawString()!)
+            let userInfoResponse = Mapper<ObjectUserInfoResponse>().map(JSONString: JSONResponse.rawString()!)
             
             var is_private = false
             if userInfoResponse?.user?.is_private != nil {
@@ -143,7 +143,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     func getFriendship() {
         insta.getUserFriendship(userid: self.username_id, success: { (JSONResponse) -> Void in
 //            print(JSONResponse)
-            let friendshipResponse = Mapper<FriendshipResponse>().map(JSONString: JSONResponse.rawString()!)
+            let friendshipResponse = Mapper<ObjectFriendshipResponse>().map(JSONString: JSONResponse.rawString()!)
             self.friendshipflag = friendshipResponse
             if let friendship = friendshipResponse {
                 self.setup(friendship: friendship)
@@ -173,7 +173,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     }
     
     func getUserFeedHelper(JSONResponse: JSON) {
-        let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
+        let userFeedResponse = Mapper<ObjectUserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
         self.next_max_id = userFeedResponse?.next_max_id ?? self.next_max_id
         if let items = userFeedResponse?.items {
             self.postData.removeAll()

@@ -15,6 +15,7 @@
 		8F0BC7432119EC2300F75301 /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0BC7422119EC2300F75301 /* LikedViewController.swift */; };
 		8F0BC7452119EC3A00F75301 /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0BC7442119EC3A00F75301 /* SavedViewController.swift */; };
 		8F0BC747211A6B7900F75301 /* FriendshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0BC746211A6B7900F75301 /* FriendshipViewController.swift */; };
+		8F15D445211E569900CF3A52 /* Response2Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D444211E569900CF3A52 /* Response2Object.swift */; };
 		8F19C29F20FFD67400A7FB56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F19C29E20FFD67400A7FB56 /* Main.storyboard */; };
 		8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519120F73E7100B39F6D /* RequestConfiguration.swift */; };
 		8F22519420F7429300B39F6D /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519320F7429300B39F6D /* MD5.swift */; };
@@ -67,7 +68,6 @@
 		8FCAD4C121171CF9006908FE /* FriendshipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4C021171CF9006908FE /* FriendshipResponse.swift */; };
 		8FCAD4C321176CCC006908FE /* MediaCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4C221176CCC006908FE /* MediaCarouselCell.swift */; };
 		8FCAD4C521176D5D006908FE /* MediaCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4C421176D5D006908FE /* MediaCarouselViewModel.swift */; };
-		8FCAD4C7211795DA006908FE /* CustomCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4C6211795DA006908FE /* CustomCarousel.swift */; };
 		8FCAD4C921181C89006908FE /* CarouselSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4C821181C89006908FE /* CarouselSectionController.swift */; };
 		8FCAD4CB211888C6006908FE /* MediaVideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4CA211888C6006908FE /* MediaVideoViewModel.swift */; };
 		8FCAD4CD2118895A006908FE /* MediaVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCAD4CC2118895A006908FE /* MediaVideoCell.swift */; };
@@ -113,6 +113,7 @@
 		8F0BC7422119EC2300F75301 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
 		8F0BC7442119EC3A00F75301 /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		8F0BC746211A6B7900F75301 /* FriendshipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendshipViewController.swift; sourceTree = "<group>"; };
+		8F15D444211E569900CF3A52 /* Response2Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response2Object.swift; sourceTree = "<group>"; };
 		8F19C29E20FFD67400A7FB56 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8F22519120F73E7100B39F6D /* RequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfiguration.swift; sourceTree = "<group>"; };
 		8F22519320F7429300B39F6D /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
@@ -165,7 +166,6 @@
 		8FCAD4C021171CF9006908FE /* FriendshipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendshipResponse.swift; sourceTree = "<group>"; };
 		8FCAD4C221176CCC006908FE /* MediaCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCarouselCell.swift; sourceTree = "<group>"; };
 		8FCAD4C421176D5D006908FE /* MediaCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCarouselViewModel.swift; sourceTree = "<group>"; };
-		8FCAD4C6211795DA006908FE /* CustomCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCarousel.swift; sourceTree = "<group>"; };
 		8FCAD4C821181C89006908FE /* CarouselSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSectionController.swift; sourceTree = "<group>"; };
 		8FCAD4CA211888C6006908FE /* MediaVideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaVideoViewModel.swift; sourceTree = "<group>"; };
 		8FCAD4CC2118895A006908FE /* MediaVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaVideoCell.swift; sourceTree = "<group>"; };
@@ -281,8 +281,8 @@
 				8F22519620F742DF00B39F6D /* hmac.swift */,
 				8FBD744120F7CCBD001ACD34 /* helper.swift */,
 				8FCAD4B82113F7EC006908FE /* FixedRefreshControl.swift */,
-				8FCAD4C6211795DA006908FE /* CustomCarousel.swift */,
 				8F2465CA211D1669006F0C94 /* Constraints.swift */,
+				8F15D444211E569900CF3A52 /* Response2Object.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -752,8 +752,8 @@
 				8F0BC7432119EC2300F75301 /* LikedViewController.swift in Sources */,
 				8F4B67B021118CF00077068E /* MediaResponse.swift in Sources */,
 				8FCAD4B221135ADE006908FE /* SearchUserModel.swift in Sources */,
+				8F15D445211E569900CF3A52 /* Response2Object.swift in Sources */,
 				8FCAD4A82112D76F006908FE /* SearchViewController.swift in Sources */,
-				8FCAD4C7211795DA006908FE /* CustomCarousel.swift in Sources */,
 				8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */,
 				8FCAD4AB21134AD5006908FE /* SearchBarCell.swift in Sources */,
 				8F59F7A5210F5CBD000A7833 /* UserInfoModel.swift in Sources */,

@@ -19,7 +19,7 @@ final class VideoViewModel: ListDiffable {
     // MARK: ListDiffable
     
     func diffIdentifier() -> NSObjectProtocol {
-        return "image" as NSObjectProtocol
+        return "video" as NSObjectProtocol
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {

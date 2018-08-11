@@ -11,6 +11,8 @@ import IGListKit
 import ObjectMapper
 import SwiftyJSON
 
+// FOR FUTURE USE
+// CODE IS OUTDATED
 class NewsViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
     var newsData = [ListDiffable]()

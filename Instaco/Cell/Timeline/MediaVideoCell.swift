@@ -17,7 +17,6 @@ final class VideoCell: UICollectionViewCell, ListBindable {
         super.init(frame: frame)
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         player.view.backgroundColor = .clear
-//        print(contentView.bounds)
         player.view.frame = contentView.bounds
         contentView.addSubview(self.player.view)
         player.playbackLoops = true
@@ -35,10 +34,6 @@ final class VideoCell: UICollectionViewCell, ListBindable {
         super.layoutSubviews()
     }
     
-    func bindViewModel(_ viewModel: Any) {
-        guard viewModel is VideoViewModel else { return }
-    }
-    
     @objc func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
         
         switch self.player.playbackState.rawValue {
@@ -53,5 +48,9 @@ final class VideoCell: UICollectionViewCell, ListBindable {
                 player.muted = true
             }
         }
+    }
+    
+    func bindViewModel(_ viewModel: Any) {
+        guard viewModel is VideoViewModel else { return }
     }
 }

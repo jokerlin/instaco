@@ -23,11 +23,14 @@ final class News: ListDiffable {
     // MARK: ListDiffable
     
     func diffIdentifier() -> NSObjectProtocol {
-        return text as NSObjectProtocol
+        return profile_image + text as NSObjectProtocol
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        return true
+        guard let object = object as? News else { return false }
+        return type == object.type
+            && profile_image == object.profile_image
+            && text == object.text
     }
     
 }

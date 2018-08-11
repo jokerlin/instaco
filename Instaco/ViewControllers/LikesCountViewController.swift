@@ -23,7 +23,6 @@ class LikesCountViewController: UIViewController, ListAdapterDataSource, UIScrol
     
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
-    
     private let refreshControl = FixedRefreshControl()
     
     init(media_id id: String) {
@@ -43,15 +42,14 @@ class LikesCountViewController: UIViewController, ListAdapterDataSource, UIScrol
         self.navigationItem.title = "Likers"
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshUserInfoData(_:)), for: .valueChanged)
-        
         self.view.addSubview(collectionView)
+        hideKeyboardWhenTappedAround()
+        
         setup()
         
         adapter.dataSource = self
         adapter.collectionView = collectionView
         adapter.scrollViewDelegate = self
-        
-        hideKeyboardWhenTappedAround()
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,10 +57,36 @@ class LikesCountViewController: UIViewController, ListAdapterDataSource, UIScrol
         collectionView.frame = view.bounds
     }
     
+    @objc private func refreshUserInfoData(_ sender: Any) {
+        data.removeAll()
+        setup()
+    }
+    
+    func setup() {
+        likersJSON2Object()
+        refreshControl.endRefreshing()
+    }
+    
+    func likersJSON2Object() {
+        insta.getLikers(media_id: self.media_id, success: { (JSONResponse) in
+//            print(JSONResponse)
+            let likersResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+            if likersResponse != nil {
+                self.data += search2ObjectHelper(searchResponse: likersResponse!)
+            }
+            self.cache = self.data
+            self.adapter.performUpdates(animated: true)
+        }, failure: { (JSONResponse) in
+            ifLoginRequire(viewController: self)
+            print(JSONResponse)
+        })
+    }
+    
+    // MARK: ListAdapterDataSource
+    
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        
         guard filterString != "" else { return [searchToken] + cache.map { $0 as ListDiffable } }
-        data=[]
+        data.removeAll()
         for item in cache {
             let str = String(item.diffIdentifier() as! Substring)
             if str.contains(filterString) {
@@ -86,36 +110,9 @@ class LikesCountViewController: UIViewController, ListAdapterDataSource, UIScrol
         return nil
     }
     
-    @objc private func refreshUserInfoData(_ sender: Any) {
-        data.removeAll()
-        setup()
-    }
-    
-    func setup() {
-        likersJSON2Object()
-        refreshControl.endRefreshing()
-    }
-    
-    func likersJSON2Object() {
-        insta.getLikers(media_id: self.media_id, success: { (JSONResponse) in
-            print(JSONResponse)
-            let likersResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-            if likersResponse?.users != nil {
-                for item in (likersResponse?.users)! {
-                    let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                    self.data.append(searchUserResult)
-                }
-            }
-            self.cache = self.data
-            self.adapter.performUpdates(animated: true)
-        }, failure: { (JSONResponse) in
-            ifLoginRequire(viewController: self)
-            print(JSONResponse)
-        })
-    }
+    // MARK: SearchSectionControllerDelegate
     
     func searchSectionController(_ sectionController: SearchBarSectionController, didChangeText text: String) {
-
         filterString = text
         adapter.performUpdates(animated: true, completion: nil)
     }

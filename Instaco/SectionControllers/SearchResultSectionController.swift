@@ -15,6 +15,8 @@ class SearchResultSectionController: ListBindingSectionController<ListDiffable>,
         dataSource = self
     }
     
+    // MARK: ListBindingSectionController
+    
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, viewModelsFor object: Any) -> [ListDiffable] {
         guard let object = object as? SearchUserModel else { fatalError() }
         return [object]

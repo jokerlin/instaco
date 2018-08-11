@@ -31,6 +31,7 @@ final class UserFeed: ListDiffable {
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        return true
+        guard let object = object as? UserFeed else { return false }
+        return id == object.id
     }
 }

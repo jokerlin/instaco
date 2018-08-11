@@ -33,6 +33,8 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         displayDelegate = self
     }
     
+    // MARK: ListBindingSectionController
+    
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, viewModelsFor object: Any) -> [ListDiffable] {
         guard let object = object as? MediaInfo else { fatalError() }
         mediaInfo = object
@@ -46,7 +48,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         } else if mediaInfo?.type == 2 {
             carousel_urls = object.carousel!
             results = [UserViewModel(username: object.username, userProfileImage: object.userProfileImage, location: object.location, timestamp: object.timestamp),
-                       MediaCarouselViewModel(urls: object.carousel!),
+                       CarouselViewModel(urls: object.carousel!),
                        ActionViewModel(likes: localLikes ?? object.likes),
                        CaptionViewModel(username: object.caption.username, text: object.caption.text),
                        CommentViewModel(comment_count: object.comment_count)]
@@ -67,7 +69,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         switch viewModel {
         case is UserViewModel: cellClass = UserCell.self
         case is ImageViewModel: cellClass = ImageCell.self
-        case is MediaCarouselViewModel: cellClass = MediaCarouselCell.self
+        case is CarouselViewModel: cellClass = MediaCarouselCell.self
         case is VideoViewModel: cellClass = VideoCell.self
         case is ActionViewModel: cellClass = ActionCell.self
         case is CaptionViewModel: cellClass = CaptionCell.self
@@ -121,7 +123,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
         switch viewModel {
         case is UserViewModel: height = 52
         case is ImageViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
-        case is MediaCarouselViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
+        case is CarouselViewModel: height = transfromHeight(originalHeight: (mediaInfo?.imageHeight)!, OriginalWidth: (mediaInfo?.imageWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is VideoViewModel: height = transfromHeight(originalHeight: (mediaInfo?.videoHeight)!, OriginalWidth: (mediaInfo?.videoWidth)!, afterWidth: (collectionContext?.containerSize.width)!)
         case is ActionViewModel: height = 40
         case is CaptionViewModel:
@@ -139,6 +141,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     }
     
     // MARK: ActionCellDelegate
+    
     func didTapHeart(cell: ActionCell) {
         if mediaInfo?.beliked == true {
             if likedFlagChange == false {
@@ -210,23 +213,20 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     // MARK: UserCellDelegate
     
     func didTapUsername(cell: UserCell) {
-        let current_vc = cell.responderViewController()
         let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
-        current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
+        viewController?.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
     
     func didTapProfileImage(cell: UserCell) {
-        let current_vc = cell.responderViewController()
         let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
-        current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
+        viewController?.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
     
     // MARK: CaptionCellDelegate
     
     func didTapUsername(cell: CaptionCell) {
-        let current_vc = cell.responderViewController()
         let userInfoViewController = UserInfoViewController(username_id: String((mediaInfo?.userid)!))
-        current_vc?.navigationController?.pushViewController(userInfoViewController, animated: true)
+        viewController?.navigationController?.pushViewController(userInfoViewController, animated: true)
     }
     
     // MARK: ImageCellDelegate

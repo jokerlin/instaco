@@ -21,10 +21,10 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     var next_max_id = ""
     var loading = false
     var friendshipflag: FriendshipResponse?
+    private let refreshControl = FixedRefreshControl()
+    
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
-    
-    private let refreshControl = FixedRefreshControl()
     
     init(username_id id: String) {
         super.init(nibName: nil, bundle: nil)
@@ -37,16 +37,13 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
         self.navigationController?.navigationBar.tintColor = UIColor.black
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshUserInfoData(_:)), for: .valueChanged)
-        
         self.view.addSubview(collectionView)
         
         getFriendship()
-        
         if username_id == insta.username_id {
             setupLogOutButton()
         }
@@ -61,6 +58,14 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         collectionView.frame = view.bounds
     }
     
+    @objc private func refreshUserInfoData(_ sender: Any) {
+        data.removeAll()
+        postData.removeAll()
+        postDataId.removeAll()
+        self.next_max_id = ""
+        getFriendship()
+    }
+    
     fileprivate func setupLogOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogOut))
     }
@@ -72,17 +77,24 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
             do {
                 try insta.logout(success: {_ in
                     print("Logout " + insta.username)
+                    
+                    // Set insta object
                     insta.isLoggedIn = false
                     insta.error = ""
+                    
+                    // Set keychain
                     let keychain = Keychain(service: "com.instacoapp")
                     try! keychain.removeAll()
-                }, failure: {_ in})
+                    
+                }, failure: {JSONResponse in
+                    print(JSONResponse)
+                })
                 
                 // present signout controller
                 let loginContoller = LoginController()
                 let navController = UINavigationController(rootViewController: loginContoller)
-                
                 self.present(navController, animated: true, completion: nil)
+                
             } catch let signOutErr {
                 print("Failed to sign out: ", signOutErr)
             }
@@ -95,26 +107,26 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     func setup(friendship: FriendshipResponse) {
         getUserInfoHeader(success: { (JSONResponse) in
-            var is_private = false
+            
             let userInfoResponse = Mapper<UserInfoResponse>().map(JSONString: JSONResponse.rawString()!)
-            if (userInfoResponse?.user?.is_private)! == 0 {
-                is_private = false
-            } else {
-                is_private = true
+            
+            var is_private = false
+            if userInfoResponse?.user?.is_private != nil {
+                is_private = (userInfoResponse?.user?.is_private)! == 0 ? false: true
             }
-            let userInfo = UserInfo(username: (userInfoResponse?.user?.username)!,
-                                    userProfileImage: URL(string: (userInfoResponse?.user?.hd_profile_pic_url_info?.url)!)!,
-                                    full_name: (userInfoResponse?.user?.full_name)!,
-                                    biography: (userInfoResponse?.user?.biography)!,
-                                    profileImageimageHeight: (userInfoResponse?.user?.hd_profile_pic_url_info?.height)!,
-                                    profileImageimageWidth: (userInfoResponse?.user?.hd_profile_pic_url_info?.width)!,
-                                    follower_count: (userInfoResponse?.user?.follower_count)!,
-                                    following_count: (userInfoResponse?.user?.following_count)!,
+            let userInfo = UserInfo(username: userInfoResponse?.user?.username ?? "",
+                                    userProfileImage: URL(string: (userInfoResponse?.user?.hd_profile_pic_url_info?.url) ?? "")!,
+                                    full_name: userInfoResponse?.user?.full_name ?? "",
+                                    biography: userInfoResponse?.user?.biography ?? "",
+                                    profileImageimageHeight: userInfoResponse?.user?.hd_profile_pic_url_info?.height ?? 0,
+                                    profileImageimageWidth: userInfoResponse?.user?.hd_profile_pic_url_info?.width ?? 0,
+                                    follower_count: userInfoResponse?.user?.follower_count ?? 0,
+                                    following_count: userInfoResponse?.user?.following_count ?? 0,
                                     is_private: is_private,
-                                    external_url: (userInfoResponse?.user?.external_url)!,
-                                    pk: (userInfoResponse?.user?.pk)!,
-                                    media_count: (userInfoResponse?.user?.media_count)!,
-                                    friendship: friendship.following!)
+                                    external_url: userInfoResponse?.user?.external_url ?? "",
+                                    pk: userInfoResponse?.user?.pk ?? 0,
+                                    media_count: userInfoResponse?.user?.media_count ?? 0,
+                                    friendship: friendship.following ?? false)
             self.data.append(userInfo)
             
             self.navigationItem.title = userInfo.username
@@ -122,7 +134,6 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         }, failure: { (JSONResponse) in
             print(JSONResponse)
         })
-
     }
     
     func getUserInfoHeader(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
@@ -134,7 +145,9 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
 //            print(JSONResponse)
             let friendshipResponse = Mapper<FriendshipResponse>().map(JSONString: JSONResponse.rawString()!)
             self.friendshipflag = friendshipResponse
-            self.setup(friendship: friendshipResponse!)
+            if let friendship = friendshipResponse {
+                self.setup(friendship: friendship)
+            }
         }, failure: { (JSONResponse) -> Void in
             ifLoginRequire(viewController: self)
             print(JSONResponse)
@@ -145,55 +158,44 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
         if self.next_max_id == "" {
             insta.getUserFeed(userid: self.username_id, success: {(JSONResponse) -> Void in
 //                print(JSONResponse)
-                let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
-                if userFeedResponse?.next_max_id != nil {
-                    self.next_max_id = (userFeedResponse?.next_max_id)!
-                }
-                if userFeedResponse?.items != nil {
-                    self.postData.removeAll()
-                    for item in (userFeedResponse?.items!)! {
-                        if self.postDataId.index(of: item.id!) == nil {
-                            let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!, type: item.type!)
-                            self.postData.append(userFeed)
-                            self.postDataId.append(item.id!)
-                        }
-                    }
-                }
-
-                self.data.append(GridItem(items: self.postData))
-                self.adapter.performUpdates(animated: true)
-                
-                self.refreshControl.endRefreshing()
+                self.getUserFeedHelper(JSONResponse: JSONResponse)
             }, failure: { (JSONResponse) -> Void in
                 print(JSONResponse)
             })
         } else {
             insta.getUserFeed(userid: self.username_id, max_id: self.next_max_id, success: {(JSONResponse) -> Void in
 //                print(JSONResponse)
-                let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
-                if userFeedResponse?.next_max_id != nil {
-                    self.next_max_id = (userFeedResponse?.next_max_id)!
-                }
-                if userFeedResponse?.items != nil {
-                    self.postData.removeAll()
-                    for item in (userFeedResponse?.items!)! {
-                        if self.postDataId.index(of: item.id!) == nil {
-                            let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url!)!, imageHeight: item.image_versions2![0].height!, imageWidth: item.image_versions2![0].height!, id: item.id!, type: item.type!)
-                            self.postData.append(userFeed)
-                            self.postDataId.append(item.id!)
-                        }
-                    }
-                }
-                
-                self.data.append(GridItem(items: self.postData))
-                self.adapter.performUpdates(animated: true)
-                
-                self.refreshControl.endRefreshing()
+                self.getUserFeedHelper(JSONResponse: JSONResponse)
             }, failure: { (JSONResponse) -> Void in
                 print(JSONResponse)
             })
         }
     }
+    
+    func getUserFeedHelper(JSONResponse: JSON) {
+        let userFeedResponse = Mapper<UserFeedResponse>().map(JSONString: JSONResponse.rawString()!)
+        self.next_max_id = userFeedResponse?.next_max_id ?? self.next_max_id
+        if let items = userFeedResponse?.items {
+            self.postData.removeAll()
+            for item in items where item.id != nil && item.image_versions2 != nil && item.type != nil {
+                if self.postDataId.index(of: item.id!) == nil {
+                    let userFeed = UserFeed(imageURL: URL(string: item.image_versions2![0].url ?? "")!,
+                                            imageHeight: item.image_versions2![0].height ?? 0,
+                                            imageWidth: item.image_versions2![0].height ?? 0,
+                                            id: item.id!,
+                                            type: item.type!)
+                    self.postData.append(userFeed)
+                    self.postDataId.append(item.id!)
+                }
+            }
+        }
+        
+        self.data.append(GridItem(items: self.postData))
+        self.adapter.performUpdates(animated: true)
+        self.refreshControl.endRefreshing()
+    }
+    
+    // MARK: ListAdapterDataSource
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         return data as [ListDiffable]
@@ -208,14 +210,6 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
         return nil
-    }
-    
-    @objc private func refreshUserInfoData(_ sender: Any) {
-        data.removeAll()
-        postData.removeAll()
-        postDataId.removeAll()
-        self.next_max_id = ""
-        getFriendship()
     }
     
     // MARK: UIScrollViewDelegate

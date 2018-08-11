@@ -23,7 +23,6 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
     
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
-    
     private let refreshControl = FixedRefreshControl()
     
     init(username_id id: Int, type: String) {
@@ -44,21 +43,125 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
         self.navigationItem.title = self.type + "s"
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshUserInfoData(_:)), for: .valueChanged)
-    
         self.view.addSubview(collectionView)
+        hideKeyboardWhenTappedAround()
+        
         setup()
         
         adapter.dataSource = self
         adapter.collectionView = collectionView
         adapter.scrollViewDelegate = self
-        
-        hideKeyboardWhenTappedAround()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
     }
+    
+    @objc private func refreshUserInfoData(_ sender: Any) {
+        data.removeAll()
+        self.next_max_id = ""
+        setup()
+    }
+    
+    func setup() {
+        if self.type == "Follower" {
+            followerJSON2Object()
+        } else {
+            followingJSON2Object()
+        }
+        refreshControl.endRefreshing()
+    }
+    
+    func followerJSON2Object() {
+        insta.getUserFriendshipFollower(user_id: username_id, success: { (JSONResponse) in
+//            print(JSONResponse)
+            self.followerJSON2ObjectHelper(JSONResponse: JSONResponse)
+        }, failure: { (JSONResponse) in
+            ifLoginRequire(viewController: self)
+            print(JSONResponse)
+        })
+    }
+    
+    func followerJSON2ObjectPagination() {
+        insta.getUserFriendshipFollower(user_id: username_id, next_max_id: self.next_max_id, success: { (JSONResponse) in
+//            print(JSONResponse)
+            self.followerJSON2ObjectHelper(JSONResponse: JSONResponse)
+        }, failure: { (JSONResponse) in
+            print(JSONResponse)
+        })
+    }
+    
+    func followerJSON2ObjectHelper(JSONResponse: JSON) {
+        let followerResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+        if followerResponse?.next_max_id != nil {
+            self.next_max_id = (followerResponse?.next_max_id!)!
+        }
+        if followerResponse != nil {
+            self.data += search2ObjectHelper(searchResponse: followerResponse!)
+        }
+        self.adapter.performUpdates(animated: true)
+    }
+    
+    func followingJSON2Object() {
+        insta.getUserFriendshipFollowing(user_id: username_id, success: { (JSONResponse) in
+//            print(JSONResponse)
+            self.followingJSON2ObjectHelper(JSONResponse: JSONResponse)
+        }, failure: { (JSONResponse) in
+            ifLoginRequire(viewController: self)
+            print(JSONResponse)
+        })
+    }
+    
+    func followingJSON2ObjectPagination() {
+        insta.getUserFriendshipFollowing(user_id: username_id, next_max_id: self.next_max_id, success: { (JSONResponse) in
+//            print(JSONResponse)
+            self.followingJSON2ObjectHelper(JSONResponse: JSONResponse)
+        }, failure: { (JSONResponse) in
+            print(JSONResponse)
+        })
+    }
+    
+    func followingJSON2ObjectHelper(JSONResponse: JSON) {
+        let followingResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+        if followingResponse?.next_max_id != nil {
+            self.next_max_id = (followingResponse?.next_max_id!)!
+        }
+        if followingResponse != nil {
+            self.data += search2ObjectHelper(searchResponse: followingResponse!)
+        }
+        self.adapter.performUpdates(animated: true)
+    }
+    
+    func searchUsers(quest: String) {
+        if self.type == "Follower" {
+            insta.searchUserFriendshipFollower(query: quest, user_id: self.username_id, success: { (JSONResponse) -> Void in
+//                print(JSONResponse)
+                let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+                if searchUserResponse != nil {
+                    self.data += search2ObjectHelper(searchResponse: searchUserResponse!)
+                }
+                self.adapter.performUpdates(animated: true)
+            }, failure: { JSONResponse in
+                print(JSONResponse)
+                ifLoginRequire(viewController: self)
+            })
+        } else {
+            insta.searchUserFriendshipFollowing(query: quest, user_id: self.username_id, success: { (JSONResponse) -> Void in
+//                print(JSONResponse)
+                let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+                if searchUserResponse != nil {
+                    self.data += search2ObjectHelper(searchResponse: searchUserResponse!)
+                }
+                self.adapter.performUpdates(animated: true)
+            }, failure: { JSONResponse in
+                print(JSONResponse)
+                ifLoginRequire(viewController: self)
+            })
+        }
+    }
+    
+    // MARK: ListAdapterDataSource
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         return [searchToken] + data as [ListDiffable]
@@ -76,12 +179,6 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
         return nil
-    }
-    
-    @objc private func refreshUserInfoData(_ sender: Any) {
-        data.removeAll()
-        self.next_max_id = ""
-        setup()
     }
     
     // MARK: UIScrollViewDelegate
@@ -106,131 +203,8 @@ class FriendshipViewController: UIViewController, ListAdapterDataSource, UIScrol
                         }
                     }
                     self.adapter.performUpdates(animated: true, completion: nil)
-                    
                 }
             }
-        }
-        
-    }
-    
-    func setup() {
-        if self.type == "Follower" {
-            followerJSON2Object()
-        } else {
-            followingJSON2Object()
-        }
-        refreshControl.endRefreshing()
-    }
-    
-    func followerJSON2Object() {
-        insta.getUserFriendshipFollower(user_id: username_id, success: { (JSONResponse) in
-//            print(JSONResponse)
-            let followerResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-            if followerResponse?.next_max_id != nil {
-                self.next_max_id = (followerResponse?.next_max_id!)!
-            }
-            if followerResponse?.users != nil {
-                for item in (followerResponse?.users)! {
-                    let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                    self.data.append(searchUserResult)
-                }
-            }
-            self.adapter.performUpdates(animated: true)
-        }, failure: { (JSONResponse) in
-            ifLoginRequire(viewController: self)
-            print(JSONResponse)
-        })
-    }
-    
-    func followerJSON2ObjectPagination() {
-        insta.getUserFriendshipFollower(user_id: username_id, next_max_id: self.next_max_id, success: { (JSONResponse) in
-            //            print(JSONResponse)
-            let followerResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-            if followerResponse?.next_max_id != nil {
-                self.next_max_id = (followerResponse?.next_max_id!)!
-            }
-            if followerResponse?.users != nil {
-                for item in (followerResponse?.users)! {
-                    let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                    self.data.append(searchUserResult)
-                }
-            }
-            self.adapter.performUpdates(animated: true)
-        }, failure: { (JSONResponse) in
-            print(JSONResponse)
-        })
-    }
-    
-    func followingJSON2Object() {
-        insta.getUserFriendshipFollowing(user_id: username_id, success: { (JSONResponse) in
-//            print(JSONResponse)
-            let followingResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-            if followingResponse?.next_max_id != nil {
-                self.next_max_id = (followingResponse?.next_max_id!)!
-            }
-            if followingResponse?.users != nil {
-                for item in (followingResponse?.users)! {
-                    let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                    self.data.append(searchUserResult)
-                }
-            }
-            self.adapter.performUpdates(animated: true)
-        }, failure: { (JSONResponse) in
-            ifLoginRequire(viewController: self)
-            print(JSONResponse)
-        })
-    }
-    
-    func followingJSON2ObjectPagination() {
-        insta.getUserFriendshipFollowing(user_id: username_id, success: { (JSONResponse) in
-            //            print(JSONResponse)
-            let followingResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-            if followingResponse?.next_max_id != nil {
-                self.next_max_id = (followingResponse?.next_max_id!)!
-            }
-            if followingResponse?.users != nil {
-                for item in (followingResponse?.users)! {
-                    let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                    self.data.append(searchUserResult)
-                }
-            }
-            self.adapter.performUpdates(animated: true)
-        }, failure: { (JSONResponse) in
-            print(JSONResponse)
-        })
-    }
-    
-    func searchUsers(quest: String) {
-        if self.type == "Follower" {
-            insta.searchUserFriendshipFollower(query: quest, user_id: self.username_id, success: { (JSONResponse) -> Void in
-                //            print(JSONResponse)
-                let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-                if searchUserResponse?.users != nil {
-                    for item in (searchUserResponse?.users)! {
-                        let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                        self.data.append(searchUserResult)
-                    }
-                }
-                self.adapter.performUpdates(animated: true)
-            }, failure: {(JSONResponse) -> Void in
-                ifLoginRequire(viewController: self)
-                print(JSONResponse)
-            })
-        } else {
-            insta.searchUserFriendshipFollowing(query: quest, user_id: self.username_id, success: { (JSONResponse) -> Void in
-                //            print(JSONResponse)
-                let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-                if searchUserResponse?.users != nil {
-                    for item in (searchUserResponse?.users)! {
-                        let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                        self.data.append(searchUserResult)
-                    }
-                }
-                self.adapter.performUpdates(animated: true)
-            }, failure: {(JSONResponse) -> Void in
-                ifLoginRequire(viewController: self)
-                print(JSONResponse)
-            })
         }
     }
     

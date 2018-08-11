@@ -67,6 +67,36 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
         return nil
     }
     
+    @objc private func refreshTimelineData(_ sender: Any) {
+        data.removeAll()
+        next_max_id = ""
+        self.timelineJSON2Object(params: insta.generatePostParamsTest())
+    }
+    
+    func timelineJSON2Object(params: [String: Any]) {
+        insta.timelineFeed(params: params, success: { (JSONResponse) -> Void in
+//            print(JSONResponse)
+            self.next_max_id = JSONResponse["next_max_id"].stringValue
+            
+            let timelineResponse = Mapper<TimelineResponse>().map(JSONString: JSONResponse.rawString()!)
+            if timelineResponse?.feed_items != nil {
+                
+                for item in (timelineResponse?.feed_items!)! {
+                    if let item = item.media_or_ad {
+                        if let mediaInfo = media2ObjectHelper(item: item) {
+                            self.data.append(mediaInfo)
+                        }
+                    }
+                }
+            }
+            self.adapter.performUpdates(animated: true)
+            self.refreshControl.endRefreshing()
+        }, failure: { JSONResponse in
+            print(JSONResponse)
+            ifLoginRequire(viewController: self)
+        })
+    }
+    
     // MARK: UIScrollViewDelegate
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,
@@ -88,119 +118,5 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
             }
         }
         
-    }
-    
-    func timelineJSON2Object(params: [String: Any]) {
-        insta.timelineFeed(params: params, success: { (JSONResponse) -> Void in
-//            print(JSONResponse)
-            self.next_max_id = JSONResponse["next_max_id"].stringValue
-            
-            let timelineResponse = Mapper<TimelineResponse>().map(JSONString: JSONResponse.rawString()!)
-            if timelineResponse?.feed_items != nil {
-                
-                for item in (timelineResponse?.feed_items!)! {
-                    var location = ""
-                    var caption_username = ""
-                    var caption_text = ""
-                    var has_viewer_saved = false
-                    
-                    if item.media_or_ad?.location != nil {
-                        location = (item.media_or_ad?.location?.name)!
-                    }
-                    
-                    if item.media_or_ad?.caption != nil {
-                        caption_username = (item.media_or_ad?.caption?.user?.username)!
-                        caption_text = (item.media_or_ad?.caption?.text)!
-                    }
-                    
-                    if item.media_or_ad?.has_viewer_saved != nil {
-                        has_viewer_saved = (item.media_or_ad?.has_viewer_saved!)!
-                    }
-                    
-                    if item.media_or_ad?.type == 3 {
-                        if let item = item.media_or_ad {
-                            let mediainfo = MediaInfo(
-                                username: (item.user?.username)!,
-                                userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
-                                location: location,
-                                timestamp: item.taken_at!,
-                                imageURL: URL(string: item.image_versions2![0].url!)!,
-                                imageHeight: item.image_versions2![0].height!,
-                                imageWidth: item.image_versions2![0].width!,
-                                likes: item.like_count!,
-                                beliked: item.has_liked!,
-                                caption: CaptionViewModel(username: caption_username, text: caption_text),
-                                id: item.id!,
-                                userid: (item.user?.pk)!,
-                                comment_count: item.comment_count!,
-                                type: 3,
-                                videoURL: URL(string: item.video_versions![0].url!),
-                                videoHeight: item.video_versions![0].height,
-                                videoWidth: item.video_versions![0].width,
-                                beSaved: has_viewer_saved)
-                            self.data.append(mediainfo)
-                        }
-                        
-                    } else if item.media_or_ad?.type == 2 {
-
-                        if let item = item.media_or_ad {
-                            var urls: [String] = []
-                            for carousel in item.carousel_media! {
-                                urls.append(carousel.image_versions2![0].url!)
-                            }
-                            
-                            let mediainfo = MediaInfo(
-                                username: (item.user?.username)!,
-                                userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
-                                location: location,
-                                timestamp: item.taken_at!,
-                                imageURL: URL(string: item.image_versions2![0].url!)!,
-                                imageHeight: item.image_versions2![0].height!,
-                                imageWidth: item.image_versions2![0].width!,
-                                likes: item.like_count!,
-                                beliked: item.has_liked!,
-                                caption: CaptionViewModel(username: caption_username, text: caption_text),
-                                id: item.id!,
-                                userid: (item.user?.pk)!,
-                                comment_count: item.comment_count!,
-                                type: 2,
-                                carousel: urls,
-                                beSaved: has_viewer_saved)
-                            self.data.append(mediainfo)
-                        }
-                    } else {
-                        if let item = item.media_or_ad {
-                            let mediainfo = MediaInfo(
-                                username: (item.user?.username)!,
-                                userProfileImage: URL(string: (item.user?.profile_pic_url)!)!,
-                                location: location,
-                                timestamp: item.taken_at!,
-                                imageURL: URL(string: item.image_versions2![0].url!)!,
-                                imageHeight: item.image_versions2![0].height!,
-                                imageWidth: item.image_versions2![0].width!,
-                                likes: item.like_count!,
-                                beliked: item.has_liked!,
-                                caption: CaptionViewModel(username: caption_username, text: caption_text),
-                                id: item.id!,
-                                userid: (item.user?.pk)!,
-                                comment_count: item.comment_count!,
-                                beSaved: has_viewer_saved)
-                            self.data.append(mediainfo)
-                        }
-                    }
-                }
-            }
-            self.adapter.performUpdates(animated: true)
-            self.refreshControl.endRefreshing()
-        }, failure: { (JSONResponse) -> Void in
-            ifLoginRequire(viewController: self)
-            print(JSONResponse)
-        })
-    }
-    
-    @objc private func refreshTimelineData(_ sender: Any) {
-        data.removeAll()
-        next_max_id = ""
-        self.timelineJSON2Object(params: insta.generatePostParamsTest())
     }
 }

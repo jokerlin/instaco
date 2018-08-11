@@ -16,11 +16,12 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     var data = [ListDiffable]()
     var loading = false
     var searchString = ""
-    var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     var searched: [Any] = []
     var quest: String = ""
     var paginationFlag = true
     let searchToken: NSNumber = 89757
+    
+    var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     lazy var adapter: ListAdapter = { return ListAdapter(updater: ListAdapterUpdater(), viewController: self) }()
     
     override func viewDidLoad() {
@@ -28,15 +29,14 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
         self.navigationItem.title = "Search"
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 1)
-        
         self.view.addSubview(collectionView)
+        hideKeyboardWhenTappedAround()
+        
         searchSuggest()
         
         adapter.dataSource = self
         adapter.collectionView = collectionView
         adapter.scrollViewDelegate = self
-        
-        hideKeyboardWhenTappedAround()
     }
     
     override func viewDidLayoutSubviews() {
@@ -44,10 +44,69 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
         collectionView.frame = view.bounds
     }
     
+    func searchUsers(quest: String) {
+        insta.searchUsers(q: quest, success: { (JSONResponse) -> Void in
+//            print(JSONResponse)
+            let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+            self.data += search2ObjectHelper(searchResponse: searchUserResponse!)
+            if searchUserResponse?.users != nil {
+                for item in (searchUserResponse?.users)! where item.pk != nil {
+                    self.searched.append(item.pk!)
+                }
+            }
+            self.adapter.performUpdates(animated: true)
+        }, failure: { JSONResponse in
+            print(JSONResponse)
+            ifLoginRequire(viewController: self)
+        })
+    }
+    
+    func searchSuggestPagination(q: String) {
+        let exlist = ("users", searched as Any)
+        let json = JSON(dictionaryLiteral: exlist)
+        insta.searchUsers(exclude_list: json, q: q, success: { (JSONResponse) in
+            //            print(JSONResponse)
+            
+            let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+            self.data += search2ObjectHelper(searchResponse: searchUserResponse!)
+            if searchUserResponse?.users != nil {
+                for item in (searchUserResponse?.users)! where item.pk != nil {
+                    self.searched.append(item.pk!)
+                }
+            }
+            self.adapter.performUpdates(animated: true)
+        }, failure: { (JSONResponse) in
+            print(JSONResponse)
+            self.paginationFlag = false
+        })
+    }
+    
+    func searchSuggest() {
+        insta.searchSuggested(success: { (JSONResponse) -> Void in
+//            print(JSONResponse)
+            let suggestedSearchResponse = Mapper<SuggestedSearchResponse>().map(JSONString: JSONResponse.rawString()!)
+            if suggestedSearchResponse?.suggested != nil {
+                for item in (suggestedSearchResponse?.suggested)! where item.user != nil {
+                    
+                    let searchUserResult = SearchUserModel (pk: item.user?.pk ?? 0,
+                                                            profile_image: item.user?.profile_pic_url ?? "",
+                                                            search_social_context: item.user?.search_social_context ?? "",
+                                                            username: item.user?.username ?? "",
+                                                            full_name: item.user?.full_name ?? "")
+                    self.data.append(searchUserResult)
+                }
+            }
+            self.adapter.performUpdates(animated: true)
+        }, failure: { (JSONResponse) -> Void in
+            ifLoginRequire(viewController: self)
+            print(JSONResponse)
+        })
+    }
+    
     // MARK: ListAdapterDataSource
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-//        return [searchToken]
+        //        return [searchToken]
         return [searchToken] + data as [ListDiffable]
     }
     
@@ -64,62 +123,6 @@ class SearchViewController: UIViewController, ListAdapterDataSource, UIScrollVie
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
         return nil
-    }
-    
-    func searchUsers(quest: String) {
-        insta.searchUsers(q: quest, success: { (JSONResponse) -> Void in
-//            print(JSONResponse)
-            let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-            if searchUserResponse?.users != nil {
-                for item in (searchUserResponse?.users)! {
-                    let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                    self.searched.append(item.pk!)
-                    self.data.append(searchUserResult)
-                }
-            }
-            self.adapter.performUpdates(animated: true)
-        }, failure: {(JSONResponse) -> Void in
-            ifLoginRequire(viewController: self)
-            print(JSONResponse)
-        })
-    }
-    
-    func searchSuggestPagination(q: String) {
-        let exlist = ("users", searched as Any)
-        let json = JSON(dictionaryLiteral: exlist)
-        insta.searchUsers(exclude_list: json, q: q, success: { (JSONResponse) in
-            //            print(JSONResponse)
-            let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
-            if searchUserResponse?.users != nil {
-                for item in (searchUserResponse?.users)! {
-                    
-                    let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)
-                    self.searched.append(item.pk!)
-                    self.data.append(searchUserResult)
-                }
-            }
-            self.adapter.performUpdates(animated: true)
-        }, failure: { (JSONResponse) in
-            print(JSONResponse)
-            self.paginationFlag = false
-        })
-    }
-    
-    func searchSuggest() {
-        insta.searchSuggested(success: { (JSONResponse) -> Void in
-//            print(JSONResponse)
-            let suggestedSearchResponse = Mapper<SuggestedSearchResponse>().map(JSONString: JSONResponse.rawString()!)
-            if suggestedSearchResponse?.suggested != nil {
-                for item in (suggestedSearchResponse?.suggested)! where item.user != nil {
-                    let searchUserResult = SearchUserModel (pk: (item.user?.pk!)!, profile_image: (item.user?.profile_pic_url!)!, search_social_context: item.user?.search_social_context, username: (item.user?.username!)!, full_name: (item.user?.full_name!)!)
-                    self.data.append(searchUserResult)
-                }
-            }
-            self.adapter.performUpdates(animated: true)
-        }, failure: { (JSONResponse) -> Void in
-            ifLoginRequire(viewController: self)
-            print(JSONResponse)
-        })
     }
     
     // MARK: SearchSectionControllerDelegate

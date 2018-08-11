@@ -11,6 +11,8 @@ import IGListKit
 import SwiftyJSON
 import ObjectMapper
 
+// FOR FUTURE USE
+// CODE IS OUTDATED
 class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
     var media_id: String = ""
@@ -271,9 +273,9 @@ class FeedLikedViewController: UIViewController, ListAdapterDataSource, UIScroll
     
     func savedSetup(JSONResponse: JSON) {
         let mediaResponse = Mapper<SavedResponse>().map(JSONString: JSONResponse.rawString()!)
-        //            if mediaResponse?.next_max_id != nil {
+        //            if mediaResponse.next_max_id != nil {
         //                self.next_max_id_saved_previous = self.next_max_id_saved
-        //                self.next_max_id_saved = String((mediaResponse?.next_max_id)!)
+        //                self.next_max_id_saved = String((mediaResponse.next_max_id)!)
         //            }
         if mediaResponse?.items != nil {
             for item in (mediaResponse?.items!)! {

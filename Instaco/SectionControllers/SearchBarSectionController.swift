@@ -21,6 +21,8 @@ final class SearchBarSectionController: ListSectionController, UISearchBarDelega
         scrollDelegate = self
     }
     
+    // MARK: ListSectionController
+    
     override func sizeForItem(at index: Int) -> CGSize {
         return CGSize(width: collectionContext!.containerSize.width, height: 44)
     }

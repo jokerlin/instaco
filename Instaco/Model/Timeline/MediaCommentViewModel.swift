@@ -19,11 +19,12 @@ final class CommentViewModel: ListDiffable {
     // MARK: ListDiffable
     
     func diffIdentifier() -> NSObjectProtocol {
-        return comment_count as NSObjectProtocol
+        return "comment" as NSObjectProtocol
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        return true
+        guard let object = object as? CommentViewModel else { return false }
+        return comment_count == object.comment_count
     }
     
 }

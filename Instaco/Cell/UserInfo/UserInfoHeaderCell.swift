@@ -228,17 +228,6 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         }
     }
     
-    func responderViewController() -> UIViewController? {
-        for view in sequence(first: self.superview, next: {$0?.superview}) {
-            if let responder = view?.next {
-                if responder.isKind(of: UIViewController.self) {
-                    return responder as? UIViewController
-                }
-            }
-        }
-        return nil
-    }
-    
     @objc func onFollow() {
         delegate?.didTapFollow(cell: self)
     }

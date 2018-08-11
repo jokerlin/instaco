@@ -18,6 +18,8 @@ class UserInfoPostSectionController: ListSectionController {
         minimumInteritemSpacing = 1
     }
     
+    // MARK: ListSectionController
+    
     override func sizeForItem(at index: Int) -> CGSize {
         guard let width = collectionContext?.containerSize.width else { fatalError() }
         

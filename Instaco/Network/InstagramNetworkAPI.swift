@@ -52,6 +52,11 @@ class InstagramAPI {
         self.username = ""
         self.password = ""
         self.error = ""
+        
+        // Simulation for headers
+        if UIDevice.current.modelName != "i386" && UIDevice.current.modelName != "x86_64" {
+            self.headers["User-Agent"] = "Instagram 11.0.0.21.20 (" + UIDevice.current.modelName + "; iPhone OS " + UIDevice.current.systemVersion.replacingOccurrences(of: ".", with: "_") + "; zh_CN; zh-Hans-CN; scale=" + String(Int(UIScreen.main.scale)) + ".00; gamut=normal; " + String(Int(UIScreen.main.bounds.width * UIScreen.main.scale)) + "x" + String(Int(UIScreen.main.bounds.height * UIScreen.main.scale)) + ") AppleWebKit/420+"
+        }
     }
     
     private func generateSignature(data: String) -> String {
@@ -248,7 +253,8 @@ class InstagramAPI {
     
     func timelineFeed(params: [String: Any], success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         SendRequest(URI: "feed/timeline/", method: .post, encoding: URLEncoding.httpBody, params: params, success: success, failure: failure)
-        // get reels tray
+        
+        // get reels tray for simulation
         self.reels_tray(success: {_ in}, failure: {_ in})
     }
     

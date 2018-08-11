@@ -34,6 +34,8 @@ final class UserViewModel: ListDiffable {
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
         guard let object = object as? UserViewModel else { return false }
         return username == object.username
+            && location == object.location
+            && userProfileImage == object.userProfileImage
             && timestamp == object.timestamp
     }
     

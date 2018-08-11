@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-class TimelineResponse: Mappable {
+class ObjectTimelineResponse: Mappable {
     var num_results: Int?
     var next_max_id: String?
-    var feed_items: [FeedItemsTimeline]?
+    var feed_items: [ObjectFeedItemsTimeline]?
     required init?(map: Map) {
         
     }
@@ -22,8 +22,8 @@ class TimelineResponse: Mappable {
     
 }
 
-class FeedItemsTimeline: Mappable {
-    var media_or_ad: Media_or_ad?
+class ObjectFeedItemsTimeline: Mappable {
+    var media_or_ad: ObjectMedia_or_ad?
     
     required init?(map: Map) {
         
@@ -34,8 +34,8 @@ class FeedItemsTimeline: Mappable {
     }
 }
 
-class Carousel_media: Mappable {
-    var image_versions2: [ImageTimeline]?
+class ObjectCarousel_media: Mappable {
+    var image_versions2: [ObjectImageTimeline]?
     required init?(map: Map) {
         
     }
@@ -45,20 +45,20 @@ class Carousel_media: Mappable {
     }
 }
 
-class Media_or_ad: Mappable {
-    var image_versions2: [ImageTimeline]?
+class ObjectMedia_or_ad: Mappable {
+    var image_versions2: [ObjectImageTimeline]?
     var like_count: Int?
-    var user: User?
+    var user: ObjectUser?
     var type: Int?
     var has_liked: Bool?
-    var location: Location?
-    var preview_comments: [PreviewComments]?
+    var location: ObjectLocation?
+    var preview_comments: [ObjectPreviewComments]?
     var taken_at: Int?
-    var caption: Caption?
+    var caption: ObjectCaption?
     var id: String?
     var comment_count: Int?
-    var carousel_media: [Carousel_media]?
-    var video_versions: [ImageTimeline]?
+    var carousel_media: [ObjectCarousel_media]?
+    var video_versions: [ObjectImageTimeline]?
     var has_viewer_saved: Bool?
     
     required init?(map: Map) {
@@ -117,8 +117,8 @@ class Media_or_ad: Mappable {
     }
 }
 
-class Caption: Mappable {
-    var user: User?
+class ObjectCaption: Mappable {
+    var user: ObjectUser?
     var text: String?
     required init?(map: Map) {
         
@@ -129,7 +129,7 @@ class Caption: Mappable {
     }
 }
 
-class User: Mappable {
+class ObjectUser: Mappable {
     var username: String?
     var profile_pic_url: String?
     var pk: Int?
@@ -144,7 +144,7 @@ class User: Mappable {
     }
 }
 
-class ImageTimeline: Mappable {
+class ObjectImageTimeline: Mappable {
     var height: Int?
     var url: String?
     var width: Int?
@@ -159,7 +159,7 @@ class ImageTimeline: Mappable {
     }
 }
 
-class Location: Mappable {
+class ObjectLocation: Mappable {
     var name: String?
     
     required init?(map: Map) {
@@ -170,8 +170,8 @@ class Location: Mappable {
     }
 }
 
-class PreviewComments: Mappable {
-    var user: User?
+class ObjectPreviewComments: Mappable {
+    var user: ObjectUser?
     var text: String?
     
     required init?(map: Map) {

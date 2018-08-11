@@ -74,54 +74,6 @@ class LoginController: UIViewController {
         return button
     }()
     
-    @objc func handleLogin() {
-        guard let username = usernameTextField.text else {return}
-        guard let password = passwordTextField.text else {return}
-
-        insta.set_auth(username: username, password: password)
-        insta.login(
-            success: { (JSONResponse) in
-                print("Login Success")
-                
-                // Store in Keychain
-                let keychain = Keychain(service: "com.instacoapp")
-                try! keychain.removeAll()
-                keychain["username"] = username
-                keychain["password"] = password
-                keychain["username_id"] = JSONResponse["logged_in_user"]["pk"].stringValue
-                keychain["device_id"] = insta.device_id
-                keychain["uuid"] = insta.uuid
-                keychain["csrftoken"] = insta.csrftoken
-                keychain["version"] = INSTACOAPPVERSION
-                
-                // set insta object
-                insta.LastJson = JSONResponse
-                insta.isLoggedIn = true
-                insta.username_id = insta.LastJson["logged_in_user"]["pk"].stringValue
-                insta.error = ""
-                guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
-                
-                mainTabBarController.setupViewControllers()
-                
-                self.dismiss(animated: true, completion: nil)
-                },
-            failure: { _ in
-                print("Login Failed")
-                var title = "Oops, an error occurred."
-                var json = JSON.init(parseJSON: insta.error)
-                title = json["message"].string ?? title
-                let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-                self.present(alertController, animated: true, completion: nil)
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                    self.presentedViewController?.dismiss(animated: false, completion: nil)
-                }
-        })
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,6 +87,10 @@ class LoginController: UIViewController {
         
         setupInputFields()
         hideKeyboardWhenTappedAround()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     fileprivate func setupInputFields() {
@@ -168,5 +124,62 @@ class LoginController: UIViewController {
         if let link = URL(string: "https://www.instagram.com/accounts/emailsignup/?hl=en") {
             UIApplication.shared.open(link)
         }
+    }
+    
+    @objc func handleLogin() {
+        guard let username = usernameTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        
+        insta.set_auth(username: username, password: password)
+        insta.login(
+            success: { (JSONResponse) in
+//                print(JSONResponse)
+                print("Login Success")
+                
+                // Store in Keychain
+                let keychain = Keychain(service: "com.instacoapp")
+                try! keychain.removeAll()
+                keychain["username"] = username
+                keychain["password"] = password
+                keychain["username_id"] = JSONResponse["logged_in_user"]["pk"].stringValue
+                keychain["device_id"] = insta.device_id
+                keychain["uuid"] = insta.uuid
+                keychain["csrftoken"] = insta.csrftoken
+                keychain["version"] = INSTACOAPPVERSION
+                
+                // Set insta object
+                insta.isLoggedIn = true
+                insta.username_id = JSONResponse["logged_in_user"]["pk"].stringValue
+                insta.error = ""
+                
+                // Do something like an official client, for future use at the same time
+                insta.simulation()
+                
+                guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
+                mainTabBarController.setupViewControllers()
+                self.dismiss(animated: true, completion: nil)
+        },
+            failure: { JSONResponse in
+                print(JSONResponse)
+                print("Login Failed")
+                var title = "Oops, an error occurred."
+                var json = JSON.init(parseJSON: insta.error)
+                title = json["message"].string ?? title
+                if title.contains("checkpoint") {
+                    // DO SOMETHING ELSE for checkpoint in the future
+                    let alertController = UIAlertController(title: title, message: JSONResponse.localizedDescription, preferredStyle: .alert)
+                    self.present(alertController, animated: true, completion: nil)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                        self.presentedViewController?.dismiss(animated: false, completion: nil)
+                    }
+                } else {
+                    let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+                    self.present(alertController, animated: true, completion: nil)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                        self.presentedViewController?.dismiss(animated: false, completion: nil)
+                    }
+                }
+                
+        })
     }
 }

@@ -143,15 +143,12 @@ extension UIViewController {
 // friendly numbers
 extension Double {
     var kmFormatted: String {
-        
         if self >= 10000, self <= 999999 {
             return String(format: "%.1fK", locale: Locale.current, self/1000).replacingOccurrences(of: ".0", with: "")
         }
-        
         if self > 999999 {
             return String(format: "%.1fM", locale: Locale.current, self/1000000).replacingOccurrences(of: ".0", with: "")
         }
-        
         return String(format: "%.0f", locale: Locale.current, self)
     }
 }
@@ -173,4 +170,22 @@ func ifLoginRequire(viewController: UIViewController) {
         }
         return
     }
+}
+
+// Get model
+public extension UIDevice {
+    
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        switch identifier {
+        default:                                        return identifier
+        }
+    }
+    
 }

@@ -15,6 +15,8 @@ class NewsSectionController: ListBindingSectionController<ListDiffable>, ListBin
         dataSource = self
     }
     
+    // MARK: ListBindingSectionController
+    
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, viewModelsFor object: Any) -> [ListDiffable] {
         guard let object = object as? News else { fatalError() }
         return [object]

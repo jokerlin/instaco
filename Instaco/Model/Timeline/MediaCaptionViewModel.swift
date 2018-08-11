@@ -21,10 +21,12 @@ final class CaptionViewModel: ListDiffable {
     // MARK: ListDiffable
     
     func diffIdentifier() -> NSObjectProtocol {
-        return (username + text) as NSObjectProtocol
+        return "caption" as NSObjectProtocol
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        return true
+        guard let object = object as? CaptionViewModel else { return false }
+        return username == object.username
+            && text == object.text
     }
 }

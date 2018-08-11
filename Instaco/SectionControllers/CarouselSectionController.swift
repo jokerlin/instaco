@@ -15,6 +15,8 @@ final class CarouselSectionController: ListSectionController, ImageCellDelegate 
         super.init()
     }
     
+    // MARK: ListSectionController
+    
     override func sizeForItem(at index: Int) -> CGSize {
         let width = collectionContext?.containerSize.width ?? 0
         let height = collectionContext?.containerSize.height ?? 0

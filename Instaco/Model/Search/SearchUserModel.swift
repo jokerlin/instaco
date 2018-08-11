@@ -28,11 +28,13 @@ final class SearchUserModel: ListDiffable {
     // MARK: ListDiffable
     
     func diffIdentifier() -> NSObjectProtocol {
-        return pk as NSObjectProtocol
+        return username as NSObjectProtocol
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        return true
+        guard let object = object as? SearchUserModel else { return false }
+        return username == object.username
+            && pk == object.pk
     }
     
 }

@@ -47,7 +47,9 @@ final class UserInfo: ListDiffable {
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        return true
+        guard let object = object as? UserInfo else { return false }
+        return username == object.username
+            && pk == object.pk
     }
     
 }

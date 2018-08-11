@@ -8,8 +8,8 @@
 
 import ObjectMapper
 
-class SearchUserResponse: Mappable {
-    var users: [JSONUsers]?
+class ObjectSearchUserResponse: Mappable {
+    var users: [ObjectSearchUsers]?
     var next_max_id: String?
     
     required init?(map: Map) {
@@ -21,12 +21,12 @@ class SearchUserResponse: Mappable {
     }
 }
 
-class JSONUsers: Mappable {
+class ObjectSearchUsers: Mappable {
     var username: String?
     var profile_pic_url: String?
     var mutual_followers_count: Int?
     var full_name: String?
-    var friendship_status: Friendship_status?
+    var friendship_status: ObjectFriendship_status?
     var search_social_context: String?
     var pk: Int?
     
@@ -44,7 +44,7 @@ class JSONUsers: Mappable {
     }
 }
 
-class Friendship_status: Mappable {
+class ObjectFriendship_status: Mappable {
     var incoming_request: Bool?
     var outgoing_request: Bool?
     var following: Bool?
@@ -63,8 +63,8 @@ class Friendship_status: Mappable {
     }
 }
 
-class SuggestedSearchResponse: Mappable {
-    var suggested: [JSONSuggestUsers]?
+class ObjectSuggestedSearchResponse: Mappable {
+    var suggested: [ObjectSuggestUsers]?
     
     required init?(map: Map) {
         
@@ -75,8 +75,8 @@ class SuggestedSearchResponse: Mappable {
     }
 }
 
-class JSONSuggestUsers: Mappable {
-    var user: JSONUsers?
+class ObjectSuggestUsers: Mappable {
+    var user: ObjectSearchUsers?
     
     required init?(map: Map) {
         

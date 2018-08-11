@@ -55,11 +55,14 @@ final class MediaInfo: ListDiffable {
     // MARK: ListDiffable
     
     func diffIdentifier() -> NSObjectProtocol {
-        return (username + String(timestamp)) as NSObjectProtocol
+        return (username + String(timestamp) + String(id)) as NSObjectProtocol
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        return true
+        guard let object = object as? MediaInfo else { return false }
+        return username == object.username
+            && id == object.id
+            && timestamp == object.timestamp
     }
     
 }

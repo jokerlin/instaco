@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-class FriendshipResponse: Mappable {
+class ObjectFriendshipResponse: Mappable {
     var is_blocking_reel: Bool?
     var is_muting_reel: Bool?
     var is_private: Bool?

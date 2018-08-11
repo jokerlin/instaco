@@ -74,7 +74,7 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
             print("Success. You just tapped the \(mentiontag) hashtag")
             insta.searchUsers(q: mentiontag, success: { (JSONResponse) in
 //                print(JSONResponse)
-                let searchUserResponse = Mapper<SearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
+                let searchUserResponse = Mapper<ObjectSearchUserResponse>().map(JSONString: JSONResponse.rawString()!)
                 if searchUserResponse?.users != nil {
                     let item = (searchUserResponse?.users![0])!
                     let searchUserResult = SearchUserModel (pk: item.pk!, profile_image: item.profile_pic_url!, search_social_context: item.search_social_context, username: item.username!, full_name: item.full_name!)

@@ -8,9 +8,9 @@
 
 import ObjectMapper
 
-class NewsResponse: Mappable {
+class ObjectNewsResponse: Mappable {
     var next_max_id: Int?
-    var stories: [Stories]?
+    var stories: [ObjectStories]?
     
     required init?(map: Map) {
         
@@ -22,10 +22,10 @@ class NewsResponse: Mappable {
     
 }
 
-class InboxResponse: Mappable {
+class ObjectInboxResponse: Mappable {
     var continuation_token: Int?
-    var new_stories: [Stories]?
-    var old_stories: [Stories]?
+    var new_stories: [ObjectStories]?
+    var old_stories: [ObjectStories]?
     
     required init?(map: Map) {
         
@@ -38,9 +38,9 @@ class InboxResponse: Mappable {
     
 }
 
-class Stories: Mappable {
+class ObjectStories: Mappable {
     var type: Int?
-    var args: Args?
+    var args: ObjectArgs?
     
     required init?(map: Map) {
         
@@ -51,9 +51,9 @@ class Stories: Mappable {
     }
 }
 
-class Args: Mappable {
-    var links: [JSONLinks]?
-    var media: [JSONMedia]?
+class ObjectArgs: Mappable {
+    var links: [ObjectArgsLinks]?
+    var media: [ObjectArgsMedia]?
     var profile_id: Int?
     var profile_image: String?
     var text: String?
@@ -74,7 +74,7 @@ class Args: Mappable {
     }
 }
 
-class JSONMedia: Mappable {
+class ObjectArgsMedia: Mappable {
     var id: String?
     var image: String?
     
@@ -87,7 +87,7 @@ class JSONMedia: Mappable {
     }
 }
 
-class JSONLinks: Mappable {
+class ObjectArgsLinks: Mappable {
     var end: Int?
     var id: Int?
     var start: Int?

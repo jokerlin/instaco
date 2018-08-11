@@ -18,6 +18,8 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
         dataSource = self
     }
     
+    // MARK: ListBindingSectionController
+    
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, viewModelsFor object: Any) -> [ListDiffable] {
         guard let object = object as? UserInfo else { fatalError() }
         userInfo = object
@@ -38,6 +40,8 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
         let height: CGFloat = 180 + UserInfoHeaderCell.textHeight((userInfo?.biography)!, width: width)
         return CGSize(width: width, height: height)
     }
+    
+    // UserInfoHeaderCellDelegate
     
     func didTapFollow(cell: UserInfoHeaderCell) {
         if userInfo?.friendship == true {

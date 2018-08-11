@@ -8,7 +8,7 @@
 
 import IGListKit
 
-final class MediaCarouselViewModel: ListDiffable {
+final class CarouselViewModel: ListDiffable {
     
     let urls: [String]
     
@@ -23,7 +23,7 @@ final class MediaCarouselViewModel: ListDiffable {
     }
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        guard let object = object as? MediaCarouselViewModel else { return false }
+        guard let object = object as? CarouselViewModel else { return false }
         return urls == object.urls
     }
     

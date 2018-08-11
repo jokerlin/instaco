@@ -12,6 +12,7 @@ import IGListKit
 protocol ActionCellDelegate: class {
     func didTapHeart(cell: ActionCell)
     func didTapRibbon(cell: ActionCell)
+    func didTapLikesCount(cell: ActionCell)
 }
 
 final class ActionCell: UICollectionViewCell, ListBindable {
@@ -48,6 +49,7 @@ final class ActionCell: UICollectionViewCell, ListBindable {
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.darkText
         label.textAlignment = .left
+        label.isUserInteractionEnabled = true
         label.sizeToFit()
         return label
     }()
@@ -59,6 +61,8 @@ final class ActionCell: UICollectionViewCell, ListBindable {
         contentView.addSubview(commentButton)
         ribbonButton.addTarget(self, action: #selector(ActionCell.onRibbon), for: .touchUpInside)
         contentView.addSubview(ribbonButton)
+        let tapLikes = UITapGestureRecognizer(target: self, action: #selector(ActionCell.onLikes))
+        likesLabel.addGestureRecognizer(tapLikes)
         contentView.addSubview(likesLabel)
     }
     
@@ -97,6 +101,10 @@ final class ActionCell: UICollectionViewCell, ListBindable {
     
     @objc func onRibbon() {
         delegate?.didTapRibbon(cell: self)
+    }
+    
+    @objc func onLikes() {
+        delegate?.didTapLikesCount(cell: self)
     }
     
     func bindViewModel(_ viewModel: Any) {

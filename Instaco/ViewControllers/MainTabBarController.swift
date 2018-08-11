@@ -19,17 +19,20 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let keychain = Keychain(service: "com.instacoapp")
 
+        // for debug: RESET the keychain
 //        try! keychain.removeAll()
     
-        if keychain.allKeys() == []  ||  keychain["username"] == nil || keychain["password"] == nil || keychain["csrftoken"] == nil || keychain["device_id"] == nil || keychain["uuid"] == nil || keychain["version"] == nil {
+        if keychain.allKeys() == []  ||  keychain["username"] == nil || keychain["password"] == nil || keychain["csrftoken"] == nil || keychain["device_id"] == nil || keychain["uuid"] == nil || keychain["version"] == nil { // Back to LoginViewController if credential in keychain broken
             DispatchQueue.main.async {
                 let loginController = LoginController()
                 let navController = UINavigationController(rootViewController: loginController)
                 self.present(navController, animated: true, completion: nil)
             }
             return
-        } else {
+        } else { // Login by keychain credential
             print("Login by \(String(describing: keychain["username"]))")
+            
+            // Set insta object
             insta.set_auth(username: keychain["username"]!, password: keychain["password"]!)
             insta.uuid = keychain["uuid"]!
             insta.username_id = keychain["username_id"]!
@@ -37,6 +40,10 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             insta.device_id = keychain["device_id"]!
             insta.error = ""
             insta.isLoggedIn = true
+            
+            // Do something like an official client, for future use at the same time
+            insta.simulation()
+            
             self.setupViewControllers()
         }
     }

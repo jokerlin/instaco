@@ -68,7 +68,7 @@ final class MediaCarouselCell: UICollectionViewCell, UIScrollViewDelegate, ListB
     }
     
     func bindViewModel(_ viewModel: Any) {
-        guard let viewModel = viewModel as? MediaCarouselViewModel else { return }
+        guard let viewModel = viewModel as? CarouselViewModel else { return }
         self.data = viewModel.urls
     }
 }

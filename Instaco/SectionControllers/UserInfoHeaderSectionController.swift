@@ -37,7 +37,11 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, sizeForViewModel viewModel: Any, at index: Int) -> CGSize {
         guard let width = collectionContext?.containerSize.width else { fatalError() }
-        let height: CGFloat = 180 + UserInfoHeaderCell.textHeight((userInfo?.biography)!, width: width)
+        var height: CGFloat = 180 + UserInfoHeaderCell.textHeight((userInfo?.biography)!, width: width)
+        if userInfo?.full_name == "" { height -= 20}
+        if userInfo?.biography == "" { height -= 14}
+        if userInfo?.external_url == "" { height -= 14}
+        
         return CGSize(width: width, height: height)
     }
     

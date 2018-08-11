@@ -30,7 +30,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
             return
         } else { // Login by keychain credential
-            print("Login by \(String(describing: keychain["username"]))")
+            print("LOGIN BY \(String(describing: keychain["username"]))")
             
             // Set insta object
             insta.set_auth(username: keychain["username"]!, password: keychain["password"]!)

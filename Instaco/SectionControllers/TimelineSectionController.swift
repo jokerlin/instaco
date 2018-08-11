@@ -132,7 +132,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             if mediaInfo?.comment_count == 0 {
                 height = 0
             } else {
-                height = 30
+                height = 15
             }
             
         default: height = 0
@@ -245,14 +245,14 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     
     @objc func onCompleteCapture(image: UIImage, error: NSError?, contextInfo: UnsafeRawPointer) {
         if error == nil {
-            print("Save Successfully")
+            print("SAVE SUCCESS")
             let alertController = UIAlertController(title: "Successfully saved", message: nil, preferredStyle: .alert)
             viewController?.present(alertController, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                 self.viewController?.dismiss(animated: false, completion: nil)
             }
         } else {
-            print("Save Fail")
+            print("SAVE FAILED")
             let alertController = UIAlertController(title: "Failed to save", message: "Please enable camera roll access in Settings", preferredStyle: .alert)
             viewController?.present(alertController, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {

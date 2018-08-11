@@ -97,7 +97,10 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        return TimelineSectionController()
+//        return TimelineSectionController()
+        let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
+        sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+        return sectionController
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {

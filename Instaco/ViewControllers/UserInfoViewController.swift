@@ -161,6 +161,10 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                 self.getUserFeedHelper(JSONResponse: JSONResponse)
             }, failure: { (JSONResponse) -> Void in
                 print(JSONResponse)
+                if insta.error.contains("Not authorized to view user") {
+                    print("THIS IS A PRIVATE ACCOUNT")
+                    self.adapter.performUpdates(animated: true, completion: nil)
+                }
             })
         } else {
             insta.getUserFeed(userid: self.username_id, max_id: self.next_max_id, success: {(JSONResponse) -> Void in

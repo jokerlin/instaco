@@ -224,7 +224,7 @@ class InstagramAPI {
         SendRequest(URI: "si/fetch_headers/", method: .get, encoding: URLEncoding.queryString, params: ["challenge_type": "signup", "guid": generateUUID(type: false)],
                         success: { _ -> Void in // (JSONResponse) -> Void in
 //                            print(JSONResponse)
-                            print("Fetch Header Successfully")
+//                            print("Fetch Header Successfully")
                             
                             // Login Request
                             let cookie = HTTPCookieStorage.shared.cookies
@@ -247,7 +247,7 @@ class InstagramAPI {
                             self.SendRequestViaHttpBody(URI: "accounts/login/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: success, failure: failure)
                         },
                         failure: { (error) -> Void in
-                            print("Fetch Header Failed")
+//                            print("Fetch Header Failed")
                             print(error)})
     }
     

@@ -134,7 +134,7 @@ class LoginController: UIViewController {
         insta.login(
             success: { (JSONResponse) in
 //                print(JSONResponse)
-                print("Login Success")
+                print("LOGIN SUCCESS")
                 
                 // Store in Keychain
                 let keychain = Keychain(service: "com.instacoapp")
@@ -161,7 +161,7 @@ class LoginController: UIViewController {
         },
             failure: { JSONResponse in
                 print(JSONResponse)
-                print("Login Failed")
+                print("LOGIN FAILED")
                 var title = "Oops, an error occurred."
                 var json = JSON.init(parseJSON: insta.error)
                 title = json["message"].string ?? title

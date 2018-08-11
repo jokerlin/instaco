@@ -13,6 +13,7 @@ import ObjectMapper
 
 class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate, UICollectionViewDelegate {
     
+//    var data: [Any] = []
     var data = [ListDiffable]()
     var next_max_id = ""
     var loading = false
@@ -50,14 +51,22 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     // MARK: ListAdapterDataSource
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+//        return data as! [ListDiffable]
         return data as [ListDiffable]
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+//        switch object {
+//        case is String: return TipSectionController()
+//        default:
+//            let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
+//            sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+//            return sectionController
+//        }
+//        return TimelineSectionController()
         let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
         sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
         return sectionController
-//        return TimelineSectionController()
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
@@ -86,6 +95,9 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
                     }
                 }
             }
+//            if self.data.count == 0 {
+//                self.data.append("No Timeline Feed for you now.")
+//            }
             self.adapter.performUpdates(animated: true)
             self.refreshControl.endRefreshing()
         }, failure: { JSONResponse in

@@ -16,6 +16,8 @@
 		8F0BC7452119EC3A00F75301 /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0BC7442119EC3A00F75301 /* SavedViewController.swift */; };
 		8F0BC747211A6B7900F75301 /* FriendshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0BC746211A6B7900F75301 /* FriendshipViewController.swift */; };
 		8F15D445211E569900CF3A52 /* Response2Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D444211E569900CF3A52 /* Response2Object.swift */; };
+		8F15D447211F5F4600CF3A52 /* TipSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D446211F5F4600CF3A52 /* TipSectionController.swift */; };
+		8F15D449211F5F9400CF3A52 /* UserTipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D448211F5F9400CF3A52 /* UserTipCell.swift */; };
 		8F19C29F20FFD67400A7FB56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F19C29E20FFD67400A7FB56 /* Main.storyboard */; };
 		8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519120F73E7100B39F6D /* RequestConfiguration.swift */; };
 		8F22519420F7429300B39F6D /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519320F7429300B39F6D /* MD5.swift */; };
@@ -114,6 +116,8 @@
 		8F0BC7442119EC3A00F75301 /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		8F0BC746211A6B7900F75301 /* FriendshipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendshipViewController.swift; sourceTree = "<group>"; };
 		8F15D444211E569900CF3A52 /* Response2Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response2Object.swift; sourceTree = "<group>"; };
+		8F15D446211F5F4600CF3A52 /* TipSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipSectionController.swift; sourceTree = "<group>"; };
+		8F15D448211F5F9400CF3A52 /* UserTipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTipCell.swift; sourceTree = "<group>"; };
 		8F19C29E20FFD67400A7FB56 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8F22519120F73E7100B39F6D /* RequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfiguration.swift; sourceTree = "<group>"; };
 		8F22519320F7429300B39F6D /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
@@ -361,6 +365,7 @@
 			children = (
 				8F59F7A6210FEBA2000A7833 /* UserInfoHeaderCell.swift */,
 				8F59F7AD21103210000A7833 /* UserInfoPostCell.swift */,
+				8F15D448211F5F9400CF3A52 /* UserTipCell.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				8FCAD4A021122B84006908FE /* NewsSectionController.swift */,
 				8F59F79C210F3DB6000A7833 /* UserInfoHeaderSectionController.swift */,
 				8F59F79E210F3DD6000A7833 /* UserInfoPostSectionController.swift */,
+				8F15D446211F5F4600CF3A52 /* TipSectionController.swift */,
 			);
 			path = SectionControllers;
 			sourceTree = "<group>";
@@ -754,6 +760,8 @@
 				8FCAD4B221135ADE006908FE /* SearchUserModel.swift in Sources */,
 				8F15D445211E569900CF3A52 /* Response2Object.swift in Sources */,
 				8FCAD4A82112D76F006908FE /* SearchViewController.swift in Sources */,
+				8F15D447211F5F4600CF3A52 /* TipSectionController.swift in Sources */,
+				8F15D449211F5F9400CF3A52 /* UserTipCell.swift in Sources */,
 				8FD3885A20F5266300B6C3E7 /* InstagramNetworkAPI.swift in Sources */,
 				8FCAD4AB21134AD5006908FE /* SearchBarCell.swift in Sources */,
 				8F59F7A5210F5CBD000A7833 /* UserInfoModel.swift in Sources */,

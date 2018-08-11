@@ -18,6 +18,8 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     var next_max_id_saved = ""
     var savedData = [ListDiffable]()
     var data = [ListDiffable]()
+//    var data: [Any] = []
+//    var savedData: [Any] = []
     var loading = false
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     private let refreshControl = FixedRefreshControl()
@@ -85,6 +87,9 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                 }
             }
         }
+//        if self.savedData.count == 0 {
+//            self.savedData.append("No saved posts.")
+//        }
         self.data = self.savedData
         self.adapter.performUpdates(animated: true)
         self.refreshControl.endRefreshing()
@@ -93,12 +98,19 @@ class SavedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     // MARK: ListAdapterDataSource
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        
         return data as [ListDiffable]
+//        return data as! [ListDiffable]
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
 //        return TimelineSectionController()
+//        switch object {
+//        case is String: return TipSectionController()
+//        default:
+//            let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
+//            sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+//            return sectionController
+//        }
         let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
         sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
         return sectionController

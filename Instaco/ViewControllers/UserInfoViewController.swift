@@ -107,7 +107,6 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     func setup(friendship: ObjectFriendshipResponse) {
         getUserInfoHeader(success: { (JSONResponse) in
-            
             let userInfoResponse = Mapper<ObjectUserInfoResponse>().map(JSONString: JSONResponse.rawString()!)
             
             var is_private = false
@@ -126,7 +125,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                                     external_url: userInfoResponse?.user?.external_url ?? "",
                                     pk: userInfoResponse?.user?.pk ?? 0,
                                     media_count: userInfoResponse?.user?.media_count ?? 0,
-                                    friendship: friendship.following ?? false)
+                                    friendship: friendship)
             self.data.append(userInfo)
             
             self.navigationItem.title = userInfo.username
@@ -167,6 +166,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                 }
             }, failure: { (JSONResponse) -> Void in
                 print(JSONResponse)
+                // is private account
                 if insta.error.contains("Not authorized to view user") {
                     print("THIS IS A PRIVATE ACCOUNT")
                     self.data.append("This is a private account.")

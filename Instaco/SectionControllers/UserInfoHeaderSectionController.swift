@@ -48,27 +48,41 @@ class UserInfoHeaderSectionController: ListBindingSectionController<ListDiffable
     // UserInfoHeaderCellDelegate
     
     func didTapFollow(cell: UserInfoHeaderCell) {
-        if userInfo?.friendship == true {
+        if userInfo?.friendship.following == true {
             if followFlagChange == false {
                 followFlagChange = true
-                cell.followButton.setTitle("follow", for: .normal)
+                cell.followButton.setTitle("Follow", for: .normal)
                 insta.FollowOp(type: false, user_id: String(userInfo!.pk))
             } else {
                 followFlagChange = false
-                cell.followButton.setTitle("Following", for: .normal)
+                if userInfo?.is_private == true {
+                    cell.followButton.setTitle("Requesting", for: .normal)
+                } else {
+                    cell.followButton.setTitle("Following", for: .normal)
+                }
                 insta.FollowOp(type: true, user_id: String(userInfo!.pk))
             }
         } else {
             if followFlagChange == false {
-                followFlagChange = true
-                cell.followButton.setTitle("Following", for: .normal)
-                insta.FollowOp(type: true, user_id: String(userInfo!.pk))
+                if userInfo?.friendship.outgoing_request == false {
+                    if userInfo?.is_private == true {
+                        cell.followButton.setTitle("Requesting", for: .normal)
+                    } else {
+                        cell.followButton.setTitle("Following", for: .normal)
+                    }
+                    followFlagChange = true
+                    insta.FollowOp(type: true, user_id: String(userInfo!.pk))
+                } else { // sent request already
+                    cell.followButton.setTitle("Follow", for: .normal)
+                    insta.FollowOp(type: false, user_id: String(userInfo!.pk))
+                }
             } else {
                 followFlagChange = false
-                cell.followButton.setTitle("follow", for: .normal)
+                cell.followButton.setTitle("Follow", for: .normal)
                 insta.FollowOp(type: false, user_id: String(userInfo!.pk))
             }
         }
+
         update(animated: true)
     }
     

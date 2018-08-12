@@ -50,7 +50,7 @@ final class CaptionCell: UICollectionViewCell, ListBindable {
         let usernameType = ActiveType.custom(pattern: "\\A[^\\s]+")
         captionLabel.customColor[usernameType] = UIColor.black
         captionLabel.hashtagColor = UIColor.rgb(red: 0, green: 0, blue: 128)
-        captionLabel.mentionColor = UIColor.rgb(red: 0, green: 0, blue: 196)
+        captionLabel.mentionColor = UIColor.rgb(red: 0, green: 0, blue: 128)
         
         // Reference: https://github.com/optonaut/ActiveLabel.swift/commit/c1ba467e214bcbc5cec89097a0bffa1f9ef9b895
         captionLabel.configureLinkAttribute = { (type, attributes, isSelected) in

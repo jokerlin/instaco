@@ -11,7 +11,7 @@ import IGListKit
 import SnapKit
 import Player
 
-final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, ImageCellDelegate, CaptionCellDelegate, ListDisplayDelegate {
+final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, ImageCellDelegate, CaptionCellDelegate, CommentCellDelegate, ListDisplayDelegate {
     
     var localLikes: Int?
     var likedFlagChange: Bool = false
@@ -111,6 +111,9 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
                 let btnImage = UIImage(named: "ibook")
                 cell.ribbonButton.setImage(btnImage, for: UIControlState.normal)
             }
+            cell.delegate = self
+        }
+        if let cell = cell as? CommentCell {
             cell.delegate = self
         }
         
@@ -259,6 +262,12 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
                 self.viewController?.dismiss(animated: false, completion: nil)
             }
         }
+    }
+    
+    // CommentCellDelegate
+    func didTapViewComments(cell: CommentCell) {
+        let commentViewController = CommentViewController(media_id: mediaInfo?.id ?? "")
+        viewController?.navigationController?.pushViewController(commentViewController, animated: true)
     }
     
     // MARK: ListAdapterDataSource of CarouselCell

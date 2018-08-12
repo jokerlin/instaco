@@ -58,7 +58,7 @@ final class ActionCell: UICollectionViewCell, ListBindable {
         super.init(frame: frame)
         likeButton.addTarget(self, action: #selector(ActionCell.onHeart), for: .touchUpInside)
         contentView.addSubview(likeButton)
-        contentView.addSubview(commentButton)
+//        contentView.addSubview(commentButton)
         ribbonButton.addTarget(self, action: #selector(ActionCell.onRibbon), for: .touchUpInside)
         contentView.addSubview(ribbonButton)
         let tapLikes = UITapGestureRecognizer(target: self, action: #selector(ActionCell.onLikes))
@@ -78,14 +78,15 @@ final class ActionCell: UICollectionViewCell, ListBindable {
             make.left.equalTo(11)
         }
         
-        commentButton.snp.makeConstraints { (make) -> Void in
-            make.centerY.equalTo(contentView)
-            make.left.equalTo(likeButton).offset(40)
-        }
+//        commentButton.snp.makeConstraints { (make) -> Void in
+//            make.centerY.equalTo(contentView)
+//            make.left.equalTo(likeButton).offset(40)
+//        }
         
         ribbonButton.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(contentView)
-            make.left.equalTo(commentButton).offset(40)
+//            make.left.equalTo(commentButton).offset(44)
+            make.left.equalTo(likeButton).offset(40)
         }
         
         likesLabel.snp.makeConstraints { (make) -> Void in

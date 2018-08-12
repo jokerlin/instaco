@@ -56,14 +56,6 @@ class TimelineViewController: UIViewController, ListAdapterDataSource, UIScrollV
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-//        switch object {
-//        case is String: return TipSectionController()
-//        default:
-//            let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
-//            sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
-//            return sectionController
-//        }
-//        return TimelineSectionController()
         let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
         sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
         return sectionController

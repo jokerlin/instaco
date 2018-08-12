@@ -10,7 +10,13 @@ import UIKit
 import IGListKit
 import ActiveLabel
 
+protocol CommentCellDelegate: class {
+    func didTapViewComments(cell: CommentCell)
+}
+
 final class CommentCell: UICollectionViewCell, ListBindable {
+    
+    weak var delegate: CommentCellDelegate?
     
     let commentLabel: UILabel = {
         let label = UILabel()
@@ -19,13 +25,15 @@ final class CommentCell: UICollectionViewCell, ListBindable {
         label.textColor = UIColor.gray
         label.textAlignment = .left
         label.sizeToFit()
+        label.isUserInteractionEnabled = true
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        let tapComments = UITapGestureRecognizer(target: self, action: #selector(CommentCell.onComments))
+        commentLabel.addGestureRecognizer(tapComments)
         contentView.addSubview(commentLabel)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,6 +47,10 @@ final class CommentCell: UICollectionViewCell, ListBindable {
             make.top.equalTo(4)
             make.left.equalTo(11)
         }
+    }
+    
+    @objc func onComments() {
+        delegate?.didTapViewComments(cell: self)
     }
     
     // MARK: ListBindable

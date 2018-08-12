@@ -404,12 +404,12 @@ class InstagramAPI {
     }
     
     private func direct_v2_ranked_recipients(mode: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let parameters: Parameters = ["mode": mode, "show_threads": true, "use_unified_inbox": true]
+        let parameters: Parameters = ["mode": mode, "show_threads": "true", "use_unified_inbox": "true"]
         SendRequest(URI: "direct_v2/ranked_recipients/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
     }
     
     private func direct_v2_inbox(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let parameters: Parameters = ["persistentBadging": true, "use_unified_inbox": true]
+        let parameters: Parameters = ["persistentBadging": "true", "use_unified_inbox": "true"]
         SendRequest(URI: "direct_v2/inbox/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
     }
     
@@ -457,8 +457,8 @@ class InstagramAPI {
     }
     
     private func getDiscover(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let parameters: Parameters = ["is_prefetch": true,
-                                      "is_from_promote": false,
+        let parameters: Parameters = ["is_prefetch": "true",
+                                      "is_from_promote": "false",
                                       "max_id": 0,
                                       "timezone_offset": -14400,
                                       "session_id": self.uuid]
@@ -523,6 +523,17 @@ class InstagramAPI {
 //        SendRequest(URI: "media/" + media_id + "/likers/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
 //    }
 //
+    
+    func getMediaComments(media_id: String, next_min_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        if next_min_id == "" {
+            let params = ["can_support_threading": "true"]
+                SendRequest(URI: "media/" + media_id + "/comments/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+        } else {
+            let params = ["min_id": next_min_id!, "can_support_threading": "true"]
+            SendRequest(URI: "media/" + media_id + "/comments/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+        }
+    }
+    
     private func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestConfig = RequestConfiguration(url: API_URL)

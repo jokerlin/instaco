@@ -18,6 +18,11 @@
 		8F15D445211E569900CF3A52 /* Response2Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D444211E569900CF3A52 /* Response2Object.swift */; };
 		8F15D447211F5F4600CF3A52 /* TipSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D446211F5F4600CF3A52 /* TipSectionController.swift */; };
 		8F15D449211F5F9400CF3A52 /* UserTipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D448211F5F9400CF3A52 /* UserTipCell.swift */; };
+		8F15D44B211FBB9D00CF3A52 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D44A211FBB9D00CF3A52 /* CommentViewController.swift */; };
+		8F15D44D211FBCC900CF3A52 /* CommentSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D44C211FBCC900CF3A52 /* CommentSectionController.swift */; };
+		8F15D450211FC82B00CF3A52 /* CommentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D44F211FC82B00CF3A52 /* CommentResponse.swift */; };
+		8F15D453211FCD5100CF3A52 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D452211FCD5100CF3A52 /* CommentViewModel.swift */; };
+		8F15D456211FD46700CF3A52 /* PostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15D455211FD46700CF3A52 /* PostCommentCell.swift */; };
 		8F19C29F20FFD67400A7FB56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F19C29E20FFD67400A7FB56 /* Main.storyboard */; };
 		8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519120F73E7100B39F6D /* RequestConfiguration.swift */; };
 		8F22519420F7429300B39F6D /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22519320F7429300B39F6D /* MD5.swift */; };
@@ -118,6 +123,11 @@
 		8F15D444211E569900CF3A52 /* Response2Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response2Object.swift; sourceTree = "<group>"; };
 		8F15D446211F5F4600CF3A52 /* TipSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipSectionController.swift; sourceTree = "<group>"; };
 		8F15D448211F5F9400CF3A52 /* UserTipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTipCell.swift; sourceTree = "<group>"; };
+		8F15D44A211FBB9D00CF3A52 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		8F15D44C211FBCC900CF3A52 /* CommentSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionController.swift; sourceTree = "<group>"; };
+		8F15D44F211FC82B00CF3A52 /* CommentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentResponse.swift; sourceTree = "<group>"; };
+		8F15D452211FCD5100CF3A52 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		8F15D455211FD46700CF3A52 /* PostCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentCell.swift; sourceTree = "<group>"; };
 		8F19C29E20FFD67400A7FB56 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8F22519120F73E7100B39F6D /* RequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfiguration.swift; sourceTree = "<group>"; };
 		8F22519320F7429300B39F6D /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
@@ -278,6 +288,22 @@
 			path = InstacoUITests;
 			sourceTree = "<group>";
 		};
+		8F15D451211FCD2100CF3A52 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				8F15D452211FCD5100CF3A52 /* CommentViewModel.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		8F15D454211FD44000CF3A52 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				8F15D455211FD46700CF3A52 /* PostCommentCell.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		8F22519520F7429D00B39F6D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +344,7 @@
 				8FCAD4B021135AD1006908FE /* Search */,
 				8FCAD49D21122829006908FE /* News */,
 				8F59F7A1210F5C6C000A7833 /* UserInfo */,
+				8F15D451211FCD2100CF3A52 /* Comment */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -377,10 +404,11 @@
 				8FCAD4C821181C89006908FE /* CarouselSectionController.swift */,
 				8FCAD4AC21134AFD006908FE /* SearchBarSectionController.swift */,
 				8FCAD4B321135EE3006908FE /* SearchResultSectionController.swift */,
-				8FCAD4A021122B84006908FE /* NewsSectionController.swift */,
 				8F59F79C210F3DB6000A7833 /* UserInfoHeaderSectionController.swift */,
 				8F59F79E210F3DD6000A7833 /* UserInfoPostSectionController.swift */,
+				8F15D44C211FBCC900CF3A52 /* CommentSectionController.swift */,
 				8F15D446211F5F4600CF3A52 /* TipSectionController.swift */,
+				8FCAD4A021122B84006908FE /* NewsSectionController.swift */,
 			);
 			path = SectionControllers;
 			sourceTree = "<group>";
@@ -393,6 +421,7 @@
 				8F0BC7422119EC2300F75301 /* LikedViewController.swift */,
 				8F0BC7442119EC3A00F75301 /* SavedViewController.swift */,
 				8F59F798210EAA14000A7833 /* UserInfoViewController.swift */,
+				8F15D44A211FBB9D00CF3A52 /* CommentViewController.swift */,
 				8F6904C121084F6E000B1AB7 /* MainTabBarController.swift */,
 				8F60943E21013B6200C360F8 /* LoginViewController.swift */,
 				8F4B67AD211188240077068E /* MediaViewController.swift */,
@@ -410,6 +439,7 @@
 				8F59F7A2210F5C82000A7833 /* Timeline */,
 				8FCAD4A921134ACA006908FE /* Search */,
 				8FCAD4A221122BCB006908FE /* News */,
+				8F15D454211FD44000CF3A52 /* Comment */,
 				8F59F7A3210F5C93000A7833 /* UserInfo */,
 			);
 			path = Cell;
@@ -425,6 +455,7 @@
 				8FCAD4BC21156EB1006908FE /* SavedResponse.swift */,
 				8FCAD4C021171CF9006908FE /* FriendshipResponse.swift */,
 				8FCAD4982111F4D5006908FE /* NewsResponse.swift */,
+				8F15D44F211FC82B00CF3A52 /* CommentResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -723,8 +754,10 @@
 				8FCAD4992111F4D5006908FE /* NewsResponse.swift in Sources */,
 				8FCAD4BD21156EB1006908FE /* SavedResponse.swift in Sources */,
 				8F2C3BFD20FFA50900C6CC46 /* MediaUserViewModel.swift in Sources */,
+				8F15D44B211FBB9D00CF3A52 /* CommentViewController.swift in Sources */,
 				8FCAD4C321176CCC006908FE /* MediaCarouselCell.swift in Sources */,
 				8F22519220F73E7100B39F6D /* RequestConfiguration.swift in Sources */,
+				8F15D44D211FBCC900CF3A52 /* CommentSectionController.swift in Sources */,
 				8FBD744220F7CCBD001ACD34 /* helper.swift in Sources */,
 				8FDA614620F7056700B07D8A /* BaseNetworkService.swift in Sources */,
 				8FCAD4A121122B84006908FE /* NewsSectionController.swift in Sources */,
@@ -740,6 +773,7 @@
 				8F2C3BF720FF7EAC00C6CC46 /* MediaModel.swift in Sources */,
 				8F0A19E720F4CF3300872C1B /* AppDelegate.swift in Sources */,
 				8F2C3BF920FF808200C6CC46 /* MediaCommentViewModel.swift in Sources */,
+				8F15D453211FCD5100CF3A52 /* CommentViewModel.swift in Sources */,
 				8F59F797210EA352000A7833 /* UserInfoResponse.swift in Sources */,
 				8FCAD4B92113F7EC006908FE /* FixedRefreshControl.swift in Sources */,
 				8FCAD49F2112283A006908FE /* NewsModel.swift in Sources */,
@@ -755,6 +789,7 @@
 				8F6904C321084F6F000B1AB7 /* MainTabBarController.swift in Sources */,
 				8F2465CD211D5A67006F0C94 /* LikesCountViewController.swift in Sources */,
 				8F22519720F742DF00B39F6D /* hmac.swift in Sources */,
+				8F15D456211FD46700CF3A52 /* PostCommentCell.swift in Sources */,
 				8F0BC7432119EC2300F75301 /* LikedViewController.swift in Sources */,
 				8F4B67B021118CF00077068E /* MediaResponse.swift in Sources */,
 				8FCAD4B221135ADE006908FE /* SearchUserModel.swift in Sources */,
@@ -771,6 +806,7 @@
 				8FCAD4B421135EE3006908FE /* SearchResultSectionController.swift in Sources */,
 				8F37FC7B20F9C2A30035E303 /* TimelineResponse.swift in Sources */,
 				8F2465CB211D1669006F0C94 /* Constraints.swift in Sources */,
+				8F15D450211FC82B00CF3A52 /* CommentResponse.swift in Sources */,
 				8F59F7A7210FEBA2000A7833 /* UserInfoHeaderCell.swift in Sources */,
 				8F59F7AA2110274E000A7833 /* UserFeedModel.swift in Sources */,
 				8F2C3BF520FF757200C6CC46 /* TimelineSectionController.swift in Sources */,

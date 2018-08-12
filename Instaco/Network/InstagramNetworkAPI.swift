@@ -466,11 +466,11 @@ class InstagramAPI {
     }
     
     private func facebookOTA(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let parameters: Parameters = ["version_name": 11.0  ,
+        let parameters: Parameters = ["version_name": "11.0"  ,
                                       "custom_user_id": insta.username_id,
                                       "fields": "update{download_uri,file_size,uncompressed_size,version_code,resources_checksum,ota_update_policy,download_uri_delta,file_size_delta,fallback_to_full_update,download_uri_delta_base,version_code_delta_base}",
-                                      "version_code": 68662588,
-                                      "custom_app_id": 1464225827161561]
+                                      "version_code": "68662588",
+                                      "custom_app_id": "1464225827161561"]
         SendRequest(URI: "facebook_ota/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
     }
     

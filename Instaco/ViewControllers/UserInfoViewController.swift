@@ -15,7 +15,7 @@ import KeychainAccess
 class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollViewDelegate {
     
     var username_id: String = ""
-    var data: [ListDiffable] = []
+    var data: [Any] = []
     var postData: [UserFeed] = []
     var postDataId: [String] = []
     var next_max_id = ""
@@ -107,7 +107,6 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     
     func setup(friendship: ObjectFriendshipResponse) {
         getUserInfoHeader(success: { (JSONResponse) in
-            
             let userInfoResponse = Mapper<ObjectUserInfoResponse>().map(JSONString: JSONResponse.rawString()!)
             
             var is_private = false
@@ -126,7 +125,7 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
                                     external_url: userInfoResponse?.user?.external_url ?? "",
                                     pk: userInfoResponse?.user?.pk ?? 0,
                                     media_count: userInfoResponse?.user?.media_count ?? 0,
-                                    friendship: friendship.following ?? false)
+                                    friendship: friendship)
             self.data.append(userInfo)
             
             self.navigationItem.title = userInfo.username
@@ -159,8 +158,20 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
             insta.getUserFeed(userid: self.username_id, success: {(JSONResponse) -> Void in
 //                print(JSONResponse)
                 self.getUserFeedHelper(JSONResponse: JSONResponse)
+                
+                // If no Posts, show some tips
+                if self.postData.count == 0 {
+                    self.data.append("No posts here.")
+                    self.adapter.performUpdates(animated: true, completion: nil)
+                }
             }, failure: { (JSONResponse) -> Void in
                 print(JSONResponse)
+                // is private account
+                if insta.error.contains("Not authorized to view user") {
+                    print("THIS IS A PRIVATE ACCOUNT")
+                    self.data.append("This is a private account.")
+                    self.adapter.performUpdates(animated: true, completion: nil)
+                }
             })
         } else {
             insta.getUserFeed(userid: self.username_id, max_id: self.next_max_id, success: {(JSONResponse) -> Void in
@@ -198,12 +209,13 @@ class UserInfoViewController: UIViewController, ListAdapterDataSource, UIScrollV
     // MARK: ListAdapterDataSource
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return data as [ListDiffable]
+        return data as! [ListDiffable]
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
         switch object {
         case is UserInfo: return UserInfoHeaderSectionController()
+        case is String: return TipSectionController()
         default: return UserInfoPostSectionController()
         }
     }

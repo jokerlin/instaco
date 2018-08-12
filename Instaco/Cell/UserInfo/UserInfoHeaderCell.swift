@@ -100,6 +100,7 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         label.textAlignment = .left
         label.text = "posts"
         label.sizeToFit()
+        label.isUserInteractionEnabled = true
         return label
     }()
     let fixFollowingLabel: UILabel = {
@@ -110,6 +111,7 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         label.textAlignment = .left
         label.text = "following"
         label.sizeToFit()
+        label.isUserInteractionEnabled = true
         return label
     }()
     let fixFollowerLabel: UILabel = {
@@ -120,6 +122,7 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         label.textAlignment = .left
         label.text = "followers"
         label.sizeToFit()
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -154,8 +157,11 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         followButton.addTarget(self, action: #selector(UserInfoHeaderCell.onFollow), for: .touchUpInside)
         contentView.addSubview(followButton)
         contentView.addSubview(fixPostLabel)
+        fixFollowingLabel.addGestureRecognizer(tapFollowing)
         contentView.addSubview(fixFollowingLabel)
+        fixFollowerLabel.addGestureRecognizer(tapFollower)
         contentView.addSubview(fixFollowerLabel)
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -278,10 +284,14 @@ final class UserInfoHeaderCell: UICollectionViewCell, ListBindable {
         }
 
         if viewModel.username != insta.username {
-            if viewModel.friendship == false {
-                followButton.setTitle("Follow", for: .normal)
-            } else {
+            
+            if viewModel.friendship.following == true {
                 followButton.setTitle("Following", for: .normal)
+            } else if viewModel.friendship.following == false {
+                followButton.setTitle("Follow", for: .normal)
+            }
+            if viewModel.friendship.outgoing_request == true {
+                followButton.setTitle("Requesting", for: .normal)
             }
         } else {
             followButton.isHidden = true

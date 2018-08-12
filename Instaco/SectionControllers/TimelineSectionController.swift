@@ -11,7 +11,7 @@ import IGListKit
 import SnapKit
 import Player
 
-final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, ImageCellDelegate, CaptionCellDelegate, ListDisplayDelegate {
+final class TimelineSectionController: ListBindingSectionController<ListDiffable>, ListBindingSectionControllerDataSource, ListAdapterDataSource, ActionCellDelegate, UserCellDelegate, ImageCellDelegate, CaptionCellDelegate, CommentCellDelegate, ListDisplayDelegate {
     
     var localLikes: Int?
     var likedFlagChange: Bool = false
@@ -113,6 +113,9 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             }
             cell.delegate = self
         }
+        if let cell = cell as? CommentCell {
+            cell.delegate = self
+        }
         
         return cell
     }
@@ -132,7 +135,7 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
             if mediaInfo?.comment_count == 0 {
                 height = 0
             } else {
-                height = 30
+                height = 15
             }
             
         default: height = 0
@@ -245,20 +248,26 @@ final class TimelineSectionController: ListBindingSectionController<ListDiffable
     
     @objc func onCompleteCapture(image: UIImage, error: NSError?, contextInfo: UnsafeRawPointer) {
         if error == nil {
-            print("Save Successfully")
+            print("SAVE SUCCESS")
             let alertController = UIAlertController(title: "Successfully saved", message: nil, preferredStyle: .alert)
             viewController?.present(alertController, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                 self.viewController?.dismiss(animated: false, completion: nil)
             }
         } else {
-            print("Save Fail")
+            print("SAVE FAILED")
             let alertController = UIAlertController(title: "Failed to save", message: "Please enable camera roll access in Settings", preferredStyle: .alert)
             viewController?.present(alertController, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                 self.viewController?.dismiss(animated: false, completion: nil)
             }
         }
+    }
+    
+    // CommentCellDelegate
+    func didTapViewComments(cell: CommentCell) {
+        let commentViewController = CommentViewController(media_id: mediaInfo?.id ?? "")
+        viewController?.navigationController?.pushViewController(commentViewController, animated: true)
     }
     
     // MARK: ListAdapterDataSource of CarouselCell

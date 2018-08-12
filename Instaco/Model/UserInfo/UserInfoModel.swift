@@ -22,9 +22,9 @@ final class UserInfo: ListDiffable {
     var username: String
     var profileImageimageHeight: Int
     var profileImageimageWidth: Int
-    var friendship: Bool
+    var friendship: ObjectFriendshipResponse
     
-    init(username: String, userProfileImage: URL, full_name: String, biography: String, profileImageimageHeight: Int, profileImageimageWidth: Int, follower_count: Int, following_count: Int, is_private: Bool, external_url: String, pk: Int, media_count: Int, friendship: Bool) {
+    init(username: String, userProfileImage: URL, full_name: String, biography: String, profileImageimageHeight: Int, profileImageimageWidth: Int, follower_count: Int, following_count: Int, is_private: Bool, external_url: String, pk: Int, media_count: Int, friendship: ObjectFriendshipResponse) {
         self.username = username
         self.userProfileImage = userProfileImage
         self.full_name = full_name

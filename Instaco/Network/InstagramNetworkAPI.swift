@@ -190,6 +190,34 @@ class InstagramAPI {
         }
     }
     
+    func AcceptOp(type: Bool, user_id: String) {
+        let data = ["_csrftoken": self.csrftoken,
+                    "user_id": user_id,
+                    "radio_type": "wifi-none",
+                    "_uid": self.username_id,
+                    "_uuid": self.uuid]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        let jsonString = String(data: jsonData!, encoding: .utf8)!
+        let sign_body = generateSignature(data: jsonString)
+        
+        if type {
+            SendRequestViaHttpBody(URI: "friendships/approve/" + user_id + "/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body,
+                                   success: { (JSONResponse) -> Void in
+                                    print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)})
+        } else {
+            SendRequestViaHttpBody(URI: "friendships/ignore/" + user_id + "/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: {(JSONResponse) -> Void in
+                print(JSONResponse)
+            },
+                                   failure: {(error) -> Void in
+                                    print(error)
+            })
+        }
+    }
+    
     func saveOp(type: Bool, media_id: String) {
         let data = ["module_name": "photo_view_other",
                     "_csrftoken": self.csrftoken,
@@ -224,7 +252,7 @@ class InstagramAPI {
         SendRequest(URI: "si/fetch_headers/", method: .get, encoding: URLEncoding.queryString, params: ["challenge_type": "signup", "guid": generateUUID(type: false)],
                         success: { _ -> Void in // (JSONResponse) -> Void in
 //                            print(JSONResponse)
-                            print("Fetch Header Successfully")
+//                            print("Fetch Header Successfully")
                             
                             // Login Request
                             let cookie = HTTPCookieStorage.shared.cookies
@@ -247,7 +275,7 @@ class InstagramAPI {
                             self.SendRequestViaHttpBody(URI: "accounts/login/", method: .post, httpbody: "ig_sig_key_version=4&signed_body=" + sign_body, success: success, failure: failure)
                         },
                         failure: { (error) -> Void in
-                            print("Fetch Header Failed")
+//                            print("Fetch Header Failed")
                             print(error)})
     }
     
@@ -376,12 +404,12 @@ class InstagramAPI {
     }
     
     private func direct_v2_ranked_recipients(mode: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let parameters: Parameters = ["mode": mode, "show_threads": true, "use_unified_inbox": true]
+        let parameters: Parameters = ["mode": mode, "show_threads": "true", "use_unified_inbox": "true"]
         SendRequest(URI: "direct_v2/ranked_recipients/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
     }
     
     private func direct_v2_inbox(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let parameters: Parameters = ["persistentBadging": true, "use_unified_inbox": true]
+        let parameters: Parameters = ["persistentBadging": "true", "use_unified_inbox": "true"]
         SendRequest(URI: "direct_v2/inbox/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
     }
     
@@ -429,8 +457,8 @@ class InstagramAPI {
     }
     
     private func getDiscover(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let parameters: Parameters = ["is_prefetch": true,
-                                      "is_from_promote": false,
+        let parameters: Parameters = ["is_prefetch": "true",
+                                      "is_from_promote": "false",
                                       "max_id": 0,
                                       "timezone_offset": -14400,
                                       "session_id": self.uuid]
@@ -438,11 +466,11 @@ class InstagramAPI {
     }
     
     private func facebookOTA(success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
-        let parameters: Parameters = ["version_name": 11.0  ,
+        let parameters: Parameters = ["version_name": "11.0"  ,
                                       "custom_user_id": insta.username_id,
                                       "fields": "update{download_uri,file_size,uncompressed_size,version_code,resources_checksum,ota_update_policy,download_uri_delta,file_size_delta,fallback_to_full_update,download_uri_delta_base,version_code_delta_base}",
-                                      "version_code": 68662588,
-                                      "custom_app_id": 1464225827161561]
+                                      "version_code": "68662588",
+                                      "custom_app_id": "1464225827161561"]
         SendRequest(URI: "facebook_ota/", method: .get, encoding: URLEncoding(destination: .queryString), params: parameters, success: success, failure: failure)
     }
     
@@ -495,6 +523,17 @@ class InstagramAPI {
 //        SendRequest(URI: "media/" + media_id + "/likers/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
 //    }
 //
+    
+    func getMediaComments(media_id: String, next_min_id: String? = "", success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        if next_min_id == "" {
+            let params = ["can_support_threading": "true"]
+                SendRequest(URI: "media/" + media_id + "/comments/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+        } else {
+            let params = ["min_id": next_min_id!, "can_support_threading": "true"]
+            SendRequest(URI: "media/" + media_id + "/comments/", method: .get, encoding: URLEncoding(destination: .queryString), params: params, success: success, failure: failure)
+        }
+    }
+    
     private func SendRequestViaHttpBody(URI: String, method: HTTPMethod, httpbody: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestConfig = RequestConfiguration(url: API_URL)

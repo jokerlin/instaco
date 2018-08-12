@@ -23,16 +23,16 @@ final class NewsCell: UICollectionViewCell, ListBindable {
         return label
     }()
     
-//    let timestampLabel: UILabel = {
-//        let label = UILabel()
-//        label.backgroundColor = .clear
-//        label.numberOfLines = 0
-//        label.font = UIFont.systemFont(ofSize: 14)
-//        label.textColor = UIColor.darkText
-//        label.textAlignment = .left
-//        label.sizeToFit()
-//        return label
-//    }()
+    let timestampLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = UIColor.darkText
+        label.textAlignment = .left
+        label.sizeToFit()
+        return label
+    }()
     
     let profileImageView: UIImageView = {
         let view = UIImageView()
@@ -46,7 +46,7 @@ final class NewsCell: UICollectionViewCell, ListBindable {
         super.init(frame: frame)
         contentView.addSubview(profileImageView)
         contentView.addSubview(textLabel)
-//        contentView.addSubview(timestampLabel)
+        contentView.addSubview(timestampLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -70,10 +70,10 @@ final class NewsCell: UICollectionViewCell, ListBindable {
             make.left.equalTo(profileImageView.snp.right).offset(9)
         }
         
-//        timestampLabel.snp.makeConstraints { (make) -> Void in
-//            make.centerY.equalTo(contentView)
-//            make.right.equalTo(contentView).offset(-11)
-//        }
+        timestampLabel.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(contentView)
+            make.right.equalTo(contentView).offset(-11)
+        }
     }
     
     func bindViewModel(_ viewModel: Any) {

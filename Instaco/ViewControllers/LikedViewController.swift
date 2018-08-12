@@ -18,6 +18,8 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     var next_max_id_liked = ""
     var likedData = [ListDiffable]()
     var data = [ListDiffable]()
+//    var data: [Any] = []
+//    var likedData: [Any] = []
     var loading = false
     
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -84,6 +86,10 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
                 }
             }
         }
+        
+//        if self.likedData.count == 0 {
+//            self.likedData.append("No liked posts.")
+//        }
         self.data = self.likedData
         self.adapter.performUpdates(animated: true)
         self.refreshControl.endRefreshing()
@@ -92,12 +98,22 @@ class LikedViewController: UIViewController, ListAdapterDataSource, UIScrollView
     // MARK: ListAdapterDataSource
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        
         return data as [ListDiffable]
+//        return data as! [ListDiffable]
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        return TimelineSectionController()
+//        return TimelineSectionController()
+//        switch object {
+//        case is String: return TipSectionController()
+//        default:
+//            let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
+//            sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+//            return sectionController
+//        }
+        let sectionController = ListStackedSectionController(sectionControllers: [TimelineSectionController()])
+        sectionController.inset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+        return sectionController
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
